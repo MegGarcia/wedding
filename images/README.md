@@ -1,29 +1,17 @@
 # Images
 
-This site is built from a Figma design that includes real engagement photos
-(hero background, the "Save the Date" panel's floral wreath and wax-seal
-close-up, the itinerary locket photo, and the three footer polaroids). This
-sandboxed environment's network policy blocks direct access to `figma.com`,
-so those photo assets could not be downloaded here — every photo spot
-currently uses a tasteful CSS gradient placeholder instead, and the floral
-wreath / wax seal are hand-built SVG/CSS approximations rather than the
-actual photo-based assets from the file.
+Real photos from the couple, matched to the Figma design:
 
-Everything else (fonts, colors, copy, spacing, and the mobile/desktop layout
-differences) was pulled directly from the Figma file via the Figma MCP
-server and should match closely.
+| File | Used for |
+|---|---|
+| `hero.jpg` | Hero background photo |
+| `calendar-grid.png` | Rotated calendar-grid accent behind "Save the Date" |
+| `floral-branch.png` | Magnolia branch accent on the save-the-date panel |
+| `floral-babys-breath.png` | Baby's breath sprig accent layered with the branch |
+| `seal.png` | Wax seal (M/Y monogram) on the save-the-date panel |
+| `itinerary-photo.png` | Oval locket photo next to the itinerary |
+| `footer-1.jpg`, `footer-2.jpg`, `footer-3.jpg` | The three footer polaroids |
 
-To swap in the real photos, export them from Figma (or the couple's photo
-library) and:
-
-- Hero background: replace the `background` on `.hero` in `css/style.css`
-  with `background-image: url("../images/hero.jpg");` (keep the dark
-  gradient overlay layered on top for text contrast).
-- Save-the-date panel: replace the `background` on `.date-panel` with the
-  engagement photo; the `.date-panel__floral` SVG and `.date-panel__seal`
-  circle can stay as decorative accents or be swapped for the real
-  floral-wreath and wax-seal-photo crops.
-- Itinerary photo: replace `.itinerary__photo`'s `background` with the
-  couple's photo (it's clipped to an oval via `border-radius: 50%`).
-- Footer collage: replace each `.polaroid--1/2/3::before`'s
-  `background-image` with a photo.
+All images were provided by the couple, then resized/compressed for the
+web (JPEG for opaque photos, optimized PNG for the assets with
+transparency) — see the git history for the exact conversion.

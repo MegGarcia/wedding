@@ -9,7 +9,6 @@
   --white: #ffffff;
   --ink: #000000;
   --placeholder: rgba(0, 0, 0, 0.25);
-  --border-soft: rgba(255, 255, 255, 0.5);
 
   --font-script: 'Luxurious Script', cursive;
   --font-label: 'Cinzel', serif;
@@ -49,8 +48,10 @@ img {
   justify-content: center;
   padding: 2.5rem 1.5rem;
   background:
-    linear-gradient(180deg, rgba(20, 24, 12, 0.1) 0%, rgba(20, 24, 12, 0.45) 100%),
-    radial-gradient(circle at 25% 15%, #ded4b8 0%, #b6a97e 30%, #8a9768 60%, #4a552a 100%);
+    linear-gradient(180deg, rgba(20, 24, 12, 0.15) 0%, rgba(20, 24, 12, 0.45) 100%),
+    url("../images/hero.jpg");
+  background-size: cover;
+  background-position: center 30%;
   text-align: center;
 }
 
@@ -113,9 +114,7 @@ img {
   position: relative;
   height: 18.5rem;
   overflow: hidden;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    radial-gradient(circle at 30% 30%, #e6dcc2 0%, #a9a97a 35%, #6b7a4d 70%, #3c4522 100%);
+  background: #38401f;
 }
 
 .date-panel__grid {
@@ -124,56 +123,38 @@ img {
   left: -3.5rem;
   width: 15rem;
   height: 15rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  opacity: 0.9;
   transform: rotate(-5deg);
-}
-
-.date-panel__grid span {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
-  padding: 0.3rem 0.5rem 0 0;
-  font-family: var(--font-label);
-  font-size: 1.5rem;
-  color: var(--white);
-  opacity: 0.85;
-  border-right: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
-}
-
-.date-panel__grid span:nth-child(3n) {
-  border-right: none;
-}
-
-.date-panel__grid span:nth-child(n+7) {
-  border-bottom: none;
 }
 
 .date-panel__floral {
   position: absolute;
-  top: -0.75rem;
-  left: -0.75rem;
-  width: 8rem;
-  height: 8rem;
+  top: -1.5rem;
+  left: -0.5rem;
+  width: 6rem;
+  height: auto;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
+}
+
+.date-panel__floral-accent {
+  position: absolute;
+  bottom: -1rem;
+  left: 3.5rem;
+  width: 3.75rem;
+  height: auto;
+  transform: rotate(15deg);
+  opacity: 0.9;
 }
 
 .date-panel__seal {
   position: absolute;
-  bottom: 1.4rem;
+  bottom: 1.2rem;
   right: 2.3rem;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3.6rem;
+  height: 3.6rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #c65f43, var(--rust));
-  color: var(--white);
-  font-family: var(--font-label);
-  font-size: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
   transform: rotate(-7deg);
 }
 
@@ -296,12 +277,22 @@ img {
 .itinerary__photo {
   flex: 0 0 auto;
   width: 9.375rem;
-  height: 11.5rem;
+  aspect-ratio: 583 / 700;
   border-radius: 50%;
-  border: 4px solid var(--white);
-  background: radial-gradient(circle at 35% 30%, #e8dcc2, #9aa679 55%, #5b6b47 100%);
+  background: var(--white);
+  padding: 0.3rem;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
   transform: rotate(-3deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.itinerary__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .itinerary__note {
@@ -486,7 +477,7 @@ img {
   transform: rotate(-6deg);
 }
 .polaroid--1::before {
-  background-image: linear-gradient(145deg, #dfd6ba, #93a172);
+  background-image: url("../images/footer-1.jpg");
 }
 
 .polaroid--2 {
@@ -498,7 +489,7 @@ img {
   z-index: 1;
 }
 .polaroid--2::before {
-  background-image: linear-gradient(145deg, #cbb98f, #6d7d4e);
+  background-image: url("../images/footer-2.jpg");
 }
 
 .polaroid--3 {
@@ -510,7 +501,7 @@ img {
   z-index: 2;
 }
 .polaroid--3::before {
-  background-image: linear-gradient(145deg, #e7ddc4, #7c8c5c);
+  background-image: url("../images/footer-3.jpg");
 }
 
 .footer__names {
@@ -575,20 +566,21 @@ img {
     height: 34rem;
   }
 
-  .date-panel__grid span {
-    font-size: 3.6rem;
-    padding: 1rem 1.5rem 0 0;
+  .date-panel__floral {
+    top: -3rem;
+    left: -1rem;
+    width: 13rem;
   }
 
-  .date-panel__floral {
-    width: 12rem;
-    height: 12rem;
+  .date-panel__floral-accent {
+    bottom: -2rem;
+    left: 8rem;
+    width: 8rem;
   }
 
   .date-panel__seal {
     width: 8rem;
     height: 8rem;
-    font-size: 1.4rem;
     right: 5.5rem;
     bottom: 3rem;
   }
@@ -654,7 +646,6 @@ img {
 
   .itinerary__photo {
     width: 21rem;
-    height: 25rem;
     transform: rotate(5.7deg);
   }
 
