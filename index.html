@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meg &amp; Yash | Save the Date</title>
+<meta name="description" content="Meg &amp; Yash are getting married July 7, 2027 in Mauritius. Save the date and share your mailing details for the formal invitation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero__overlay">
+    <p class="hero__eyebrow">Meg &amp; Yash's</p>
+    <h1 class="hero__title">Save the<br>Date</h1>
+  </div>
+</header>
+
+<section class="story">
+  <div class="story__inner">
+    <p class="story__text">
+      <span class="drop-cap">E</span>veryone else saw it coming before we did. We met at RIT, introduced through Greek life, and spent two years as friends before we started dating at the end of our junior year. In the three years since, a lot of our favorite time together has been spent over dinner, usually at Redd or AMA Pizza E Cucina, taking our time and never rushing to leave. Five years of knowing each other, three of being together, and on the seventh of July we're getting married in Mauritius, Yash's home country, surrounded by our families and closest friends.
+    </p>
+  </div>
+</section>
+
+<section class="date-section">
+  <div class="date-card">
+    <svg class="date-card__florals" viewBox="0 0 160 160" aria-hidden="true">
+      <g fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.9">
+        <circle cx="26" cy="30" r="12"/>
+        <circle cx="42" cy="20" r="10"/>
+        <circle cx="20" cy="52" r="9"/>
+        <circle cx="46" cy="46" r="8"/>
+        <path d="M10 70 Q 40 40 70 20" stroke-dasharray="2 4"/>
+      </g>
+    </svg>
+    <span class="date-card__num date-card__num--top">07</span>
+    <span class="date-card__num date-card__num--left">13</span>
+    <span class="date-card__num date-card__num--right">14</span>
+    <div class="date-card__seal" aria-hidden="true">M&amp;Y</div>
+    <p class="date-card__script">Save the Date</p>
+    <p class="date-card__date">July 7, 2027</p>
+  </div>
+
+  <div class="countdown" id="countdown" aria-label="Countdown to the wedding">
+    <div class="countdown__item">
+      <span class="countdown__value" id="cd-days">000</span>
+      <span class="countdown__label">Days</span>
+    </div>
+    <div class="countdown__item">
+      <span class="countdown__value" id="cd-hours">00</span>
+      <span class="countdown__label">Hours</span>
+    </div>
+    <div class="countdown__item">
+      <span class="countdown__value" id="cd-minutes">00</span>
+      <span class="countdown__label">Minutes</span>
+    </div>
+    <div class="countdown__item">
+      <span class="countdown__value" id="cd-seconds">00</span>
+      <span class="countdown__label">Seconds</span>
+    </div>
+  </div>
+</section>
+
+<section class="itinerary">
+  <p class="itinerary__eyebrow">Our Wedding Itinerary</p>
+
+  <div class="itinerary__row">
+    <ol class="itinerary__list">
+      <li class="itinerary__item">
+        <span class="itinerary__day">06</span>
+        <div class="itinerary__details">
+          <h3 class="itinerary__name">Sangeet &amp; Welcome Dinner</h3>
+          <p class="itinerary__meta">Tuesday &middot; Yash's Family Home</p>
+        </div>
+      </li>
+      <li class="itinerary__item">
+        <span class="itinerary__day">07</span>
+        <div class="itinerary__details">
+          <h3 class="itinerary__name">Wedding Ceremony</h3>
+          <p class="itinerary__meta">Wednesday &middot; Venue To Follow</p>
+        </div>
+      </li>
+      <li class="itinerary__item">
+        <span class="itinerary__day">08</span>
+        <div class="itinerary__details">
+          <h3 class="itinerary__name">Reception</h3>
+          <p class="itinerary__meta">Thursday &middot; Venue To Follow</p>
+        </div>
+      </li>
+    </ol>
+
+    <div class="itinerary__aside">
+      <div class="itinerary__photo" role="img" aria-label="Photo of Meg and Yash"></div>
+      <div class="itinerary__note">
+        <p class="itinerary__note-title">Mauritius</p>
+        <p class="itinerary__note-text">A two-day flight and a fun week. Travel and lodging recommendations to follow with the invitation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rsvp">
+  <h2 class="rsvp__title">Mailing Details</h2>
+  <p class="rsvp__intro">Submit your mailing address so that we may mail the formal invitation.</p>
+  <p class="rsvp__deadline">Please respond by September 31, 2026.</p>
+
+  <form class="rsvp__form" id="rsvp-form" novalidate>
+    <div class="field">
+      <label for="first-name">First Name</label>
+      <input type="text" id="first-name" name="firstName" placeholder="Yash" required>
+    </div>
+    <div class="field">
+      <label for="last-name">Last Name</label>
+      <input type="text" id="last-name" name="lastName" placeholder="Sewpal" required>
+    </div>
+    <div class="field field--full">
+      <label for="street">Street Address</label>
+      <input type="text" id="street" name="street" placeholder="Number, Street, Apartment" required>
+    </div>
+    <div class="field">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" required>
+    </div>
+    <div class="field">
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" required>
+    </div>
+    <div class="field">
+      <label for="postal">Postal Code</label>
+      <input type="text" id="postal" name="postalCode" inputmode="numeric" required>
+    </div>
+    <div class="field field--full">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="field field--full">
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone">
+    </div>
+
+    <button type="submit" class="rsvp__submit">Submit</button>
+  </form>
+
+  <p class="rsvp__success" id="rsvp-success" role="status" hidden>
+    Thank you! Your mailing details have been received.
+  </p>
+</section>
+
+<footer class="footer">
+  <div class="footer__collage" aria-hidden="true">
+    <div class="polaroid polaroid--1"></div>
+    <div class="polaroid polaroid--2"></div>
+    <div class="polaroid polaroid--3"></div>
+  </div>
+  <p class="footer__names">Meg &amp; Yash</p>
+  <p class="footer__date">07.07.2027</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
