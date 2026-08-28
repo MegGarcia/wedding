@@ -164,7 +164,7 @@ img {
 
 .date-panel__text {
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(-5deg);
   text-align: center;
@@ -576,6 +576,10 @@ img {
 
   .date-panel__floral-accent {
     max-width: 12.5rem;
+  }
+
+  .date-panel__text {
+    top: 50%;
   }
 
   .date-panel__script {
