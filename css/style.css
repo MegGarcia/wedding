@@ -525,7 +525,8 @@ img {
 @media (min-width: 900px) {
   .hero {
     min-height: 92vh;
-    padding: 4rem 2rem;
+    justify-content: flex-end;
+    padding: 4rem 8rem 4rem 2rem;
   }
 
   .hero__eyebrow {
