@@ -557,7 +557,9 @@ img {
   }
 
   .date-panel {
-    height: 34rem;
+    height: auto;
+    aspect-ratio: 1.79 / 1;
+    min-height: 28rem;
   }
 
   .date-panel__grid {
@@ -568,22 +570,29 @@ img {
   }
 
   .date-panel__floral {
-    top: -3rem;
-    left: -1rem;
-    width: 13rem;
+    top: 4%;
+    left: 12%;
+    width: 15%;
+    max-width: 13rem;
   }
 
   .date-panel__floral-accent {
-    bottom: -2rem;
-    left: 8rem;
-    width: 8rem;
+    top: 36%;
+    left: 61%;
+    bottom: auto;
+    width: 11%;
+    max-width: 7rem;
+    transform: rotate(-10deg);
   }
 
   .date-panel__seal {
-    width: 8rem;
-    height: 8rem;
-    right: 5.5rem;
-    bottom: 3rem;
+    width: 11%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    left: 59%;
+    top: 66%;
+    right: auto;
+    bottom: auto;
   }
 
   .date-panel__script {
