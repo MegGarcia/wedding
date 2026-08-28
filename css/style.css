@@ -738,40 +738,40 @@ img {
 
   .footer__collage {
     max-width: 61rem;
-    aspect-ratio: 981 / 958;
+    aspect-ratio: 1035 / 958;
   }
 
   .footer__floral-accent {
-    left: 18.75%;
-    top: 14.1%;
-    width: 21.25%;
+    left: 6%;
+    top: 7.6%;
+    width: 29%;
   }
 
   .footer__floral {
-    left: 65%;
-    top: 78%;
-    width: 16%;
+    left: 60%;
+    top: 76%;
+    width: 20%;
   }
 
   .polaroid--1 {
-    left: 15%;
-    top: 44.1%;
-    width: 32.5%;
-    aspect-ratio: 1.41 / 1;
+    left: 0%;
+    top: 37.3%;
+    width: 42%;
+    aspect-ratio: 1.3 / 1;
   }
 
   .polaroid--2 {
-    left: 45.4%;
-    top: 54.7%;
-    width: 37.1%;
-    aspect-ratio: 1.41 / 1;
+    left: 43%;
+    top: 49.7%;
+    width: 50.5%;
+    aspect-ratio: 1.3 / 1;
   }
 
   .polaroid--3 {
-    left: 41.25%;
-    top: 11.8%;
-    width: 36.25%;
-    aspect-ratio: 1.41 / 1;
+    left: 36.5%;
+    top: 6.3%;
+    width: 50%;
+    aspect-ratio: 1.3 / 1;
   }
 
   .footer__names {
