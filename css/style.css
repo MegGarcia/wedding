@@ -566,27 +566,27 @@ img {
   }
 
   .date-panel__floral {
-    top: 12%;
-    left: 13%;
-    width: 20%;
+    top: 11.94%;
+    left: 16.1%;
+    width: 19%;
     max-width: 23rem;
   }
 
   .date-panel__floral-accent {
-    top: 33%;
-    left: 64%;
+    top: 37.75%;
+    left: 64.18%;
     bottom: auto;
-    width: 12%;
-    max-width: 7rem;
-    transform: rotate(-10deg);
+    width: 25.36%;
+    max-width: 9.5rem;
+    transform: none;
   }
 
   .date-panel__seal {
-    width: 11%;
+    width: 12.71%;
     height: auto;
     aspect-ratio: 1 / 1;
-    left: 63%;
-    top: 61%;
+    left: 62.4%;
+    top: 70.68%;
     right: auto;
     bottom: auto;
   }
