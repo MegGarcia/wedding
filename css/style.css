@@ -143,6 +143,7 @@ img {
   height: auto;
   transform: rotate(15deg);
   opacity: 0.9;
+  z-index: 1;
 }
 
 .date-panel__seal {
@@ -155,6 +156,7 @@ img {
   object-fit: cover;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
   transform: rotate(-7deg);
+  z-index: 2;
 }
 
 .date-panel__text {
@@ -577,7 +579,7 @@ img {
     left: 64.18%;
     bottom: auto;
     width: 25.36%;
-    max-width: 9.5rem;
+    max-width: 12.5rem;
     transform: none;
   }
 
