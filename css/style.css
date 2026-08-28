@@ -112,7 +112,8 @@ img {
 
 .date-panel {
   position: relative;
-  height: 18.5625rem;
+  height: auto;
+  aspect-ratio: 402 / 297;
   overflow: hidden;
   background: #38401f;
 }
@@ -128,30 +129,32 @@ img {
 
 .date-panel__floral {
   position: absolute;
-  top: -1.5rem;
-  left: -0.5rem;
-  width: 6rem;
+  top: 11.94%;
+  left: 16.1%;
+  width: 19%;
+  max-width: 11rem;
   height: auto;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 
 .date-panel__floral-accent {
   position: absolute;
-  bottom: -1rem;
-  left: 3.5rem;
-  width: 3.75rem;
+  top: 37.75%;
+  left: 64.18%;
+  width: 25.36%;
+  max-width: 7rem;
   height: auto;
-  transform: rotate(15deg);
   opacity: 0.9;
   z-index: 1;
 }
 
 .date-panel__seal {
   position: absolute;
-  bottom: 1.2rem;
-  right: 2.3rem;
-  width: 3.6rem;
-  height: 3.6rem;
+  width: 12.71%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  left: 62.4%;
+  top: 70.68%;
   border-radius: 50%;
   object-fit: cover;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
@@ -568,29 +571,11 @@ img {
   }
 
   .date-panel__floral {
-    top: 11.94%;
-    left: 16.1%;
-    width: 19%;
     max-width: 23rem;
   }
 
   .date-panel__floral-accent {
-    top: 37.75%;
-    left: 64.18%;
-    bottom: auto;
-    width: 25.36%;
     max-width: 12.5rem;
-    transform: none;
-  }
-
-  .date-panel__seal {
-    width: 12.71%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-    left: 62.4%;
-    top: 70.68%;
-    right: auto;
-    bottom: auto;
   }
 
   .date-panel__script {
