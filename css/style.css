@@ -112,19 +112,18 @@ img {
 
 .date-panel {
   position: relative;
-  height: 18.5rem;
+  height: 18.5625rem;
   overflow: hidden;
   background: #38401f;
 }
 
 .date-panel__grid {
   position: absolute;
-  top: -3.5rem;
-  left: -3.5rem;
-  width: 15rem;
-  height: 15rem;
+  inset: 0;
+  background-image: url("../images/calendar-grid-mobile.svg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
   opacity: 0.9;
-  transform: rotate(-5deg);
 }
 
 .date-panel__floral {
@@ -558,15 +557,12 @@ img {
 
   .date-panel {
     height: auto;
-    aspect-ratio: 1.79 / 1;
+    aspect-ratio: 1441 / 805;
     min-height: 28rem;
   }
 
   .date-panel__grid {
-    top: -70%;
-    left: -17%;
-    width: 134%;
-    height: 240%;
+    background-image: url("../images/calendar-grid-desktop.svg");
   }
 
   .date-panel__floral {
