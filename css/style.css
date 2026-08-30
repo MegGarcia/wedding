@@ -263,6 +263,7 @@ img {
   .itinerary__item {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0;
   }
 
   .itinerary__day {
