@@ -63,9 +63,12 @@ function appendSubmission(data) {
     data.unit || '',
     data.city,
     data.state,
-    data.postalCode,
+    // A leading apostrophe forces Sheets to store these as text instead of
+    // parsing them as numbers, which would otherwise drop a leading zero
+    // (e.g. postal code "08876" becoming 8876).
+    "'" + data.postalCode,
     data.email,
-    data.phone || ''
+    "'" + (data.phone || '')
   ]);
 }
 
