@@ -54,6 +54,7 @@
 
   var form = document.getElementById('rsvp-form');
   var success = document.getElementById('rsvp-success');
+  var submitButton = form ? form.querySelector('.rsvp__submit') : null;
 
   var FIELD_MESSAGES = {
     email: { typeMismatch: 'Enter a valid email address.' },
@@ -134,6 +135,10 @@
       if (firstInvalid) {
         firstInvalid.focus();
         return;
+      }
+
+      if (submitButton) {
+        submitButton.disabled = true;
       }
 
       if (FORM_ENDPOINT.indexOf('PASTE_YOUR_') === 0) {

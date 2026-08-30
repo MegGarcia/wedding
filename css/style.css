@@ -455,6 +455,10 @@ img {
 }
 
 .rsvp__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   font-family: var(--font-body);
   font-size: 1.125rem;
   background: var(--olive);
@@ -467,6 +471,31 @@ img {
 
 .rsvp__submit:hover {
   background: #3c4522;
+}
+
+.rsvp__submit:disabled {
+  background: #8a8a8a;
+  cursor: not-allowed;
+}
+
+.rsvp__spinner {
+  display: none;
+  width: 1em;
+  height: 1em;
+  border: 0.15em solid rgba(255, 255, 255, 0.4);
+  border-top-color: var(--white);
+  border-radius: 50%;
+  animation: rsvp-spin 0.7s linear infinite;
+}
+
+.rsvp__submit:disabled .rsvp__spinner {
+  display: inline-block;
+}
+
+@keyframes rsvp-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .rsvp__success {
