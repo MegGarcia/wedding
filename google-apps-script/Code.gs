@@ -63,21 +63,7 @@ function appendSubmission(data) {
     var sheet = getOrCreateSheet();
     var row = sheet.getLastRow() + 1;
 
-    // Format these columns as plain text *before* writing the value.
-    // Sheets auto-parses numeric-looking strings the same way it does
-    // when you type into a cell, so a plain string write (or even a
-    // leading-apostrophe string) still gets silently converted to a
-    // number and loses leading zeros (e.g. postal code "08876" becoming
-    // 8876). Pre-formatting the cell as text is the only reliable fix.
-    sheet.getRange(row, POSTAL_COLUMN).setNumberFormat('@');
-    sheet.getRange(row, PHONE_COLUMN).setNumberFormat('@');
-    // Apps Script batches spreadsheet operations for efficiency, so without
-    // forcing a flush here the format change above isn't guaranteed to be
-    // committed before the write below happens -- and Sheets still parses
-    // a numeric-looking string as a number under whatever format was active
-    // at write time.
-    SpreadsheetApp.flush();
-
+    // Every column except Postal Code/Phone, written as one batch.
     sheet.getRange(row, 1, 1, HEADER_ROW.length).setValues([[
       new Date(),
       data.firstName,
@@ -86,10 +72,21 @@ function appendSubmission(data) {
       data.unit || '',
       data.city,
       data.state,
-      data.postalCode,
+      '',
       data.email,
-      data.phone || ''
+      ''
     ]]);
+
+    // Postal Code and Phone are numeric-looking strings, and Sheets parses
+    // those as actual numbers the same way it does when you type into a
+    // cell -- silently dropping leading zeros (e.g. "08876" becoming 8876).
+    // Pre-setting the cell's format and *then* writing the value as part of
+    // a multi-column batch above still isn't reliable, since the batch
+    // write re-triggers Sheets' automatic type detection across the row.
+    // Chaining setNumberFormat('@') directly onto each cell's own
+    // setValue() call is the pattern that actually holds.
+    sheet.getRange(row, POSTAL_COLUMN).setNumberFormat('@').setValue(data.postalCode);
+    sheet.getRange(row, PHONE_COLUMN).setNumberFormat('@').setValue(data.phone || '');
   } finally {
     lock.releaseLock();
   }
