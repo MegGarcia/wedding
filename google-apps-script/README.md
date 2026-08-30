@@ -40,6 +40,23 @@ Web App has to be deployed once, by hand, from your Google account.
 
    Commit and push that change (or redeploy the site) and the form is live.
 
+## Testing a change to Code.gs without redeploying
+
+You don't need to redeploy the Web App (or touch the live form) just to
+check that `appendSubmission` works correctly. In the Apps Script editor:
+
+1. Make sure the latest `Code.gs` is pasted in and saved (Ctrl/Cmd+S).
+2. In the function dropdown at the top of the editor, select
+   `testAppendSubmission`.
+3. Click **Run**. It calls `appendSubmission()` directly with fake data
+   (postal code `08876`) — no HTTP request or deployment involved.
+4. Check the `Submissions` tab: a "Test Zero" row should appear with the
+   Postal Code and Phone columns keeping their leading zeros.
+
+This is much faster than submitting the real form each time, and always
+reflects whatever is currently saved in the editor, regardless of which
+deployment version is live.
+
 ## After editing Code.gs later
 
 Apps Script deployments are pinned to a version. If you change `Code.gs` in

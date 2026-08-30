@@ -71,6 +71,12 @@ function appendSubmission(data) {
     // 8876). Pre-formatting the cell as text is the only reliable fix.
     sheet.getRange(row, POSTAL_COLUMN).setNumberFormat('@');
     sheet.getRange(row, PHONE_COLUMN).setNumberFormat('@');
+    // Apps Script batches spreadsheet operations for efficiency, so without
+    // forcing a flush here the format change above isn't guaranteed to be
+    // committed before the write below happens -- and Sheets still parses
+    // a numeric-looking string as a number under whatever format was active
+    // at write time.
+    SpreadsheetApp.flush();
 
     sheet.getRange(row, 1, 1, HEADER_ROW.length).setValues([[
       new Date(),
@@ -121,4 +127,26 @@ function jsonResponse(payload) {
   return ContentService
     .createTextOutput(JSON.stringify(payload))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+/**
+ * Quick manual test: in the Apps Script editor, pick "testAppendSubmission"
+ * from the function dropdown at the top and click Run. This calls
+ * appendSubmission() directly with fake data (no HTTP request, no
+ * redeploy needed -- just uses whatever code is currently saved), so it's
+ * a much faster way to check the Postal Code/Phone columns keep their
+ * leading zeros than doing a full form submission every time.
+ */
+function testAppendSubmission() {
+  appendSubmission({
+    firstName: 'Test',
+    lastName: 'Zero',
+    street: '123 Main St',
+    unit: 'Apt 1',
+    city: 'Anytown',
+    state: 'NY',
+    postalCode: '08876',
+    email: 'test@example.com',
+    phone: '0585551234'
+  });
 }
