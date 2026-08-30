@@ -259,6 +259,19 @@ img {
   text-align: center;
 }
 
+@media (max-width: 400px) {
+  .itinerary__item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .itinerary__day {
+    font-size: 2rem;
+    min-width: 2rem;
+    margin-top: 1rem;
+  }
+}
+
 .itinerary__name {
   font-family: var(--font-script);
   font-weight: 400;
@@ -710,6 +723,10 @@ img {
   .itinerary__list {
     flex-basis: 60%;
     flex-grow: 1;
+  }
+
+  .itinerary__item {
+    gap: 2rem;
   }
 
   .itinerary__day {
