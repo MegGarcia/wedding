@@ -5,7 +5,7 @@
   // Submissions/logins go through a Google Apps Script Web App bound to a
   // Google Sheet. See google-apps-script/README.md for how to deploy it
   // and get this URL.
-  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw2mbFLeSGwWjFVmmo0jj7diU51tcbWonehCHghj_FwVsABxeQo-D_Z6K6skW74WldrCA/exec';
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyvorsLrGa4UJ2-93LDJByizdq8MJ5Uc1i7unDinzjZ9BxevgBvwtvvFycO_VDH6yUxrA/exec';
 
   // ---------- Login gate ----------
   var AUTH_STORAGE_KEY = 'weddingSiteAuthed';
