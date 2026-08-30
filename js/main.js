@@ -113,7 +113,7 @@
   }
 
   if (form) {
-    var fields = form.querySelectorAll('input');
+    var fields = form.querySelectorAll('input, select');
     fields.forEach(function (field) {
       field.addEventListener('input', function () {
         validateField(field);

@@ -397,7 +397,8 @@ img {
   margin-bottom: 0.25rem;
 }
 
-.field input {
+.field input,
+.field select {
   font-family: var(--font-body);
   font-size: 1.125rem;
   padding: 0.6rem 1rem;
@@ -410,12 +411,14 @@ img {
   color: var(--placeholder);
 }
 
-.field input:focus {
+.field input:focus,
+.field select:focus {
   outline: 2px solid var(--olive);
   outline-offset: 1px;
 }
 
-.field input.is-invalid {
+.field input.is-invalid,
+.field select.is-invalid {
   border-color: var(--rust);
 }
 
