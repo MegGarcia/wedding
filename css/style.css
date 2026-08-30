@@ -1138,6 +1138,7 @@ img {
 
   .login-gate__photo-strip {
     width: 16rem;
+    filter: none;
   }
 
   .login-gate__floral {
