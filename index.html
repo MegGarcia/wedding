@@ -11,18 +11,24 @@
 <body>
 
 <div id="login-gate" class="login-gate">
+  <img class="login-gate__photo-strip" src="images/photo-strip.png" alt="" aria-hidden="true">
+  <img class="login-gate__floral" src="images/floral-babys-breath.png" alt="" aria-hidden="true">
   <form id="login-form" class="login-gate__form" novalidate>
     <h1 class="login-gate__title">Meg &amp; Yash</h1>
     <p class="login-gate__text">Enter the phone number you gave us to view the site.</p>
     <div class="field">
       <label for="login-phone">Phone Number</label>
-      <input type="tel" id="login-phone" name="phone" autocomplete="tel" required>
+      <div class="login-gate__input-wrap">
+        <input type="tel" id="login-phone" name="phone" autocomplete="tel" required>
+        <button type="submit" class="login-gate__submit" aria-label="Enter">
+          <svg class="login-gate__arrow" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="rsvp__spinner" aria-hidden="true"></span>
+        </button>
+      </div>
     </div>
     <p class="field__error" id="login-error" hidden>We couldn't find that number — please double-check it, or reach out to Meg &amp; Yash directly.</p>
-    <button type="submit" class="rsvp__submit">
-      <span class="rsvp__submit-label">Enter</span>
-      <span class="rsvp__spinner" aria-hidden="true"></span>
-    </button>
   </form>
 </div>
 

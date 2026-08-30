@@ -15,7 +15,7 @@
   var loginForm = document.getElementById('login-form');
   var loginPhone = document.getElementById('login-phone');
   var loginError = document.getElementById('login-error');
-  var loginSubmit = loginForm ? loginForm.querySelector('.rsvp__submit') : null;
+  var loginSubmit = loginForm ? loginForm.querySelector('.login-gate__submit') : null;
 
   function revealSite() {
     if (loginGate) {
