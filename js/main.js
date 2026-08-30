@@ -251,4 +251,57 @@
       }).then(showSuccess).catch(showSuccess);
     });
   }
+
+  // ---------- Scroll reveal (1D, applied site-wide) ----------
+  var reduceMotion = false;
+  try {
+    reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (err) {
+    reduceMotion = false;
+  }
+
+  if (!reduceMotion && window.IntersectionObserver) {
+    document.documentElement.classList.add('has-reveal');
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      revealObserver.observe(el);
+    });
+
+    // ---------- Footer polaroids (1C): pick up on hover, and enter
+    // staggered right to left once the collage scrolls into view ----------
+    var collage = document.querySelector('.footer__collage');
+    if (collage) {
+      var polaroidOrder = ['.polaroid--2', '.polaroid--3', '.polaroid--1'];
+      var polaroidObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          polaroidOrder.forEach(function (selector, i) {
+            var el = collage.querySelector(selector);
+            if (el) {
+              el.style.transitionDelay = (i * 140) + 'ms';
+              el.classList.add('is-visible');
+              // The inline delay above is only for the one-time entrance;
+              // clear it once that transition ends so it doesn't also
+              // delay the hover pick-up transition afterwards.
+              el.addEventListener('transitionend', function clearDelay(event) {
+                if (event.propertyName !== 'opacity') return;
+                el.style.transitionDelay = '';
+                el.removeEventListener('transitionend', clearDelay);
+              });
+            }
+          });
+          observer.disconnect();
+        });
+      }, { threshold: 0.2 });
+      polaroidObserver.observe(collage);
+    }
+  }
 })();

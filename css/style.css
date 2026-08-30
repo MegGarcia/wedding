@@ -38,6 +38,26 @@ img {
   display: block;
 }
 
+/* ---------- Scroll reveal (1D, applied site-wide) ---------- */
+/* Elements start hidden only once JS confirms it can animate + observe
+   them (see js/main.js) -- without that gate everything must stay
+   visible, since [hidden]/no-JS visitors would otherwise never see it. */
+
+.has-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 620ms cubic-bezier(0.22, 1, 0.36, 1), transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.has-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-d1 { transition-delay: 140ms; }
+.reveal-d2 { transition-delay: 280ms; }
+.reveal-d3 { transition-delay: 420ms; }
+
 /* ---------- Login gate ---------- */
 
 .login-gate {
@@ -179,6 +199,11 @@ img {
 .login-gate__arrow {
   width: 1.5rem;
   height: 1.5rem;
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.login-gate__submit:hover .login-gate__arrow {
+  transform: translateX(5px);
 }
 
 .login-gate__submit:disabled .login-gate__arrow {
@@ -343,6 +368,29 @@ img {
   margin: 0.4rem 0 0;
 }
 
+/* These two carry their own resting transform (rotate / recentering),
+   so the generic [data-reveal] transform can't just overwrite it --
+   compose the entrance offset with it instead, per element. */
+.has-reveal .date-panel__seal {
+  opacity: 0;
+  transform: translateY(16px) rotate(-7deg);
+}
+
+.has-reveal .date-panel__seal.is-visible {
+  opacity: 1;
+  transform: rotate(-7deg);
+}
+
+.has-reveal .date-panel__text {
+  opacity: 0;
+  transform: translate(-50%, -50%) translateY(16px) rotate(-5deg);
+}
+
+.has-reveal .date-panel__text.is-visible {
+  opacity: 1;
+  transform: translate(-50%, -50%) rotate(-5deg);
+}
+
 /* ---------- Countdown ---------- */
 
 .countdown {
@@ -480,6 +528,29 @@ img {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
+/* .itinerary__photo / __note carry their own resting rotation, so
+   compose the entrance offset with it rather than overwriting it
+   (mobile values here; desktop overrides sit by the desktop rotation). */
+.has-reveal .itinerary__photo {
+  opacity: 0;
+  transform: translateY(16px) rotate(-3deg);
+}
+
+.has-reveal .itinerary__photo.is-visible {
+  opacity: 1;
+  transform: rotate(-3deg);
+}
+
+.has-reveal .itinerary__note {
+  opacity: 0;
+  transform: translateY(16px) rotate(4.5deg);
+}
+
+.has-reveal .itinerary__note.is-visible {
+  opacity: 1;
+  transform: rotate(4.5deg);
+}
+
 .itinerary__note-title {
   font-family: var(--font-label);
   font-size: 0.75rem;
@@ -570,6 +641,16 @@ img {
   font-size: 1.125rem;
   color: var(--ink);
   margin-bottom: 0.25rem;
+  transition: color 240ms ease-out;
+}
+
+.field:focus-within label {
+  color: var(--olive);
+}
+
+.login-gate__form .field label,
+.login-gate__form .field:focus-within label {
+  color: var(--white);
 }
 
 .field__required {
@@ -586,6 +667,8 @@ img {
   border-radius: 0;
   background: var(--white);
   color: var(--ink);
+  box-shadow: 0 0 0 0 rgba(74, 85, 42, 0);
+  transition: box-shadow 240ms ease-out;
 }
 
 .field select {
@@ -613,8 +696,8 @@ img {
 
 .field input:focus,
 .field select:focus {
-  outline: 2px solid var(--olive);
-  outline-offset: 1px;
+  outline: none;
+  box-shadow: 0 0 0 5px rgba(74, 85, 42, 0.18);
 }
 
 .field input.is-invalid,
@@ -731,6 +814,7 @@ img {
   background: var(--white);
   padding: 1.6%;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: transform 380ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 380ms ease, opacity 480ms ease;
 }
 
 .polaroid img {
@@ -766,6 +850,48 @@ img {
   transform: rotate(-4deg);
   z-index: 2;
 }
+
+/* Hover / touch pick-up: straighten toward level, lift, shadow spreads. */
+.polaroid:hover,
+.has-reveal .polaroid--1.is-visible:hover,
+.has-reveal .polaroid--2.is-visible:hover,
+.has-reveal .polaroid--3.is-visible:hover {
+  box-shadow: 0 22px 38px rgba(0, 0, 0, 0.42);
+  z-index: 9;
+}
+
+.polaroid--1:hover,
+.has-reveal .polaroid--1.is-visible:hover {
+  transform: rotate(-1deg) translateY(-10px) scale(1.03);
+}
+
+.polaroid--2:hover,
+.has-reveal .polaroid--2.is-visible:hover {
+  transform: rotate(1deg) translateY(-10px) scale(1.03);
+}
+
+.polaroid--3:hover,
+.has-reveal .polaroid--3.is-visible:hover {
+  transform: rotate(-1deg) translateY(-10px) scale(1.03);
+}
+
+/* Entrance: fires once as the collage scrolls into view, staggered
+   right to left (polaroid--2, then --3, then --1). */
+.has-reveal .polaroid {
+  opacity: 0;
+}
+
+.has-reveal .polaroid--1 { transform: translateY(24px) rotate(-6deg); }
+.has-reveal .polaroid--2 { transform: translateY(24px) rotate(5deg); }
+.has-reveal .polaroid--3 { transform: translateY(24px) rotate(-4deg); }
+
+.has-reveal .polaroid.is-visible {
+  opacity: 1;
+}
+
+.has-reveal .polaroid--1.is-visible { transform: rotate(-6deg); }
+.has-reveal .polaroid--2.is-visible { transform: rotate(5deg); }
+.has-reveal .polaroid--3.is-visible { transform: rotate(-4deg); }
 
 .footer__names {
   font-family: var(--font-script);
@@ -936,12 +1062,28 @@ img {
     transform: rotate(5.7deg);
   }
 
+  .has-reveal .itinerary__photo {
+    transform: translateY(16px) rotate(5.7deg);
+  }
+
+  .has-reveal .itinerary__photo.is-visible {
+    transform: rotate(5.7deg);
+  }
+
   .itinerary__note {
     flex-basis: 100%;
     transform: none;
     text-align: center;
     padding: 2.5rem;
     margin-top: 2.5rem;
+  }
+
+  .has-reveal .itinerary__note {
+    transform: translateY(16px);
+  }
+
+  .has-reveal .itinerary__note.is-visible {
+    transform: none;
   }
 
   .itinerary__note-title {
