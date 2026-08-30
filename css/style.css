@@ -332,7 +332,7 @@ img {
   width: 38%;
   font-family: var(--font-script);
   font-size: 1.5rem;
-  line-height: 1.05;
+  line-height: 1.2rem;
   color: var(--olive);
 }
 
@@ -370,6 +370,10 @@ img {
   .envelope-scene__stage {
     width: min(46vw, 26rem);
   }
+}
+
+.envelope-scene__postcard-name {
+  line-height: 1.05;
 }
 
 /* ---------- Hero ---------- */
