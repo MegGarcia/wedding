@@ -107,17 +107,17 @@
   <form class="rsvp__form" id="rsvp-form" novalidate>
     <div class="form-row">
       <div class="field field--half">
-        <label for="first-name">First Name</label>
+        <label for="first-name">First Name <span class="field__required" aria-hidden="true">*</span></label>
         <input type="text" id="first-name" name="firstName" placeholder="Yash" autocomplete="given-name" required>
       </div>
       <div class="field field--half">
-        <label for="last-name">Last Name</label>
+        <label for="last-name">Last Name <span class="field__required" aria-hidden="true">*</span></label>
         <input type="text" id="last-name" name="lastName" placeholder="Sewpal" autocomplete="family-name" required>
       </div>
     </div>
 
     <div class="field field--full">
-      <label for="street">Street Address</label>
+      <label for="street">Street Address <span class="field__required" aria-hidden="true">*</span></label>
       <input type="text" id="street" name="street" placeholder="Number and Street" autocomplete="address-line1" required>
     </div>
 
@@ -128,11 +128,11 @@
 
     <div class="form-row form-row--city">
       <div class="field field--city">
-        <label for="city">City</label>
+        <label for="city">City <span class="field__required" aria-hidden="true">*</span></label>
         <input type="text" id="city" name="city" autocomplete="address-level2" required>
       </div>
       <div class="field field--state">
-        <label for="state">State</label>
+        <label for="state">State <span class="field__required" aria-hidden="true">*</span></label>
         <select id="state" name="state" autocomplete="address-level1" required>
           <option value="" selected disabled>Select a state</option>
           <option value="AL">Alabama</option>
@@ -189,18 +189,18 @@
         </select>
       </div>
       <div class="field field--postal">
-        <label for="postal">Postal Code</label>
+        <label for="postal">Postal Code <span class="field__required" aria-hidden="true">*</span></label>
         <input type="text" id="postal" name="postalCode" inputmode="numeric" pattern="\d{5}(-\d{4})?" title="5-digit ZIP code, optionally followed by -1234" autocomplete="postal-code" required>
       </div>
     </div>
 
     <div class="form-row">
       <div class="field field--half">
-        <label for="email">Email</label>
+        <label for="email">Email <span class="field__required" aria-hidden="true">*</span></label>
         <input type="email" id="email" name="email" autocomplete="email" required>
       </div>
       <div class="field field--half">
-        <label for="phone">Phone Number</label>
+        <label for="phone">Phone Number <span class="field__required" aria-hidden="true">*</span></label>
         <input type="tel" id="phone" name="phone" pattern="[0-9+\(\)\-.\s]{7,20}" title="A phone number using digits, spaces, dashes, parentheses, or +" autocomplete="tel" required>
       </div>
     </div>

@@ -397,6 +397,10 @@ img {
   margin-bottom: 0.25rem;
 }
 
+.field__required {
+  color: var(--rust);
+}
+
 .field input,
 .field select {
   font-family: var(--font-body);
