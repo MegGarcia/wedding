@@ -469,9 +469,9 @@ img {
 
 .footer__floral {
   position: absolute;
-  left: 73%;
-  top: 78%;
-  width: 30%;
+  left: 32%;
+  top: 84%;
+  width: 62%;
   height: auto;
   z-index: 1;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
@@ -748,9 +748,9 @@ img {
   }
 
   .footer__floral {
-    left: 60%;
-    top: 76%;
-    width: 20%;
+    left: 53.7%;
+    top: 76.1%;
+    width: 51%;
   }
 
   .polaroid--1 {
