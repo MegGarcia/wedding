@@ -55,6 +55,56 @@
   var form = document.getElementById('rsvp-form');
   var success = document.getElementById('rsvp-success');
 
+  var FIELD_MESSAGES = {
+    email: { typeMismatch: 'Enter a valid email address.' },
+    postal: { patternMismatch: 'Enter a valid ZIP code (e.g. 12345 or 12345-6789).' },
+    phone: { patternMismatch: 'Enter a valid phone number.' }
+  };
+
+  function messageFor(field) {
+    var validity = field.validity;
+    var overrides = FIELD_MESSAGES[field.id] || {};
+
+    if (validity.valueMissing) {
+      return 'This field is required.';
+    }
+    if (validity.typeMismatch) {
+      return overrides.typeMismatch || 'Enter a valid value.';
+    }
+    if (validity.patternMismatch) {
+      return overrides.patternMismatch || 'Enter a valid value.';
+    }
+    return field.validationMessage || 'Enter a valid value.';
+  }
+
+  function validateField(field) {
+    var errorEl = field.nextElementSibling;
+    var hasErrorEl = errorEl && errorEl.classList.contains('field__error');
+
+    if (field.checkValidity()) {
+      field.classList.remove('is-invalid');
+      field.removeAttribute('aria-invalid');
+      if (hasErrorEl) {
+        errorEl.remove();
+      }
+      return true;
+    }
+
+    field.classList.add('is-invalid');
+    field.setAttribute('aria-invalid', 'true');
+
+    if (!hasErrorEl) {
+      errorEl = document.createElement('span');
+      errorEl.className = 'field__error';
+      errorEl.id = field.id + '-error';
+      field.insertAdjacentElement('afterend', errorEl);
+    }
+    errorEl.textContent = messageFor(field);
+    field.setAttribute('aria-describedby', errorEl.id);
+
+    return false;
+  }
+
   function showSuccess() {
     form.hidden = true;
     if (success) {
@@ -63,11 +113,26 @@
   }
 
   if (form) {
+    var fields = form.querySelectorAll('input');
+    fields.forEach(function (field) {
+      field.addEventListener('input', function () {
+        validateField(field);
+      });
+    });
+
     form.addEventListener('submit', function (event) {
       event.preventDefault();
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
+      var firstInvalid = null;
+      fields.forEach(function (field) {
+        var valid = validateField(field);
+        if (!valid && !firstInvalid) {
+          firstInvalid = field;
+        }
+      });
+
+      if (firstInvalid) {
+        firstInvalid.focus();
         return;
       }
 

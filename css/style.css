@@ -415,6 +415,17 @@ img {
   outline-offset: 1px;
 }
 
+.field input.is-invalid {
+  border-color: var(--rust);
+}
+
+.field__error {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--rust);
+  margin-top: 0.35rem;
+}
+
 .rsvp__submit {
   font-family: var(--font-body);
   font-size: 1.125rem;
