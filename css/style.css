@@ -76,10 +76,19 @@ img {
   background-position: center;
   background-blend-mode: color-dodge;
   overflow: auto;
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .login-gate[hidden] {
   display: none;
+}
+
+/* 2b: on a successful login the gate dissolves into the hero underneath
+   instead of hard-cutting -- see revealSite() in js/main.js. */
+.login-gate--opening {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
 }
 
 .login-gate__visual {
@@ -602,10 +611,19 @@ img {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  transition: opacity 320ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .rsvp__form[hidden] {
   display: none;
+}
+
+/* 2d: on submit the form fades up and out before the sealed confirmation
+   takes its place -- see showSuccess() in js/main.js. */
+.rsvp__form--sending-out {
+  opacity: 0;
+  transform: translateY(-16px);
+  pointer-events: none;
 }
 
 .form-row {
@@ -762,14 +780,71 @@ img {
 }
 
 .rsvp__success {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
   max-width: 640px;
   margin: 1.5rem auto 0;
-  text-align: center;
+  text-align: left;
+  color: var(--olive);
+  background: rgba(74, 85, 42, 0.1);
+  padding: 1.1rem 1.5rem;
+}
+
+.rsvp__success[hidden] {
+  display: none;
+}
+
+/* 2d: the wax seal stamps down beside the script "Thank you" once the
+   form has finished fading out -- .is-visible is added a frame after
+   [hidden] is removed so the transition actually runs. */
+.rsvp__success-seal {
+  flex: 0 0 auto;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transform: translateY(-18px) scale(0.6) rotate(-7deg);
+  transition: opacity 320ms ease, transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.rsvp__success-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.rsvp__success-script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 2.25rem;
+  line-height: 0.8;
+  color: var(--olive);
+  margin: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 380ms ease 160ms, transform 380ms cubic-bezier(0.22, 1, 0.36, 1) 160ms;
+}
+
+.rsvp__success-note {
   font-family: var(--font-body);
   font-size: 1rem;
   color: var(--olive);
-  background: rgba(74, 85, 42, 0.1);
-  padding: 0.9rem;
+  margin: 0.4rem 0 0;
+  opacity: 0;
+  transition: opacity 380ms ease 220ms;
+}
+
+.rsvp__success.is-visible .rsvp__success-seal {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotate(-7deg);
+}
+
+.rsvp__success.is-visible .rsvp__success-script,
+.rsvp__success.is-visible .rsvp__success-note {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ---------- Footer ---------- */

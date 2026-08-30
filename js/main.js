@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  var reduceMotion = false;
+  try {
+    reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (err) {
+    reduceMotion = false;
+  }
+
   // Shared with both the login gate and the mailing-details form below.
   // Submissions/logins go through a Google Apps Script Web App bound to a
   // Google Sheet. See google-apps-script/README.md for how to deploy it
@@ -17,13 +24,25 @@
   var loginError = document.getElementById('login-error');
   var loginSubmit = loginForm ? loginForm.querySelector('.login-gate__submit') : null;
 
+  // 2b: the gate dissolves into the hero instead of hard-cutting -- the
+  // hero is already visible underneath before the gate finishes fading.
   function revealSite() {
-    if (loginGate) {
-      loginGate.hidden = true;
-    }
     if (siteContent) {
       siteContent.hidden = false;
     }
+    if (!loginGate) {
+      return;
+    }
+    if (reduceMotion) {
+      loginGate.hidden = true;
+      return;
+    }
+    loginGate.classList.add('login-gate--opening');
+    loginGate.addEventListener('transitionend', function onGateOpen(event) {
+      if (event.target !== loginGate) return;
+      loginGate.removeEventListener('transitionend', onGateOpen);
+      loginGate.hidden = true;
+    });
   }
 
   var alreadyAuthed = false;
@@ -191,14 +210,37 @@
     return false;
   }
 
+  // 2d: the spinner already runs during the fetch above -- give it an
+  // ending. The form fades up and out, then the wax seal stamps down
+  // beside a script "Thank you".
   function showSuccess() {
     if (submitButton) {
       submitButton.disabled = false;
     }
-    form.hidden = true;
-    if (success) {
-      success.hidden = false;
+
+    function finish() {
+      form.hidden = true;
+      if (success) {
+        success.hidden = false;
+        if (!reduceMotion) {
+          requestAnimationFrame(function () {
+            success.classList.add('is-visible');
+          });
+        }
+      }
     }
+
+    if (reduceMotion) {
+      finish();
+      return;
+    }
+
+    form.classList.add('rsvp__form--sending-out');
+    form.addEventListener('transitionend', function onFormOut(event) {
+      if (event.target !== form) return;
+      form.removeEventListener('transitionend', onFormOut);
+      finish();
+    });
   }
 
   if (form) {
@@ -253,13 +295,6 @@
   }
 
   // ---------- Scroll reveal (1D, applied site-wide) ----------
-  var reduceMotion = false;
-  try {
-    reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  } catch (err) {
-    reduceMotion = false;
-  }
-
   if (!reduceMotion && window.IntersectionObserver) {
     document.documentElement.classList.add('has-reveal');
 
