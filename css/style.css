@@ -401,6 +401,7 @@ img {
 .field select {
   font-family: var(--font-body);
   font-size: 1.125rem;
+  line-height: 1.4;
   padding: 0.6rem 1rem;
   border: 1px solid var(--olive);
   border-radius: 0;
@@ -412,10 +413,13 @@ img {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  padding-right: 2.5rem;
+  border-width: 1px;
+  box-shadow: none;
+  margin: 0;
+  padding-right: 3.5rem;
   background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234a552a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 1rem center;
+  background-position: right 2rem center;
   background-size: 1rem;
   cursor: pointer;
 }
@@ -746,7 +750,8 @@ img {
     font-size: 1.5rem;
   }
 
-  .field input {
+  .field input,
+  .field select {
     font-size: 1.5rem;
     height: 4rem;
     border-width: 2px;
