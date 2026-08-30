@@ -473,7 +473,7 @@ img {
   top: 78%;
   width: 30%;
   height: auto;
-  z-index: 4;
+  z-index: 1;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 
