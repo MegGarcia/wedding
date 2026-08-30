@@ -1,0 +1,55 @@
+# Save the Date form → Google Sheet + email
+
+The mailing-details form on the site (`#rsvp-form` in `index.html`) posts to a
+Google Apps Script Web App, which appends each submission to a Google Sheet
+and emails a notification. Since the site itself is static (no server), this
+Web App has to be deployed once, by hand, from your Google account.
+
+## One-time setup
+
+1. **Create the Sheet.** Go to [sheet.new](https://sheet.new) and name it
+   something like "Save the Date Submissions". You don't need to add any
+   columns yourself — the script creates a `Submissions` tab with headers
+   the first time it runs.
+
+2. **Add the script.** In the Sheet, go to **Extensions → Apps Script**.
+   Delete the placeholder `myFunction() {}` code and paste in the full
+   contents of [`Code.gs`](./Code.gs) from this folder.
+
+3. **Check the notify address.** `NOTIFY_EMAIL` at the top of `Code.gs` is
+   already set to `megangarcia2024@gmail.com`. Change it there if you ever
+   want notifications to go somewhere else.
+
+4. **Deploy as a Web App.**
+   - Click **Deploy → New deployment**.
+   - Click the gear icon next to "Select type" and choose **Web app**.
+   - Set **Execute as** to **Me**.
+   - Set **Who has access** to **Anyone**.
+   - Click **Deploy**, then authorize the requested Google account
+     permissions (it needs access to the Sheet and to send email as you).
+   - Copy the **Web app URL** it gives you — it looks like
+     `https://script.google.com/macros/s/XXXXXXXX/exec`.
+
+5. **Wire it into the site.** Open `js/main.js` and replace the
+   `FORM_ENDPOINT` placeholder near the top of the mailing-details section
+   with the URL you just copied:
+
+   ```js
+   var FORM_ENDPOINT = 'https://script.google.com/macros/s/XXXXXXXX/exec';
+   ```
+
+   Commit and push that change (or redeploy the site) and the form is live.
+
+## After editing Code.gs later
+
+Apps Script deployments are pinned to a version. If you change `Code.gs` in
+the future, the live URL won't pick up the change automatically — go to
+**Deploy → Manage deployments**, edit the existing deployment, and choose
+**New version** before clicking **Deploy** again.
+
+## What it does
+
+- Validates that the required fields (first/last name, street, city, state,
+  postal code, email) are present.
+- Appends a timestamped row to the `Submissions` tab.
+- Sends an email to `NOTIFY_EMAIL` with the submitted details.

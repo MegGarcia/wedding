@@ -47,8 +47,20 @@
   }
 
   // ---------- Mailing details form ----------
+  // Submissions are sent to a Google Apps Script Web App, which appends a
+  // row to a Google Sheet and emails a notification. See
+  // google-apps-script/README.md for how to deploy it and get this URL.
+  var FORM_ENDPOINT = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+
   var form = document.getElementById('rsvp-form');
   var success = document.getElementById('rsvp-success');
+
+  function showSuccess() {
+    form.hidden = true;
+    if (success) {
+      success.hidden = false;
+    }
+  }
 
   if (form) {
     form.addEventListener('submit', function (event) {
@@ -59,13 +71,26 @@
         return;
       }
 
-      // NOTE: No backend is wired up yet. Swap this block for a real
-      // submission (e.g. Formspree, Netlify Forms, a serverless function)
-      // once one is available.
-      form.hidden = true;
-      if (success) {
-        success.hidden = false;
+      if (FORM_ENDPOINT.indexOf('PASTE_YOUR_') === 0) {
+        console.warn('FORM_ENDPOINT is not configured yet — see google-apps-script/README.md');
+        showSuccess();
+        return;
       }
+
+      var data = {};
+      new FormData(form).forEach(function (value, key) {
+        data[key] = value;
+      });
+
+      // Apps Script Web Apps don't return CORS headers browsers can read,
+      // so the response is opaque either way — fire the request and show
+      // success once it's been sent.
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      }).then(showSuccess).catch(showSuccess);
     });
   }
 })();
