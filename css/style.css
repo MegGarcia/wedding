@@ -68,6 +68,8 @@ img {
 }
 
 .login-gate__photo-strip {
+  position: relative;
+  z-index: 2;
   display: block;
   width: 11rem;
   filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.45));
@@ -75,18 +77,27 @@ img {
 
 .login-gate__floral {
   position: absolute;
+  z-index: 1;
   right: -2.5rem;
   top: -1.5rem;
   width: 6.5rem;
-  transform: rotate(18deg);
+  transform: scaleX(-1) rotate(18deg);
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
   pointer-events: none;
 }
 
-.login-gate__eyebrow {
+.login-gate__text {
   position: absolute;
-  left: 1.25rem;
-  top: 37%;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.login-gate__eyebrow {
   font-family: var(--font-label);
   font-size: 1.1rem;
   letter-spacing: 0.04em;
@@ -96,9 +107,6 @@ img {
 }
 
 .login-gate__title {
-  position: absolute;
-  left: 1.1rem;
-  top: 46%;
   font-family: var(--font-script);
   font-weight: 400;
   font-size: 2.75rem;
@@ -619,6 +627,11 @@ img {
   font-size: 0.875rem;
   color: var(--rust);
   margin-top: 0.35rem;
+}
+
+#login-error {
+  background: #f9dede;
+  padding: 0.35rem 0.6rem;
 }
 
 .rsvp__submit {

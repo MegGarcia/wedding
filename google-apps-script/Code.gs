@@ -214,3 +214,28 @@ function testCheckGuestPhone() {
   var result = checkGuestPhone('555-123-4567');
   Logger.log(result);
 }
+
+/**
+ * Proves the "1"/"+1" country-code case works regardless of which side
+ * has it: pick any real row from the Guest List tab, and this checks it
+ * against all four combinations (stored with/without a leading 1, entered
+ * with/without one) -- normalizePhone() takes the *last 10 digits* of
+ * both sides before comparing, so all four should log {ok: true, ...}
+ * with the same firstName. Edit STORED_PHONE below to match a real row,
+ * then Run from the function dropdown and check the log.
+ */
+function testCountryCodeMatching() {
+  var STORED_PHONE = '555-123-4567'; // must match a real Guest List row, in whatever format that row uses
+
+  var digitsOnly = STORED_PHONE.replace(/\D/g, '').slice(-10);
+  var variants = [
+    digitsOnly,             // no country code
+    '1' + digitsOnly,       // leading 1, no plus
+    '+1' + digitsOnly,      // leading +1
+    '+1 (' + digitsOnly.slice(0, 3) + ') ' + digitsOnly.slice(3, 6) + '-' + digitsOnly.slice(6) // formatted with +1
+  ];
+
+  variants.forEach(function (variant) {
+    Logger.log(variant + ' -> ' + JSON.stringify(checkGuestPhone(variant)));
+  });
+}
