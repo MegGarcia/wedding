@@ -33,6 +33,9 @@ var HEADER_ROW = [
   'Phone'
 ];
 
+var POSTAL_COLUMN = HEADER_ROW.indexOf('Postal Code') + 1;
+var PHONE_COLUMN = HEADER_ROW.indexOf('Phone') + 1;
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
@@ -54,22 +57,36 @@ function doPost(e) {
 }
 
 function appendSubmission(data) {
-  var sheet = getOrCreateSheet();
-  sheet.appendRow([
-    new Date(),
-    data.firstName,
-    data.lastName,
-    data.street,
-    data.unit || '',
-    data.city,
-    data.state,
-    // A leading apostrophe forces Sheets to store these as text instead of
-    // parsing them as numbers, which would otherwise drop a leading zero
-    // (e.g. postal code "08876" becoming 8876).
-    "'" + data.postalCode,
-    data.email,
-    "'" + (data.phone || '')
-  ]);
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var sheet = getOrCreateSheet();
+    var row = sheet.getLastRow() + 1;
+
+    // Format these columns as plain text *before* writing the value.
+    // Sheets auto-parses numeric-looking strings the same way it does
+    // when you type into a cell, so a plain string write (or even a
+    // leading-apostrophe string) still gets silently converted to a
+    // number and loses leading zeros (e.g. postal code "08876" becoming
+    // 8876). Pre-formatting the cell as text is the only reliable fix.
+    sheet.getRange(row, POSTAL_COLUMN).setNumberFormat('@');
+    sheet.getRange(row, PHONE_COLUMN).setNumberFormat('@');
+
+    sheet.getRange(row, 1, 1, HEADER_ROW.length).setValues([[
+      new Date(),
+      data.firstName,
+      data.lastName,
+      data.street,
+      data.unit || '',
+      data.city,
+      data.state,
+      data.postalCode,
+      data.email,
+      data.phone || ''
+    ]]);
+  } finally {
+    lock.releaseLock();
+  }
 }
 
 function getOrCreateSheet() {
