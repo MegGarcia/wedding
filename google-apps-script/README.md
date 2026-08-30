@@ -96,10 +96,20 @@ updated `Code.gs`:
 To test this without a real HTTP round-trip: add a row to `Guest List`,
 then in the Apps Script editor pick `testCheckGuestPhone` from the function
 dropdown, edit the phone number in that function to match, and click
-**Run** — check the log (**View → Logs**) for `{ok: true, firstName: ...}`.
+**Run** — check the log (**View → Logs**) for
+`{ok: true, firstName: ..., lastName: ...}`.
 
 A successful login is remembered on that browser (via `localStorage`), so a
 guest only has to enter their number once per device/browser.
+
+### Guest last name added to login response
+
+`checkGuestPhone` now returns the matched guest's `lastName` alongside
+`firstName` — used to personalize the postcard shown right after a fresh
+login ("Dear [First] [Last]"). This reads the `Last Name` column that was
+already in the `Guest List` tab; no sheet changes needed. **Redeploy** (per
+"After editing Code.gs later" above) for the live site to actually receive
+it — until then, the postcard falls back to "Dear Friend".
 
 ## What it does
 
@@ -108,5 +118,6 @@ guest only has to enter their number once per device/browser.
 - Appends a timestamped row to the `Submissions` tab.
 - Sends an email to `NOTIFY_EMAIL` with the submitted details.
 - Checks a phone number against the `Guest List` tab for the site's login
-  gate (never exposes the guest list itself to the browser — only a
-  yes/no answer for the one number submitted).
+  gate — never exposes the guest list itself to the browser, only the
+  matched guest's first/last name (used to personalize the post-login
+  postcard) for the one number submitted.

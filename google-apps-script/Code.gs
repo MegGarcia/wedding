@@ -88,7 +88,7 @@ function checkGuestPhone(phone) {
   for (var i = 1; i < rows.length; i++) {
     var rowPhone = normalizePhone(String(rows[i][2] || ''));
     if (rowPhone && rowPhone === normalized) {
-      return { ok: true, firstName: String(rows[i][0] || '') };
+      return { ok: true, firstName: String(rows[i][0] || ''), lastName: String(rows[i][1] || '') };
     }
   }
   return { ok: false };

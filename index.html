@@ -51,6 +51,19 @@
     </div>
     <p class="field__error" id="login-error" hidden>Please try again, or reach out to Megan &amp; Yash directly.</p>
   </form>
+
+  <div id="envelope-scene" class="envelope-scene" hidden>
+    <div class="envelope-scene__stage">
+      <img class="envelope-scene__body envelope-scene__body--open" src="images/Envelope_Full.png" alt="" aria-hidden="true">
+      <img class="envelope-scene__body envelope-scene__body--closed" src="images/Envelope_Front.png" alt="" aria-hidden="true">
+      <div class="envelope-scene__postcard">
+        <img class="envelope-scene__postcard-bg" src="images/Postcard.png" alt="" aria-hidden="true">
+        <p class="envelope-scene__postcard-message">It's official&hellip; Megan &amp; Yash are getting married!</p>
+        <p class="envelope-scene__postcard-name">Dear <span id="envelope-postcard-name"></span></p>
+      </div>
+    </div>
+    <button type="button" class="envelope-scene__skip" id="envelope-skip">Skip to site</button>
+  </div>
 </div>
 
 <div id="site-content" hidden>

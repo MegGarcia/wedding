@@ -23,6 +23,17 @@
   var loginPhone = document.getElementById('login-phone');
   var loginError = document.getElementById('login-error');
   var loginSubmit = loginForm ? loginForm.querySelector('.login-gate__submit') : null;
+  var loginVisual = document.querySelector('.login-gate__visual');
+  var envelopeScene = document.getElementById('envelope-scene');
+  var envelopeNameEl = document.getElementById('envelope-postcard-name');
+
+  // Kept roughly in sync with .envelope-scene__postcard's transition
+  // delay+duration in css/style.css. One combined timer (not a
+  // transitionend listener chained into a second timer) so a browser
+  // that suppresses/delays transitions on a backgrounded tab can't strand
+  // the guest with the pause never starting.
+  var ENVELOPE_ANIMATION_MS = 2200;
+  var ENVELOPE_PAUSE_MS = 30000;
 
   // 2b: the gate dissolves into the hero instead of hard-cutting -- the
   // hero is already visible underneath before the gate finishes fading.
@@ -42,6 +53,45 @@
       if (event.target !== loginGate) return;
       loginGate.removeEventListener('transitionend', onGateOpen);
       loginGate.hidden = true;
+    });
+  }
+
+  // After a successful login (never on repeat/already-authed visits), the
+  // gate doesn't dissolve immediately -- an envelope opens and a
+  // personalized postcard slides out first. A click/tap anywhere on the
+  // gate, or 30 seconds after the slide-out finishes, whichever comes
+  // first, hands off to the existing revealSite() dissolve.
+  function showEnvelopeThenReveal(name) {
+    if (reduceMotion || !envelopeScene || !envelopeNameEl) {
+      revealSite();
+      return;
+    }
+
+    envelopeNameEl.textContent = name || 'Friend';
+
+    if (loginVisual) loginVisual.hidden = true;
+    if (loginForm) loginForm.hidden = true;
+    envelopeScene.hidden = false;
+
+    var finished = false;
+    var pauseTimeoutId = null;
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      clearTimeout(pauseTimeoutId);
+      loginGate.removeEventListener('click', finish);
+      revealSite();
+    }
+
+    loginGate.addEventListener('click', finish);
+
+    var skipButton = document.getElementById('envelope-skip');
+    if (skipButton) skipButton.focus();
+
+    requestAnimationFrame(function () {
+      envelopeScene.classList.add('is-opening');
+      pauseTimeoutId = setTimeout(finish, ENVELOPE_ANIMATION_MS + ENVELOPE_PAUSE_MS);
     });
   }
 
@@ -95,7 +145,11 @@
           } catch (err) {
             // Nothing to do -- worst case, they log in again next visit.
           }
-          revealSite();
+          var displayName = [result.firstName, result.lastName]
+            .filter(function (part) { return part && String(part).trim(); })
+            .join(' ')
+            .trim();
+          showEnvelopeThenReveal(displayName);
         } else {
           showLoginError();
         }
