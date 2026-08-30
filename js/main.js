@@ -50,7 +50,7 @@
   // Submissions are sent to a Google Apps Script Web App, which appends a
   // row to a Google Sheet and emails a notification. See
   // google-apps-script/README.md for how to deploy it and get this URL.
-  var FORM_ENDPOINT = 'PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwQHIr54WCNY5Ob7V0-vccMO19n0XGzK7B3vNrgLEtCNdCXUS-wlZmZJjm_ImABha2xTg/exec';
 
   var form = document.getElementById('rsvp-form');
   var success = document.getElementById('rsvp-success');
