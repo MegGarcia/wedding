@@ -11,13 +11,15 @@
 <body>
 
 <div id="login-gate" class="login-gate">
-  <img class="login-gate__photo-strip" src="images/photo-strip.png" alt="" aria-hidden="true">
-  <img class="login-gate__floral" src="images/floral-babys-breath.png" alt="" aria-hidden="true">
+  <div class="login-gate__visual">
+    <img class="login-gate__photo-strip" src="images/photo-strip.png" alt="" aria-hidden="true">
+    <img class="login-gate__floral" src="images/floral-babys-breath.png" alt="" aria-hidden="true">
+    <p class="login-gate__eyebrow">Meg &amp; Yash's</p>
+    <h1 class="login-gate__title">Save the<br>Date</h1>
+  </div>
   <form id="login-form" class="login-gate__form" novalidate>
-    <h1 class="login-gate__title">Meg &amp; Yash</h1>
-    <p class="login-gate__text">Enter the phone number you gave us to view the site.</p>
     <div class="field">
-      <label for="login-phone">Phone Number</label>
+      <label for="login-phone">Password</label>
       <div class="login-gate__input-wrap">
         <input type="tel" id="login-phone" name="phone" autocomplete="tel" required>
         <button type="submit" class="login-gate__submit" aria-label="Enter">
