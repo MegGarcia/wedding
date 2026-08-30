@@ -109,7 +109,7 @@ img {
 .login-gate__title {
   font-family: var(--font-script);
   font-weight: 400;
-  font-size: 2.75rem;
+  font-size: 5rem;
   line-height: 0.75;
   color: var(--white);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
@@ -802,11 +802,12 @@ img {
   }
 
   .login-gate__eyebrow {
-    font-size: 1.3rem;
+    font-size: 2rem;
   }
 
   .login-gate__title {
-    font-size: 3.5rem;
+    font-size: 8rem;
+    width: 120%;
   }
 
   .hero {
