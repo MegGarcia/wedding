@@ -118,7 +118,12 @@
 
     <div class="field field--full">
       <label for="street">Street Address</label>
-      <input type="text" id="street" name="street" placeholder="Number, Street, Apartment" autocomplete="street-address" required>
+      <input type="text" id="street" name="street" placeholder="Number and Street" autocomplete="address-line1" required>
+    </div>
+
+    <div class="field field--full">
+      <label for="unit">Apartment, Suite, etc. (optional)</label>
+      <input type="text" id="unit" name="unit" placeholder="Apt, Suite, Unit, Floor, etc." autocomplete="address-line2">
     </div>
 
     <div class="form-row form-row--city">

@@ -47,6 +47,15 @@ the future, the live URL won't pick up the change automatically — go to
 **Deploy → Manage deployments**, edit the existing deployment, and choose
 **New version** before clicking **Deploy** again.
 
+### Apt/Unit column added
+
+The form now has a separate optional "Apartment, Suite, etc." field. Do the
+redeploy above with the updated `Code.gs`. If your Sheet already has
+submissions in it from before this change, the script won't rewrite its
+header row automatically (it only writes headers the first time it creates
+the tab) — manually insert a new column between "Street" and "City" and
+label it "Apt/Unit" so old and new rows stay lined up.
+
 ## What it does
 
 - Validates that the required fields (first/last name, street, city, state,
