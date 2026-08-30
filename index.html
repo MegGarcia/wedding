@@ -10,6 +10,24 @@
 </head>
 <body>
 
+<div id="login-gate" class="login-gate">
+  <form id="login-form" class="login-gate__form" novalidate>
+    <h1 class="login-gate__title">Meg &amp; Yash</h1>
+    <p class="login-gate__text">Enter the phone number you gave us to view the site.</p>
+    <div class="field">
+      <label for="login-phone">Phone Number</label>
+      <input type="tel" id="login-phone" name="phone" autocomplete="tel" required>
+    </div>
+    <p class="field__error" id="login-error" hidden>We couldn't find that number — please double-check it, or reach out to Meg &amp; Yash directly.</p>
+    <button type="submit" class="rsvp__submit">
+      <span class="rsvp__submit-label">Enter</span>
+      <span class="rsvp__spinner" aria-hidden="true"></span>
+    </button>
+  </form>
+</div>
+
+<div id="site-content" hidden>
+
 <header class="hero">
   <div class="hero__overlay">
     <p class="hero__eyebrow">Meg &amp; Yash's</p>
@@ -227,6 +245,8 @@
   <p class="footer__names">Meg &amp; Yash</p>
   <p class="footer__date">07.07.2027</p>
 </footer>
+
+</div>
 
 <script src="js/main.js"></script>
 </body>

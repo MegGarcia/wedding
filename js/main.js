@@ -1,6 +1,96 @@
 (function () {
   'use strict';
 
+  // Shared with both the login gate and the mailing-details form below.
+  // Submissions/logins go through a Google Apps Script Web App bound to a
+  // Google Sheet. See google-apps-script/README.md for how to deploy it
+  // and get this URL.
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw2mbFLeSGwWjFVmmo0jj7diU51tcbWonehCHghj_FwVsABxeQo-D_Z6K6skW74WldrCA/exec';
+
+  // ---------- Login gate ----------
+  var AUTH_STORAGE_KEY = 'weddingSiteAuthed';
+
+  var loginGate = document.getElementById('login-gate');
+  var siteContent = document.getElementById('site-content');
+  var loginForm = document.getElementById('login-form');
+  var loginPhone = document.getElementById('login-phone');
+  var loginError = document.getElementById('login-error');
+  var loginSubmit = loginForm ? loginForm.querySelector('.rsvp__submit') : null;
+
+  function revealSite() {
+    if (loginGate) {
+      loginGate.hidden = true;
+    }
+    if (siteContent) {
+      siteContent.hidden = false;
+    }
+  }
+
+  var alreadyAuthed = false;
+  try {
+    alreadyAuthed = localStorage.getItem(AUTH_STORAGE_KEY) === 'true';
+  } catch (err) {
+    // localStorage unavailable (private browsing, etc.) -- fail closed,
+    // the login gate stays up.
+  }
+
+  if (alreadyAuthed) {
+    revealSite();
+  } else if (loginForm) {
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      if (!loginPhone.value.trim()) {
+        loginPhone.focus();
+        return;
+      }
+
+      loginError.hidden = true;
+      loginSubmit.disabled = true;
+
+      var callbackName = 'weddingLoginCallback_' + Date.now();
+      var script = document.createElement('script');
+
+      function cleanup() {
+        clearTimeout(timeoutId);
+        delete window[callbackName];
+        script.remove();
+        loginSubmit.disabled = false;
+      }
+
+      function showLoginError() {
+        loginError.hidden = false;
+        loginPhone.focus();
+      }
+
+      var timeoutId = setTimeout(function () {
+        cleanup();
+        showLoginError();
+      }, 10000);
+
+      window[callbackName] = function (result) {
+        cleanup();
+        if (result && result.ok) {
+          try {
+            localStorage.setItem(AUTH_STORAGE_KEY, 'true');
+          } catch (err) {
+            // Nothing to do -- worst case, they log in again next visit.
+          }
+          revealSite();
+        } else {
+          showLoginError();
+        }
+      };
+
+      script.onerror = function () {
+        cleanup();
+        showLoginError();
+      };
+      script.src = FORM_ENDPOINT + '?phone=' + encodeURIComponent(loginPhone.value) + '&callback=' + callbackName;
+      document.body.appendChild(script);
+    });
+  }
+
   // ---------- Countdown ----------
   var WEDDING_DATE = new Date('2027-07-07T00:00:00');
 
@@ -47,11 +137,6 @@
   }
 
   // ---------- Mailing details form ----------
-  // Submissions are sent to a Google Apps Script Web App, which appends a
-  // row to a Google Sheet and emails a notification. See
-  // google-apps-script/README.md for how to deploy it and get this URL.
-  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbw2mbFLeSGwWjFVmmo0jj7diU51tcbWonehCHghj_FwVsABxeQo-D_Z6K6skW74WldrCA/exec';
-
   var form = document.getElementById('rsvp-form');
   var success = document.getElementById('rsvp-success');
   var submitButton = form ? form.querySelector('.rsvp__submit') : null;

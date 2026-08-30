@@ -2,7 +2,8 @@
 
 The mailing-details form on the site (`#rsvp-form` in `index.html`) posts to a
 Google Apps Script Web App, which appends each submission to a Google Sheet
-and emails a notification. Since the site itself is static (no server), this
+and emails a notification. The same Web App also backs the site's
+phone-number login gate. Since the site itself is static (no server), this
 Web App has to be deployed once, by hand, from your Google account.
 
 ## One-time setup
@@ -73,9 +74,39 @@ header row automatically (it only writes headers the first time it creates
 the tab) — manually insert a new column between "Street" and "City" and
 label it "Apt/Unit" so old and new rows stay lined up.
 
+### Login gate added
+
+The site now requires a guest to enter a phone number before seeing
+anything, checked against a **new `Guest List` tab in this same
+spreadsheet** (not a separate spreadsheet). After redeploying with the
+updated `Code.gs`:
+
+1. Open the same Google Sheet the form submissions go to.
+2. A `Guest List` tab is created automatically (with a `First Name, Last
+   Name, Phone` header row) the first time anyone attempts to log in — or
+   you can create it yourself ahead of time with those exact headers.
+3. **Add a row for every invited guest yourself** — their first name, last
+   name, and the phone number they should log in with. This is the actual
+   guest list, so it has to be entered by hand; it's not something that
+   can be generated or guessed.
+4. Phone numbers can be entered in any format (with or without dashes,
+   parentheses, spaces, or a leading "1") — the script compares only the
+   last 10 digits, so formatting doesn't need to match exactly.
+
+To test this without a real HTTP round-trip: add a row to `Guest List`,
+then in the Apps Script editor pick `testCheckGuestPhone` from the function
+dropdown, edit the phone number in that function to match, and click
+**Run** — check the log (**View → Logs**) for `{ok: true, firstName: ...}`.
+
+A successful login is remembered on that browser (via `localStorage`), so a
+guest only has to enter their number once per device/browser.
+
 ## What it does
 
 - Validates that the required fields (first/last name, street, city, state,
   postal code, email) are present.
 - Appends a timestamped row to the `Submissions` tab.
 - Sends an email to `NOTIFY_EMAIL` with the submitted details.
+- Checks a phone number against the `Guest List` tab for the site's login
+  gate (never exposes the guest list itself to the browser — only a
+  yes/no answer for the one number submitted).

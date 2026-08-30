@@ -9,6 +9,8 @@
 
 var NOTIFY_EMAIL = 'megangarcia2024@gmail.com';
 var SHEET_NAME = 'Submissions';
+var GUEST_SHEET_NAME = 'Guest List';
+var GUEST_HEADER_ROW = ['First Name', 'Last Name', 'Phone'];
 
 var REQUIRED_FIELDS = [
   'firstName',
@@ -54,6 +56,59 @@ function doPost(e) {
   } catch (err) {
     return jsonResponse({ ok: false, error: String(err) });
   }
+}
+
+/**
+ * Login check for the site's phone-number gate. Uses JSONP (a real
+ * callback invocation, not JSON) rather than relying on Apps Script
+ * sending browser-readable CORS headers on a fetch response -- loading a
+ * <script src> isn't subject to CORS at all, which sidesteps that
+ * uncertainty entirely.
+ */
+function doGet(e) {
+  var callback = e.parameter.callback;
+  var result;
+  try {
+    result = checkGuestPhone(e.parameter.phone || '');
+  } catch (err) {
+    result = { ok: false, error: String(err) };
+  }
+  var body = callback + '(' + JSON.stringify(result) + ')';
+  return ContentService.createTextOutput(body).setMimeType(ContentService.MimeType.JAVASCRIPT);
+}
+
+function checkGuestPhone(phone) {
+  var normalized = normalizePhone(phone);
+  if (!normalized) {
+    return { ok: false };
+  }
+
+  var sheet = getOrCreateGuestSheet();
+  var rows = sheet.getDataRange().getValues();
+  for (var i = 1; i < rows.length; i++) {
+    var rowPhone = normalizePhone(String(rows[i][2] || ''));
+    if (rowPhone && rowPhone === normalized) {
+      return { ok: true, firstName: String(rows[i][0] || '') };
+    }
+  }
+  return { ok: false };
+}
+
+function normalizePhone(value) {
+  var digits = String(value).replace(/\D/g, '');
+  // Compare the last 10 digits so a stored or entered leading "1" country
+  // code doesn't cause a false mismatch.
+  return digits.slice(-10);
+}
+
+function getOrCreateGuestSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName(GUEST_SHEET_NAME);
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(GUEST_SHEET_NAME);
+    sheet.appendRow(GUEST_HEADER_ROW);
+  }
+  return sheet;
 }
 
 function appendSubmission(data) {
@@ -146,4 +201,16 @@ function testAppendSubmission() {
     email: 'test@example.com',
     phone: '0585551234'
   });
+}
+
+/**
+ * Quick manual test for the login gate: add a real row to the "Guest
+ * List" tab, then edit the phone number below to match it (in any
+ * format -- digits, dashes, parens, it's normalized either way) and Run
+ * this from the function dropdown. Logs whether it matched and, if so,
+ * the first name it found -- no redeploy or real HTTP request needed.
+ */
+function testCheckGuestPhone() {
+  var result = checkGuestPhone('555-123-4567');
+  Logger.log(result);
 }
