@@ -362,6 +362,10 @@ img {
   gap: 1rem;
 }
 
+.rsvp__form[hidden] {
+  display: none;
+}
+
 .form-row {
   display: flex;
   flex-wrap: wrap;

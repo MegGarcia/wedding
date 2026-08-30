@@ -107,6 +107,9 @@
   }
 
   function showSuccess() {
+    if (submitButton) {
+      submitButton.disabled = false;
+    }
     form.hidden = true;
     if (success) {
       success.hidden = false;
