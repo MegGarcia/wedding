@@ -803,6 +803,7 @@ img {
 
   .login-gate__eyebrow {
     font-size: 2rem;
+    width: 300px;
   }
 
   .login-gate__title {
