@@ -56,16 +56,24 @@
   // making some of them un-tappable on a phone. These are small, purely
   // cosmetic percentage-point nudges applied on top of project()'s
   // geographic result so every marker stays independently tappable; they
-  // do not change any lat/lng in LOCATIONS. Revisit alongside the
+  // do not change any lat/lng in LOCATIONS. Every resulting position below
+  // was verified to land on the actual island shape in images/travel-map.png
+  // (sampled the image's pixel colors directly, not eyeballed) -- re-verify
+  // the same way if the base image ever changes. Trou aux Biches, Grand
+  // Baie, and Mont Choisy sit on a genuinely narrow stretch of the island
+  // art and end up closer together (~15-33px on mobile) than every other
+  // marker (all 36px+ apart); that's the real shape's limit at this size,
+  // not something a further nudge fixes -- a marker-clustering UI would be
+  // the proper fix if that's ever worth doing. Revisit alongside the
   // calibration once the real Figma map is reachable.
   var NUDGES = {
-    'venue': { dx: -2.7, dy: 3.3 },
-    'grand-baie': { dx: 4, dy: -1 },
-    'trou-aux-biches': { dx: -5.4, dy: 2.2 },
-    'mont-choisy': { dx: -2.75, dy: -1.9 },
-    'pamplemousses': { dx: 3.2, dy: 2.2 },
-    'port-louis': { dx: -2, dy: -6 },
-    'caudan': { dx: 2, dy: 6 }
+    'venue': { dx: -6.19, dy: 4.01 },
+    'grand-baie': { dx: 8.12, dy: -1.33 },
+    'trou-aux-biches': { dx: 3.72, dy: -7.27 },
+    'mont-choisy': { dx: 5.74, dy: 4.11 },
+    'pamplemousses': { dx: 11.76, dy: 3.15 },
+    'port-louis': { dx: -5.76, dy: -2.29 },
+    'caudan': { dx: -0.95, dy: 7.4 }
   };
 
   function projectWithNudge(loc) {
@@ -166,7 +174,6 @@
 
     requestAnimationFrame(function () {
       popup.classList.add('is-open');
-      positionWithinBounds(popup);
     });
   }
 
@@ -181,28 +188,11 @@
       marker.classList.remove('is-active');
     }
     if (popup) {
-      popup.classList.remove('is-open', 'travelmap__popup--flip-left', 'travelmap__popup--flip-right', 'travelmap__popup--flip-top');
+      popup.classList.remove('is-open');
       popup.hidden = true;
     }
 
     activeSlug = null;
-  }
-
-  function positionWithinBounds(popup) {
-    var mapRect = map.getBoundingClientRect();
-    var popupRect = popup.getBoundingClientRect();
-
-    popup.classList.remove('travelmap__popup--flip-left', 'travelmap__popup--flip-right', 'travelmap__popup--flip-top');
-
-    if (popupRect.left < mapRect.left) {
-      popup.classList.add('travelmap__popup--flip-left');
-    } else if (popupRect.right > mapRect.right) {
-      popup.classList.add('travelmap__popup--flip-right');
-    }
-
-    if (popup.getBoundingClientRect().top < mapRect.top) {
-      popup.classList.add('travelmap__popup--flip-top');
-    }
   }
 
   document.addEventListener('click', function (event) {

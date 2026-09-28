@@ -2477,8 +2477,8 @@ img {
 
 .travelmap {
   position: relative;
-  width: 60%;
-  max-width: 16rem;
+  width: 75%;
+  max-width: 19rem;
   margin: 0 auto;
   aspect-ratio: 471 / 557;
 }
@@ -2493,8 +2493,8 @@ img {
 .travelmap__marker {
   position: absolute;
   transform: translate(-50%, -100%);
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
   padding: 0;
   border: none;
   background: none;
@@ -2530,9 +2530,7 @@ img {
 
 .travelmap__popup {
   position: absolute;
-  --popup-tx: -50%;
-  --popup-ty: calc(-100% - 0.75rem);
-  transform: translate(var(--popup-tx), var(--popup-ty));
+  transform: translate(-50%, calc(-100% - 0.75rem));
   width: 11rem;
   max-width: 80%;
   background: var(--white);
@@ -2582,27 +2580,11 @@ img {
   margin: 0;
 }
 
-/* Each flip class overrides only its own axis, via the custom properties
-   above -- so a marker near a corner can combine a horizontal and
-   vertical flip at once and both still apply (a plain "transform:"
-   override per class would only let the last-matched one win). */
-.travelmap__popup--flip-left {
-  --popup-tx: 0%;
-}
-
-.travelmap__popup--flip-right {
-  --popup-tx: -100%;
-}
-
-.travelmap__popup--flip-top {
-  --popup-ty: calc(100% + 0.75rem);
-}
-
 @media (min-width: 900px) {
   .travelmap {
     flex: 0 0 auto;
-    width: 20rem;
-    max-width: 30%;
+    width: 22rem;
+    max-width: 35%;
     margin: 0;
   }
 
