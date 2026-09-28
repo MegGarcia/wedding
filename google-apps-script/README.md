@@ -58,6 +58,25 @@ This is much faster than submitting the real form each time, and always
 reflects whatever is currently saved in the editor, regardless of which
 deployment version is live.
 
+**Careful which function you pick from the dropdown.** `appendSubmission`/
+`appendRsvpSubmission` (no `test` prefix) are the *real* functions the
+live form calls, and they expect a data object as their argument —
+running one of those directly gives it none, so `data` is `undefined`
+inside the function. If you see an error like:
+
+```
+TypeError: Cannot read properties of undefined (reading 'events')
+appendRsvpSubmission @ Code.gs:207
+```
+
+that's this exact mistake, not a bug in the form or the deployed site —
+re-run using `testAppendRsvpSubmission` (or `testAppendSubmission`)
+instead, the ones prefixed `test` that already come with fake data built
+in. A real failure from an actual form submission would never show up
+this way: `doPost` catches every error itself and returns an ordinary
+`{ok: false, error: ...}` response, so it can't surface as a raw
+stack-trace popup like this one.
+
 ## After editing Code.gs later
 
 Apps Script deployments are pinned to a version. If you change `Code.gs` in
@@ -125,6 +144,23 @@ before. Same `FORM_ENDPOINT`, no new URL. **Redeploy** (per "After editing
 Code.gs later" above) before the RSVP page's submissions will actually be
 recorded — until then it fails soft (see `rsvp.html`'s own script for how
 it degrades if `FORM_ENDPOINT` isn't reachable).
+
+### Deployment URL changed
+
+If **Deploy → New deployment** is ever used instead of editing the
+existing deployment and picking **New version**, it mints a *different*
+Web App URL — the old one doesn't automatically start forwarding to it.
+`FORM_ENDPOINT` is duplicated in two places since there's no shared
+module system: `js/main.js` (mailing form + login gate) and `js/rsvp.js`
+(the RSVP form). **Both must be updated to the same URL, together** —
+updating only one leaves the other form posting to a stale or dead
+deployment, which looks identical to a normal submission from the
+browser's side (no error), it just never shows up in the Sheet. Also
+double-check the new deployment's **Execute as** is **Me** and **Who has
+access** is **Anyone** (same as the original setup step above) — since
+this one URL now backs the login gate and both forms, a misconfigured
+new deployment breaks all three at once, not just the one you were
+testing.
 
 ## What it does
 

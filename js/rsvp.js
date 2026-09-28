@@ -14,7 +14,7 @@
 
   // Same deployed Apps Script Web App URL as js/main.js's FORM_ENDPOINT --
   // duplicated here since there's no shared module to import it from.
-  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbykXicuZau62KHgfccEqbTAd5o2z8IEIKjvkzpVXr5vRkePNalIUnZ0UPtsChL2O5y-lg/exec';
+  var FORM_ENDPOINT = 'https://script.google.com/macros/s/AKfycbz8CFNRQC6dmihh3zPJfRgZrWKY0IVkp2uGKsuC-ufZwHZ9Mi1l9lBJ55c97xVCunOuwQ/exec';
 
   var form = document.getElementById('rsvp-attend-form');
   if (!form) return;
