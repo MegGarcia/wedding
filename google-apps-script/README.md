@@ -178,6 +178,31 @@ picking `testRsvpDecline` from the function dropdown and running it —
 check the log for `{"ok":true}` and the `RSVP Responses` tab for a "Test
 Decliner" row.
 
+### Events split into one TRUE/FALSE column per event
+
+The single `Events` column (a comma-joined list of whichever events a
+guest checked) is now one column per event instead — `Tilak & Sangeet
+(Tuesday, July 6th)`, `Wedding (Wednesday, July 7th)`, `Reception
+(Thursday, July 8th)` — each holding `TRUE`/`FALSE`, so you can filter or
+`COUNTIF` a head count per event directly instead of parsing a joined
+string. `RSVP_EVENTS` at the top of `Code.gs` is the one place that list
+lives; it has to match `rsvp.html`'s checkbox values exactly (it already
+does).
+
+**This changes the sheet's column layout**, and the header row is only
+ever written once, when the `RSVP Responses` tab is first created — it
+won't rewrite itself on existing tabs (same caveat as the "Apt/Unit
+column added" note above). If you already have real rows in that tab
+from earlier testing, either:
+- Delete the entire `RSVP Responses` tab and let the next submission (or
+  `testAppendRsvpSubmission`) recreate it fresh with the new columns, or
+- Manually replace the header row and re-arrange the `Events` column's
+  data by hand into the three new columns.
+
+If it's just your own test rows in there so far, deleting the tab is by
+far the easier option. **Redeploy** (per "After editing Code.gs later"
+above) for this to take effect on the live site.
+
 ## What it does
 
 - Validates that the required fields (first/last name, street, city, state,

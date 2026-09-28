@@ -47,17 +47,26 @@ var RSVP_REQUIRED_FIELDS = ['fullName', 'attending'];
 // hides and clears both once "Regretfully decline" is picked (js/rsvp.js's
 // syncAttendingFollowup()), so a decline submission never sends them.
 var RSVP_REQUIRED_FIELDS_IF_ATTENDING = ['plusOne', 'events'];
+// Must match rsvp.html's checkbox values exactly (name="events") -- each
+// one becomes its own TRUE/FALSE column in the sheet (see
+// appendRsvpSubmission) instead of one comma-joined "Events" column, so
+// you can filter/count attendance per event directly.
+var RSVP_EVENTS = [
+  'Tilak & Sangeet (Tuesday, July 6th)',
+  'Wedding (Wednesday, July 7th)',
+  'Reception (Thursday, July 8th)'
+];
 var RSVP_HEADER_ROW = [
   'Timestamp',
   'Full Name',
   'Attending',
   'Plus One?',
-  'Plus One Name',
-  'Events',
+  'Plus One Name'
+].concat(RSVP_EVENTS, [
   'Dietary Restrictions',
   'Song Requests',
   'Notes'
-];
+]);
 
 function doPost(e) {
   try {
@@ -212,19 +221,26 @@ function appendRsvpSubmission(data) {
   try {
     var sheet = getOrCreateRsvpSheet();
     var row = sheet.getLastRow() + 1;
-    var eventsList = Array.isArray(data.events) ? data.events.join(', ') : (data.events || '');
+    var selectedEvents = Array.isArray(data.events) ? data.events : (data.events ? [data.events] : []);
+    // One TRUE/FALSE column per RSVP_EVENTS entry, in that same order, so
+    // it lines up with the header row built from RSVP_EVENTS above.
+    var eventFlags = RSVP_EVENTS.map(function (eventName) {
+      return selectedEvents.indexOf(eventName) !== -1;
+    });
 
-    sheet.getRange(row, 1, 1, RSVP_HEADER_ROW.length).setValues([[
+    var rowValues = [
       new Date(),
       data.fullName,
       data.attending,
       data.plusOne || '',
-      data.plusOneName || '',
-      eventsList,
+      data.plusOneName || ''
+    ].concat(eventFlags, [
       data.dietary || '',
       data.songRequests || '',
       data.notes || ''
-    ]]);
+    ]);
+
+    sheet.getRange(row, 1, 1, RSVP_HEADER_ROW.length).setValues([rowValues]);
   } finally {
     lock.releaseLock();
   }
@@ -299,7 +315,7 @@ function testAppendSubmission() {
  * editor, pick "testAppendRsvpSubmission" from the function dropdown and
  * click Run. Calls appendRsvpSubmission() directly with fake data -- no
  * HTTP request or redeploy needed. Check the "RSVP Responses" tab for a
- * "Test Guest" row with a comma-joined Events column.
+ * "Test Guest" row with all three event columns TRUE.
  */
 function testAppendRsvpSubmission() {
   appendRsvpSubmission({
@@ -322,7 +338,8 @@ function testAppendRsvpSubmission() {
  * required-fields check a real decline request hits. In the Apps Script
  * editor, pick "testRsvpDecline" from the function dropdown and click
  * Run; check the log for {"ok":true} and the "RSVP Responses" tab for a
- * "Test Decliner" row with blank Plus One?/Events columns.
+ * "Test Decliner" row with a blank Plus One? column and all three event
+ * columns FALSE.
  */
 function testRsvpDecline() {
   var result = doPost({
