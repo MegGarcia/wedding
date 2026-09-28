@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('weddingSiteAuthed') !== 'true') {
+      window.location.replace('index.html');
+    }
+  } catch (err) {
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- 'weddingSiteAuthed'/'true' must stay in sync with AUTH_STORAGE_KEY in js/main.js -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel &amp; Stay — Megan &amp; Yash</title>
+<meta name="description" content="Everything you need to know about traveling to and staying in Mauritius for Megan &amp; Yash's wedding.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="pagenav">
+  <div class="pagenav__bar">
+    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
+    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+    </button>
+    <nav class="pagenav__menu" id="pagenav-menu" hidden>
+      <a class="pagenav__link" href="itinerary.html">Itinerary</a>
+      <a class="pagenav__link" href="travel-stay.html" aria-current="page">Travel &amp; Stay</a>
+      <a class="pagenav__link" href="faq.html">FAQ</a>
+      <a class="pagenav__link" href="registry.html">Registry</a>
+      <a class="pagenav__rsvp" href="rsvp.html">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pagehero" style="background-image: url('images/travel-hero.jpg');">
+  <h1 class="pagehero__title">Travel &amp; Stay</h1>
+</section>
+
+<section class="travel-intro">
+  <div class="travel-intro__text">
+    <h2 class="travel-intro__title">Welcome to Mauritius!</h2>
+    <p>A volcanic island in the Indian Ocean, Mauritius is famous for its turquoise lagoons, coral reefs, and easy, welcoming pace, and it&rsquo;s often called the Star and Key of the Indian Ocean. Early July falls in the island&rsquo;s winter, which simply means warm, dry, comfortable days in the 60s to 70s&deg;F and cooler evenings, ideal weather for a celebration and for exploring afterward. Pack a light layer for the nights, and don&rsquo;t forget your swimsuit for the beaches.</p>
+    <p>One charming bit of local pride: the national bird is the dodo, the famous flightless bird found only here. It&rsquo;s been extinct for centuries, so you won&rsquo;t spot one in the wild, but you&rsquo;ll see it everywhere else, from the national coat of arms to shop windows across the island to our wedding invitations.</p>
+  </div>
+  <img class="travel-intro__map" src="images/travel-map.png" alt="Illustrated map of Mauritius with pins marking points of interest">
+</section>
+
+<section class="travel-hotels">
+  <h2 class="travel-hotels__title">Hotels</h2>
+  <p class="travel-hotels__intro">Please book early. July is peak season in Mauritius, coinciding with the European holiday period, and hotels near the venue fill up quickly. We recommend booking one of the hotels near the venue. We have compiled a list of suggested hotels, all within a 15 minute drive.</p>
+
+  <!-- TODO: Figma's asset-download rate limit was hit mid-build, so these
+       6 hotel photos are placeholders for now (see images/README.md).
+       The Figma source also has no real booking URLs for the arrow-link
+       buttons below -- they're left as href="#" rather than a guessed URL;
+       swap in the real ones whenever you have them. -->
+  <div class="travel-hotels__grid">
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="Victoria Beachcomber website (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>Victoria Beachcomber</h3>
+        <p class="travel-hotel-card__address">Pointe aux Piments 21304, Mauritius</p>
+        <div class="travel-hotel-card__meta">
+          <span class="travel-hotel-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="travel-hotel-card__pill">10 min drive</span>
+          <span class="travel-hotel-card__pill">$260&ndash;550 a night</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="Ravenala Attitude website (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>Ravenala Attitude</h3>
+        <p class="travel-hotel-card__address">Turtle Bay, Balaclava, Mauritius</p>
+        <div class="travel-hotel-card__meta">
+          <span class="travel-hotel-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="travel-hotel-card__pill">5 min drive</span>
+          <span class="travel-hotel-card__pill">$180&ndash;350 a night</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="Le M&eacute;ridien website (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>Le M&eacute;ridien</h3>
+        <p class="travel-hotel-card__address">MU, Village Hall Lane, Pointe aux Piments 21304, Mauritius</p>
+        <div class="travel-hotel-card__meta">
+          <span class="travel-hotel-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="travel-hotel-card__pill">8 min drive</span>
+          <span class="travel-hotel-card__pill">$436&ndash;520 a night</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="Be Cosy by LOV website (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>Be Cosy by LOV</h3>
+        <p class="travel-hotel-card__address">Coastal Road, Trou-aux-Biches, Mauritius</p>
+        <div class="travel-hotel-card__meta">
+          <span class="travel-hotel-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="travel-hotel-card__pill">12 min drive</span>
+          <span class="travel-hotel-card__pill">$101&ndash;175 a night</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="Voile Bleue Boutique website (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>Voile Bleue Boutique</h3>
+        <p class="travel-hotel-card__address">Pointe aux Biches, Mauritius</p>
+        <div class="travel-hotel-card__meta">
+          <span class="travel-hotel-card__stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <span class="travel-hotel-card__pill">11 min drive</span>
+          <span class="travel-hotel-card__pill">$95&ndash;155 a night</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="travel-hotel-card">
+      <div class="travel-hotel-card__photo-wrap placeholder-photo">Photo pending</div>
+      <a class="travel-hotel-card__link" href="#" aria-disabled="true" aria-label="AirBnb (link pending)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M7 17L17 7M9 7h8v8"/></svg>
+      </a>
+      <div class="travel-hotel-card__body">
+        <h3>AirBnb</h3>
+        <p class="travel-hotel-card__address">If you&rsquo;re looking for an alternative accommodation, we also recommend AirBnb. This may be a good choice for you if you are traveling in a group or extending your stay.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="travel-flights">
+  <h2 class="travel-flights__title">Flights</h2>
+  <div class="travel-flights__body">
+    <p>No direct flights from the US, so plan on one connection (usually Paris, Dubai, or Johannesburg) and 18 to 26 hours total. Please arrive by Monday, July 5th to beat the jet lag. You&rsquo;ll land at SSR International Airport (MRU). The venue and hotels are 60 to 90 minutes north, with taxis and car hire at the airport.</p>
+    <div class="travel-flights__entry">
+      <h3>Entry</h3>
+      <p>US citizens don&rsquo;t need a visa. Bring a passport valid at least six months past your departure date, and complete the <a href="https://safemauritius.govmu.org/" target="_blank" rel="noopener">Mauritius All-In-One Travel Form</a> online. Confirm current rules at travel.state.gov before booking.</p>
+    </div>
+  </div>
+  <!-- TODO: flights/airport photo pending -- see note above. -->
+  <div class="travel-flights__photo placeholder-photo placeholder-photo--on-dark" style="aspect-ratio: 959 / 519;">Photo pending</div>
+</section>
+
+<div class="travel-callout">
+  <!-- TODO: Seven Coloured Earths photo pending -- see note above. -->
+  <div class="placeholder-photo" style="aspect-ratio: 630 / 441;">Photo pending</div>
+  <p>Seven Coloured Earths</p>
+</div>
+
+<footer class="pagefooter">
+  <span class="pagefooter__brand">M&amp;Y</span>
+  <span class="pagefooter__date">07.07.2027</span>
+</footer>
+
+<script src="js/pages.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('weddingSiteAuthed') !== 'true') {
+      window.location.replace('index.html');
+    }
+  } catch (err) {
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- 'weddingSiteAuthed'/'true' must stay in sync with AUTH_STORAGE_KEY in js/main.js -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Megan &amp; Yash</title>
+<meta name="description" content="Frequently asked questions about Megan &amp; Yash's wedding in Mauritius.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="pagenav">
+  <div class="pagenav__bar">
+    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
+    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+    </button>
+    <nav class="pagenav__menu" id="pagenav-menu" hidden>
+      <a class="pagenav__link" href="itinerary.html">Itinerary</a>
+      <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
+      <a class="pagenav__link" href="faq.html" aria-current="page">FAQ</a>
+      <a class="pagenav__link" href="registry.html">Registry</a>
+      <a class="pagenav__rsvp" href="rsvp.html">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pagehero" style="background-image: url('images/faq-hero.jpg');">
+  <h1 class="pagehero__title">Frequently Asked<br>Questions</h1>
+</section>
+
+<section class="faq-list">
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">
+      <span>When should I arrive?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+      <p>We recommend arriving by Monday, July 5th at the latest, so you&rsquo;re rested before the Tilak on the 6th. Festivities run through the reception on Thursday, July 8th.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">
+      <span>Do I need a visa?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+      <p>No. US citizens don&rsquo;t need a visa for a tourist stay. You&rsquo;ll just need a valid US passport (valid at least six months beyond your departure) and to complete Mauritius&rsquo;s short online travel form. Please double-check requirements at travel.state.gov before you book, as rules can change.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">
+      <span>What should I wear?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+      <p>For every event, either traditional Indian attire or formal American wedding attire works beautifully. The Sangeet is festive and colorful, the wedding is the dressiest day, and the reception is formal or cocktail. Wear whatever makes you feel most celebratory.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">
+      <span>Is the food vegetarian?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+      <p>Meals on Tuesday and Wednesday (the 6th and 7th) are vegetarian.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">
+      <span>Where should I stay?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5" hidden>
+      <p>See the Travel &amp; Stay page for our recommended hotels, all within a 15 minute drive of the venue. Please book early, as July is peak season.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">
+      <span>How do I get around?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+      <p>Some hotels have shuttles from the airport. Taxis and Ubers are also popular forms of transportation in Mauritius.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q7" aria-expanded="false" aria-controls="faq-a7">
+      <span>Can I bring a plus one?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a7" role="region" aria-labelledby="faq-q7" hidden>
+      <p>Yes, you must let us know at the time of submitting your RSVP if you are bringing a plus one. However, it is not necessary to submit the name of the person if undecided.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q8" aria-expanded="false" aria-controls="faq-a8">
+      <span>Currency</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a8" role="region" aria-labelledby="faq-q8" hidden>
+      <p>The local currency is the Mauritian rupee. Cards are widely accepted at hotels and larger venues, but it&rsquo;s worth carrying some cash for smaller shops, tips, and taxis.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q9" aria-expanded="false" aria-controls="faq-a9">
+      <span>Adapters</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a9" role="region" aria-labelledby="faq-q9" hidden>
+      <p>Mauritius runs on 230V and uses mainly UK-style three-pin (Type G) outlets, so bring a universal adapter. This is an easy one to forget.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button type="button" class="faq-question" id="faq-q10" aria-expanded="false" aria-controls="faq-a10">
+      <span>Language</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" id="faq-a10" role="region" aria-labelledby="faq-q10" hidden>
+      <p>Both English and French are widely spoken, so you won&rsquo;t run into a language barrier.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="pagefooter">
+  <span class="pagefooter__brand">M&amp;Y</span>
+  <span class="pagefooter__date">07.07.2027</span>
+</footer>
+
+<script src="js/pages.js" defer></script>
+</body>
+</html>

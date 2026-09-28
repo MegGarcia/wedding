@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('weddingSiteAuthed') !== 'true') {
+      window.location.replace('index.html');
+    }
+  } catch (err) {
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- 'weddingSiteAuthed'/'true' must stay in sync with AUTH_STORAGE_KEY in js/main.js -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registry — Megan &amp; Yash</title>
+<meta name="description" content="Registry details for Megan &amp; Yash's wedding.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="pagenav">
+  <div class="pagenav__bar">
+    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
+    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+    </button>
+    <nav class="pagenav__menu" id="pagenav-menu" hidden>
+      <a class="pagenav__link" href="itinerary.html">Itinerary</a>
+      <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
+      <a class="pagenav__link" href="faq.html">FAQ</a>
+      <a class="pagenav__link" href="registry.html" aria-current="page">Registry</a>
+      <a class="pagenav__rsvp" href="rsvp.html">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="registry-hero" style="background-image: url('images/registry-hero.jpg');">
+  <div class="registry-card">
+    <p class="registry-card__text">Your presence in Mauritius, so far from home, is truly the greatest gift we could ask for. But for those who&rsquo;ve asked, we&rsquo;ve put together a registry on Zola.</p>
+    <!-- No real Zola registry URL exists yet -- js/pages.js wires this up
+         from a REGISTRY_URL placeholder constant once you provide one. -->
+    <a class="registry-card__cta" id="registry-link" href="#" aria-disabled="true">View Registry</a>
+  </div>
+
+  <footer class="pagefooter pagefooter--overlay">
+    <span class="pagefooter__brand">M&amp;Y</span>
+    <span class="pagefooter__date">07.07.2027</span>
+  </footer>
+</section>
+
+<script src="js/pages.js" defer></script>
+</body>
+</html>

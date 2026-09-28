@@ -111,6 +111,21 @@ already in the `Guest List` tab; no sheet changes needed. **Redeploy** (per
 "After editing Code.gs later" above) for the live site to actually receive
 it — until then, the postcard falls back to "Dear Friend".
 
+### RSVP (attendance) form added
+
+The new `rsvp.html` page posts a real attendance RSVP (name, attending
+yes/no, plus-one, which events, dietary/song/notes) — separate from the
+mailing-details form above. `doPost` now dispatches on a `formType` field:
+`formType: 'rsvp'` routes to a new `appendRsvpSubmission`/
+`sendRsvpNotificationEmail` pair that writes to its own `RSVP Responses`
+tab (created automatically on first submission, same pattern as `Guest
+List`); anything without `formType` — i.e. the existing mailing-details
+form — is completely unaffected and keeps using `Submissions` exactly as
+before. Same `FORM_ENDPOINT`, no new URL. **Redeploy** (per "After editing
+Code.gs later" above) before the RSVP page's submissions will actually be
+recorded — until then it fails soft (see `rsvp.html`'s own script for how
+it degrades if `FORM_ENDPOINT` isn't reachable).
+
 ## What it does
 
 - Validates that the required fields (first/last name, street, city, state,
@@ -121,3 +136,7 @@ it — until then, the postcard falls back to "Dear Friend".
   gate — never exposes the guest list itself to the browser, only the
   matched guest's first/last name (used to personalize the post-login
   postcard) for the one number submitted.
+- Validates and appends attendance RSVPs (from `rsvp.html`) to a separate
+  `RSVP Responses` tab, and emails `NOTIFY_EMAIL` about those too — routed
+  by the `formType: 'rsvp'` field so the mailing-details form above is
+  unaffected.

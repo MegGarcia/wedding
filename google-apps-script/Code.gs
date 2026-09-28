@@ -38,9 +38,40 @@ var HEADER_ROW = [
 var POSTAL_COLUMN = HEADER_ROW.indexOf('Postal Code') + 1;
 var PHONE_COLUMN = HEADER_ROW.indexOf('Phone') + 1;
 
+// RSVP (attendance) form -- new pages/rsvp.html. Kept separate from the
+// mailing-details REQUIRED_FIELDS/HEADER_ROW/SHEET_NAME above so the
+// existing form's behavior is untouched; doPost dispatches on formType.
+var RSVP_SHEET_NAME = 'RSVP Responses';
+var RSVP_REQUIRED_FIELDS = ['fullName', 'attending', 'plusOne', 'events'];
+var RSVP_HEADER_ROW = [
+  'Timestamp',
+  'Full Name',
+  'Attending',
+  'Plus One?',
+  'Plus One Name',
+  'Events',
+  'Dietary Restrictions',
+  'Song Requests',
+  'Notes'
+];
+
 function doPost(e) {
   try {
     var data = JSON.parse(e.postData.contents);
+
+    if (data.formType === 'rsvp') {
+      var rsvpMissing = RSVP_REQUIRED_FIELDS.filter(function (field) {
+        return !data[field] || (Array.isArray(data[field]) && !data[field].length);
+      });
+      if (rsvpMissing.length) {
+        return jsonResponse({ ok: false, error: 'Missing fields: ' + rsvpMissing.join(', ') });
+      }
+
+      appendRsvpSubmission(data);
+      sendRsvpNotificationEmail(data);
+
+      return jsonResponse({ ok: true });
+    }
 
     var missing = REQUIRED_FIELDS.filter(function (field) {
       return !data[field];
@@ -157,6 +188,40 @@ function getOrCreateSheet() {
   return sheet;
 }
 
+function getOrCreateRsvpSheet() {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName(RSVP_SHEET_NAME);
+  if (!sheet) {
+    sheet = spreadsheet.insertSheet(RSVP_SHEET_NAME);
+    sheet.appendRow(RSVP_HEADER_ROW);
+  }
+  return sheet;
+}
+
+function appendRsvpSubmission(data) {
+  var lock = LockService.getScriptLock();
+  lock.waitLock(10000);
+  try {
+    var sheet = getOrCreateRsvpSheet();
+    var row = sheet.getLastRow() + 1;
+    var eventsList = Array.isArray(data.events) ? data.events.join(', ') : (data.events || '');
+
+    sheet.getRange(row, 1, 1, RSVP_HEADER_ROW.length).setValues([[
+      new Date(),
+      data.fullName,
+      data.attending,
+      data.plusOne,
+      data.plusOneName || '',
+      eventsList,
+      data.dietary || '',
+      data.songRequests || '',
+      data.notes || ''
+    ]]);
+  } finally {
+    lock.releaseLock();
+  }
+}
+
 function sendNotificationEmail(data) {
   var subject = 'New Save the Date submission — ' + data.firstName + ' ' + data.lastName;
   var body = [
@@ -170,6 +235,24 @@ function sendNotificationEmail(data) {
     'Postal Code: ' + data.postalCode,
     'Email: ' + data.email,
     'Phone: ' + (data.phone || '(not provided)')
+  ].join('\n');
+
+  MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
+}
+
+function sendRsvpNotificationEmail(data) {
+  var eventsList = Array.isArray(data.events) ? data.events.join(', ') : (data.events || '');
+  var subject = 'New RSVP — ' + data.fullName + ' (' + data.attending + ')';
+  var body = [
+    'A new RSVP was received:',
+    '',
+    'Name: ' + data.fullName,
+    'Attending: ' + data.attending,
+    'Plus one: ' + data.plusOne + (data.plusOneName ? ' (' + data.plusOneName + ')' : ''),
+    'Events: ' + eventsList,
+    'Dietary: ' + (data.dietary || '(none)'),
+    'Song requests: ' + (data.songRequests || '(none)'),
+    'Notes: ' + (data.notes || '(none)')
   ].join('\n');
 
   MailApp.sendEmail(NOTIFY_EMAIL, subject, body);
@@ -200,6 +283,26 @@ function testAppendSubmission() {
     postalCode: '08876',
     email: 'test@example.com',
     phone: '0585551234'
+  });
+}
+
+/**
+ * Quick manual test for the RSVP (attendance) form: in the Apps Script
+ * editor, pick "testAppendRsvpSubmission" from the function dropdown and
+ * click Run. Calls appendRsvpSubmission() directly with fake data -- no
+ * HTTP request or redeploy needed. Check the "RSVP Responses" tab for a
+ * "Test Guest" row with a comma-joined Events column.
+ */
+function testAppendRsvpSubmission() {
+  appendRsvpSubmission({
+    fullName: 'Test Guest',
+    attending: 'Joyfully accept',
+    plusOne: 'Yes, I have a plus one',
+    plusOneName: 'Plus One Guest',
+    events: ['Tilak & Sangeet (Tuesday, July 6th)', 'Wedding (Wednesday, July 7th)', 'Reception (Thursday, July 8th)'],
+    dietary: 'Vegetarian',
+    songRequests: 'Anything by ABBA',
+    notes: 'So excited!'
   });
 }
 

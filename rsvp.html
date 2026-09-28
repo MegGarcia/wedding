@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('weddingSiteAuthed') !== 'true') {
+      window.location.replace('index.html');
+    }
+  } catch (err) {
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- 'weddingSiteAuthed'/'true' must stay in sync with AUTH_STORAGE_KEY in js/main.js -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RSVP — Megan &amp; Yash</title>
+<meta name="description" content="RSVP for Megan &amp; Yash's wedding in Mauritius.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="pagenav">
+  <div class="pagenav__bar">
+    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
+    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+    </button>
+    <nav class="pagenav__menu" id="pagenav-menu" hidden>
+      <a class="pagenav__link" href="itinerary.html">Itinerary</a>
+      <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
+      <a class="pagenav__link" href="faq.html">FAQ</a>
+      <a class="pagenav__link" href="registry.html">Registry</a>
+      <a class="pagenav__rsvp" href="rsvp.html" aria-current="page">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="rsvpform-page">
+  <div class="rsvpform-intro">
+    <h1 class="rsvpform-heading">See you in Mauritius?</h1>
+    <p>We can&rsquo;t wait to celebrate with you in Mauritius. Please let us know if you&rsquo;ll be joining us by January 15, 2027 so we can finalize plans with our venue and hotels. Because this is a destination celebration, an early response is a real gift to us, and it gives you the best shot at flights and rooms before July fills up.</p>
+    <p class="rsvpform-deadline">Please respond by January 15, 2027</p>
+  </div>
+
+  <form class="rsvpform" id="rsvp-attend-form" novalidate>
+    <div class="field">
+      <label for="rsvp-name">Your full name <span class="field__required">*</span></label>
+      <input type="text" id="rsvp-name" name="fullName" placeholder="Luna Garpal" required>
+    </div>
+
+    <fieldset class="field">
+      <legend>Will you be attending? <span class="field__required">*</span></legend>
+      <label class="rsvpform-radio"><input type="radio" name="attending" value="Joyfully accept" required> Joyfully accept</label>
+      <label class="rsvpform-radio"><input type="radio" name="attending" value="Regretfully decline" required> Regretfully decline</label>
+    </fieldset>
+
+    <div class="rsvpform-row">
+      <fieldset class="field">
+        <legend>Will you be bringing a plus one? If your invite includes your partner, please say yes if they will be attending with you. <span class="field__required">*</span></legend>
+        <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-yes" value="Yes, I have a plus one" required> Yes, I have a plus one</label>
+        <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-no" value="No, just me" required> No, just me</label>
+      </fieldset>
+      <div class="field">
+        <label for="rsvp-plusone-name">Plus one&rsquo;s full name</label>
+        <input type="text" id="rsvp-plusone-name" name="plusOneName" placeholder="Luna Garpal" disabled>
+      </div>
+    </div>
+
+    <fieldset class="field">
+      <legend>Which events will join us for? <span class="field__required">*</span></legend>
+      <label class="rsvpform-check"><input type="checkbox" name="events" value="Tilak &amp; Sangeet (Tuesday, July 6th)"> Tilak &amp; Sangeet (Tuesday, July 6th)</label>
+      <label class="rsvpform-check"><input type="checkbox" name="events" value="Wedding (Wednesday, July 7th)"> Wedding (Wednesday, July 7th)</label>
+      <label class="rsvpform-check"><input type="checkbox" name="events" value="Reception (Thursday, July 8th)"> Reception (Thursday, July 8th)</label>
+    </fieldset>
+
+    <div class="field">
+      <label for="rsvp-dietary">Dietary restrictions or allergies</label>
+      <input type="text" id="rsvp-dietary" name="dietary">
+    </div>
+
+    <div class="field">
+      <label for="rsvp-songs">Song requests</label>
+      <input type="text" id="rsvp-songs" name="songRequests">
+    </div>
+
+    <div class="field">
+      <label for="rsvp-notes">Anything else we should know?</label>
+      <input type="text" id="rsvp-notes" name="notes">
+    </div>
+
+    <button type="submit" class="rsvp__submit">
+      <span class="rsvp__spinner" aria-hidden="true"></span>
+      Submit
+    </button>
+  </form>
+
+  <div class="rsvp__success" id="rsvp-attend-success" hidden>
+    <img class="rsvp__success-seal" src="images/seal.png" alt="">
+    <div class="rsvp__success-text">
+      <p class="rsvp__success-script">Thank you</p>
+      <p class="rsvp__success-note">We&rsquo;ve received your RSVP.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="pagefooter">
+  <span class="pagefooter__brand">M&amp;Y</span>
+  <span class="pagefooter__date">07.07.2027</span>
+</footer>
+
+<script src="js/pages.js" defer></script>
+<script src="js/rsvp.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+  try {
+    if (localStorage.getItem('weddingSiteAuthed') !== 'true') {
+      window.location.replace('index.html');
+    }
+  } catch (err) {
+    window.location.replace('index.html');
+  }
+})();
+</script>
+<!-- 'weddingSiteAuthed'/'true' must stay in sync with AUTH_STORAGE_KEY in js/main.js -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Itinerary — Megan &amp; Yash</title>
+<meta name="description" content="The full weekend itinerary for Megan &amp; Yash's wedding in Mauritius.">
+
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicon-180.png">
+
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="pagenav">
+  <div class="pagenav__bar">
+    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
+    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+      <span class="pagenav__toggle-bar"></span>
+    </button>
+    <nav class="pagenav__menu" id="pagenav-menu" hidden>
+      <a class="pagenav__link" href="itinerary.html" aria-current="page">Itinerary</a>
+      <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
+      <a class="pagenav__link" href="faq.html">FAQ</a>
+      <a class="pagenav__link" href="registry.html">Registry</a>
+      <a class="pagenav__rsvp" href="rsvp.html">RSVP</a>
+    </nav>
+  </div>
+</header>
+
+<section class="pagehero" style="background-image: url('images/itin-hero.jpg');">
+  <h1 class="pagehero__title">Itinerary</h1>
+</section>
+
+<section class="itin-intro">
+  <p class="itin-intro__text"><span class="drop-cap">M</span>any of you will be experiencing an Indian wedding for the first time, and each event has its own spirit. Come curious, come ready to celebrate, and don&rsquo;t worry about knowing exactly what to do.</p>
+</section>
+
+<section class="itin-days">
+  <div class="itin-day">
+    <h2 class="itin-day__title">Tuesday, July 6</h2>
+    <div class="itin-day__events">
+      <article class="itin-event">
+        <p class="itin-event__time">4pm</p>
+        <h3 class="itin-event__name">Tilak</h3>
+        <p class="itin-event__desc">A traditional blessing that formally brings the two families together and marks the start of the celebrations. Tea, coffee, soft drinks, and light starters to follow.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          La Grande Kaz
+        </p>
+      </article>
+      <article class="itin-event">
+        <p class="itin-event__time">6pm</p>
+        <h3 class="itin-event__name">Sangeet</h3>
+        <p class="itin-event__desc">Our welcome evening ceremony with traditional songs and dance, a vegetarian dinner, and drinks.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          La Grande Kaz
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="itin-day">
+    <h2 class="itin-day__title">Wednesday, July 7</h2>
+    <div class="itin-day__events">
+      <article class="itin-event">
+        <p class="itin-event__time">3:30pm</p>
+        <h3 class="itin-event__name">Arrival</h3>
+        <p class="itin-event__desc">Join us at the venue for the wedding ceremony.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          La Grande Kaz
+        </p>
+      </article>
+      <article class="itin-event">
+        <p class="itin-event__time">4pm</p>
+        <h3 class="itin-event__name">Wedding</h3>
+        <p class="itin-event__desc">Traditional ceremony. Refreshments are served throughout.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          La Grande Kaz
+        </p>
+      </article>
+      <article class="itin-event">
+        <p class="itin-event__time">6pm</p>
+        <h3 class="itin-event__name">Dinner</h3>
+        <p class="itin-event__desc">Traditional dinner of seven vegetarian curries.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          La Grande Kaz
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="itin-day">
+    <h2 class="itin-day__title">Thursday, July 8</h2>
+    <div class="itin-day__events">
+      <article class="itin-event">
+        <p class="itin-event__time">6:30pm</p>
+        <h3 class="itin-event__name">Reception</h3>
+        <p class="itin-event__desc">A relaxed celebration dinner to close out the weekend and send us off in style.</p>
+        <p class="itin-event__location">
+          <svg class="icon-pin" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+          Venue TBD
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="itin-dresscode">
+  <div class="itin-dresscode__text">
+    <h2 class="itin-dresscode__title">Dress Code</h2>
+    <p>Wear colorful attire. Wednesday should have formal attire and the rest of the events should be semi-formal or formal.</p>
+    <p>Dress for the island breeze. For every event you&rsquo;re welcome to wear either traditional Indian attire or formal American wedding attire, whatever makes you feel most comfortable and celebratory.</p>
+    <p>If you&rsquo;d like to wear traditional attire and aren&rsquo;t sure where to begin, reach out and we&rsquo;ll happily point you in the right direction.</p>
+  </div>
+  <!-- TODO: Figma's asset-download rate limit was hit mid-build. Only 7 of
+       the 12 dress-code photos were pulled; slots 08-12 below temporarily
+       repeat 01-05 as placeholders until the remaining images are fetched
+       and swapped in (see images/README.md). -->
+  <div class="itin-dresscode__grid">
+    <img src="images/itin-dresscode-01.jpg" alt="Attire inspiration: green embellished lehenga">
+    <img src="images/itin-dresscode-02.jpg" alt="Attire inspiration: brown suit">
+    <img src="images/itin-dresscode-03.jpg" alt="Attire inspiration: coral formal gown">
+    <img src="images/itin-dresscode-04.jpg" alt="Attire inspiration: yellow embellished lehenga">
+    <img src="images/itin-dresscode-05.jpg" alt="Attire inspiration: pale yellow formal gown">
+    <img src="images/itin-dresscode-06.jpg" alt="Attire inspiration: pink and gold lehenga">
+    <img src="images/itin-dresscode-07.jpg" alt="Attire inspiration: olive suit">
+    <img src="images/itin-dresscode-01.jpg" alt="Attire inspiration: green embellished lehenga">
+    <img src="images/itin-dresscode-02.jpg" alt="Attire inspiration: brown suit">
+    <img src="images/itin-dresscode-03.jpg" alt="Attire inspiration: coral formal gown">
+    <img src="images/itin-dresscode-04.jpg" alt="Attire inspiration: yellow embellished lehenga">
+    <img src="images/itin-dresscode-05.jpg" alt="Attire inspiration: pale yellow formal gown">
+  </div>
+</section>
+
+<section class="itin-venue">
+  <div>
+    <h2 class="itin-venue__title">La Grande Kaz</h2>
+    <p class="itin-venue__address">H-Concept Ltd Solitude,<br>Triolet, Mauritius</p>
+  </div>
+  <img class="itin-venue__photo" src="images/itin-venue.jpg" alt="Map showing the location of La Grande Kaz by H-Concept in Mauritius">
+</section>
+
+<footer class="pagefooter">
+  <span class="pagefooter__brand">M&amp;Y</span>
+  <span class="pagefooter__date">07.07.2027</span>
+</footer>
+
+<script src="js/pages.js" defer></script>
+</body>
+</html>
