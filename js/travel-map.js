@@ -8,6 +8,18 @@
 (function () {
   'use strict';
 
+  // Hover-capable pointer devices (mouse/trackpad) get the mouseenter/
+  // mouseleave hover-to-open behavior. Touch-only devices rely solely on
+  // tap (click) to open, and tap-elsewhere/Escape to close -- otherwise
+  // legacy touch-to-mouse-event emulation can synthesize a mouseleave
+  // shortly after the tap's click already opened the popup, closing it
+  // ~150ms later ("ghost hover"), which is the intermittent open-then-
+  // immediately-close bug reported on phones. (A touchscreen laptop whose
+  // primary pointer is still a mouse/trackpad will report hover-capable
+  // and keep this behavior even if the touchscreen itself is tapped
+  // directly -- acceptable; phones are the target here.)
+  var supportsHover = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
   // Edit name/lat/lng/image directly. image points at the exact filename
   // to drop into images/ for that location's popup photo (see
   // images/README.md for the full list) -- until that file actually
@@ -139,18 +151,20 @@
       '<circle class="travelmap__marker-dot" cx="12" cy="11.6" r="4.4"/>' +
       '</svg>';
 
-    button.addEventListener('mouseenter', function () {
-      cancelClose();
-      openPopup(loc.slug);
-    });
-    button.addEventListener('mouseleave', function () {
-      if (activeSlug !== loc.slug) return;
-      cancelClose();
-      closeTimer = setTimeout(function () {
-        closeTimer = null;
-        closePopup();
-      }, 150);
-    });
+    if (supportsHover) {
+      button.addEventListener('mouseenter', function () {
+        cancelClose();
+        openPopup(loc.slug);
+      });
+      button.addEventListener('mouseleave', function () {
+        if (activeSlug !== loc.slug) return;
+        cancelClose();
+        closeTimer = setTimeout(function () {
+          closeTimer = null;
+          closePopup();
+        }, 150);
+      });
+    }
     button.addEventListener('click', function (event) {
       // Without this, the click bubbles to the document listener below
       // and immediately closes the popup this same click just opened.
