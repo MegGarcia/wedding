@@ -2140,6 +2140,16 @@ img {
   transition: opacity 320ms ease, transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Mirrors the protected .rsvp__form[hidden] rule (index.html's own form)
+   -- without this, setting form.hidden = true in showSuccess() does
+   nothing, since this rule's own `display` always wins over the
+   browser's built-in [hidden] styling regardless of specificity, leaving
+   the full-height form laid out (just invisible) and a large gap above
+   the confirmation message. */
+.rsvpform[hidden] {
+  display: none;
+}
+
 .rsvpform fieldset.field {
   border: none;
   padding: 0;
