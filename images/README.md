@@ -37,7 +37,7 @@ save-the-date page.
 | `travel-hotel-voile-bleue.jpg` | Voile Bleue Boutique hotel card |
 | `travel-hotel-airbnb.jpg` | AirBnb card, Travel & Stay page |
 | `travel-flights.jpg` | Flights section photo, Travel & Stay page |
-| `travel-seven-coloured-earths.jpg` | "Seven Coloured Earths" callout card, Travel & Stay page |
+| `travel-seven-coloured-earths.jpg` | Chamarel Seven Coloured Earths marker photo on the interactive map, Travel & Stay page |
 | `faq-hero.jpg` | FAQ page hero photo |
 | `registry-hero.jpg` | Registry page hero photo |
 
@@ -82,7 +82,6 @@ coming soon" placeholder used elsewhere on the site.
 | `travel-map-port-louis.jpg` | Port Louis |
 | `travel-map-caudan.jpg` | Caudan Waterfront |
 | `travel-map-tamarin.jpg` | Tamarin |
-| `travel-map-chamarel.jpg` | Chamarel Seven Coloured Earths |
 | `travel-map-black-river.jpg` | Black River Gorges National Park |
 | `travel-map-le-morne.jpg` | Le Morne Brabant |
 | `travel-map-ile-aux-cerfs.jpg` | Île aux Cerfs |

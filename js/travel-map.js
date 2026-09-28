@@ -36,7 +36,7 @@
     { slug: 'port-louis', name: 'Port Louis', lat: -20.1608912, lng: 57.5012222, image: 'images/travel-map-port-louis.jpg' },
     { slug: 'caudan', name: 'Caudan Waterfront', lat: -20.160863, lng: 57.498089, image: 'images/travel-map-caudan.jpg' },
     { slug: 'tamarin', name: 'Tamarin', lat: -20.3377911, lng: 57.3750805, image: 'images/travel-map-tamarin.jpg' },
-    { slug: 'chamarel', name: 'Chamarel Seven Coloured Earths', lat: -20.4400767, lng: 57.3731676, image: 'images/travel-map-chamarel.jpg' },
+    { slug: 'chamarel', name: 'Chamarel Seven Coloured Earths', lat: -20.4400767, lng: 57.3731676, image: 'images/travel-seven-coloured-earths.jpg' },
     { slug: 'black-river', name: 'Black River Gorges National Park', lat: -20.4263719, lng: 57.4509443, image: 'images/travel-map-black-river.jpg' },
     { slug: 'le-morne', name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, image: 'images/travel-map-le-morne.jpg' },
     { slug: 'ile-aux-cerfs', name: 'Île aux Cerfs', lat: -20.2723538, lng: 57.8041107, image: 'images/travel-map-ile-aux-cerfs.jpg' }
