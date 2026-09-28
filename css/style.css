@@ -1444,32 +1444,32 @@ img {
 
 .pagenav {
   position: sticky;
-  top: 0.75rem;
+  top: 0;
   z-index: 50;
-  margin: 0.75rem;
-}
-
-.pagenav + .pagehero,
-.pagenav + .registry-hero {
-  margin-top: -4.5rem;
 }
 
 .pagenav__bar {
   position: relative;
+  background: var(--white);
+  padding: 1rem 1.25rem;
+}
+
+/* Holds the actual nav content (brand/toggle/menu) and caps it at the
+   same --max-width every page's content uses, so the nav's left/right
+   edge lines up with the page below it instead of drifting apart as the
+   window widens -- .pagenav__bar itself stays full-bleed white. */
+.pagenav__row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--white);
-  border-radius: 999px;
-  padding: 0.5rem 0.5rem 0.5rem 1.1rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .pagenav__brand {
-  font-family: var(--font-label);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-size: 1.15rem;
+  font-family: var(--font-script);
+  font-weight: 400;
+  font-size: 1.75rem;
   color: var(--olive);
   text-decoration: none;
 }
@@ -1556,10 +1556,18 @@ img {
 .pagefooter {
   background: var(--olive);
   color: var(--white);
+  padding: 2rem 1.5rem;
+}
+
+/* Same purpose as .pagenav__row -- caps the brand/date row at
+   --max-width so it lines up with the page content above it, while
+   .pagefooter itself stays a full-bleed olive bar. */
+.pagefooter__inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 1.5rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
 .pagefooter__brand {
@@ -2070,6 +2078,17 @@ img {
 
 /* ---------- Registry page ---------- */
 
+/* Sole flex child of .registry-hero -- caps at --max-width so the card's
+   left edge lines up with every other page's content column instead of
+   just sitting at .registry-hero's own small padding. width:100% makes
+   it fill the hero's available (padded) width before the cap/centering
+   kicks in, same math as .pagenav__row/.pagefooter__inner above. */
+.registry-hero__inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
 .registry-hero {
   position: relative;
   min-height: 100vh;
@@ -2322,21 +2341,12 @@ label.rsvpform-check {
    ========================================================================== */
 
 @media (min-width: 900px) {
-  .pagenav {
-    margin: 1.25rem 2rem;
-  }
-
-  .pagenav + .pagehero,
-  .pagenav + .registry-hero {
-    margin-top: -5.5rem;
-  }
-
   .pagenav__bar {
-    padding: 0.6rem 0.75rem 0.6rem 1.75rem;
+    padding: 1.25rem 4rem;
   }
 
   .pagenav__brand {
-    font-size: 1.4rem;
+    font-size: 2.25rem;
   }
 
   .pagenav__toggle {

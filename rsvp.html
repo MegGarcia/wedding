@@ -29,19 +29,21 @@
 
 <header class="pagenav">
   <div class="pagenav__bar">
-    <a class="pagenav__brand" href="index.html">M&amp;Y</a>
-    <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
-      <span class="pagenav__toggle-bar"></span>
-      <span class="pagenav__toggle-bar"></span>
-      <span class="pagenav__toggle-bar"></span>
-    </button>
-    <nav class="pagenav__menu" id="pagenav-menu" hidden>
-      <a class="pagenav__link" href="itinerary.html">Itinerary</a>
-      <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
-      <a class="pagenav__link" href="faq.html">FAQ</a>
-      <a class="pagenav__link" href="registry.html">Registry</a>
-      <a class="pagenav__rsvp" href="rsvp.html" aria-current="page">RSVP</a>
-    </nav>
+    <div class="pagenav__row">
+      <a class="pagenav__brand" href="index.html">Megan &amp; Yash</a>
+      <button type="button" class="pagenav__toggle" id="pagenav-toggle" aria-expanded="false" aria-controls="pagenav-menu" aria-label="Menu">
+        <span class="pagenav__toggle-bar"></span>
+        <span class="pagenav__toggle-bar"></span>
+        <span class="pagenav__toggle-bar"></span>
+      </button>
+      <nav class="pagenav__menu" id="pagenav-menu" hidden>
+        <a class="pagenav__link" href="itinerary.html">Itinerary</a>
+        <a class="pagenav__link" href="travel-stay.html">Travel &amp; Stay</a>
+        <a class="pagenav__link" href="faq.html">FAQ</a>
+        <a class="pagenav__link" href="registry.html">Registry</a>
+        <a class="pagenav__rsvp" href="rsvp.html" aria-current="page">RSVP</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -116,8 +118,10 @@
 </section>
 
 <footer class="pagefooter">
-  <span class="pagefooter__brand">M&amp;Y</span>
-  <span class="pagefooter__date">07.07.2027</span>
+  <div class="pagefooter__inner">
+    <span class="pagefooter__brand">MAURITIUS</span>
+    <span class="pagefooter__date">07.07.2027</span>
+  </div>
 </footer>
 
 <script src="js/pages.js" defer></script>
