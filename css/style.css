@@ -1630,10 +1630,13 @@ img {
 
 .itin-days {
   background: var(--olive);
+  padding: 0 1.25rem 2.5rem;
+}
+
+.itin-days__inner {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 0 1.25rem 2.5rem;
 }
 
 .itin-day {
@@ -1708,6 +1711,9 @@ img {
 .itin-dresscode {
   background: var(--white);
   padding: 2.5rem 1.25rem;
+}
+
+.itin-dresscode__inner {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -1747,6 +1753,9 @@ img {
   background: var(--olive);
   color: var(--white);
   padding: 2.5rem 1.25rem;
+}
+
+.itin-venue__inner {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -1777,6 +1786,9 @@ img {
   background: var(--olive);
   color: var(--white);
   padding: 2.5rem 1.25rem;
+}
+
+.travel-intro__inner {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -1935,6 +1947,9 @@ img {
   background: var(--olive);
   color: var(--white);
   padding: 2.5rem 1.25rem;
+}
+
+.travel-flights__inner {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -2387,10 +2402,15 @@ label.rsvpform-check {
   }
 
   .itin-days {
-    flex-direction: row;
-    gap: 2rem;
     padding-top: 2.5rem;
     padding-bottom: 4rem;
+  }
+
+  .itin-days__inner {
+    flex-direction: row;
+    gap: 2rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .itin-day {
@@ -2398,11 +2418,16 @@ label.rsvpform-check {
   }
 
   .itin-dresscode {
-    flex-direction: row;
-    align-items: center;
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .itin-dresscode__inner {
+    flex-direction: row;
+    align-items: center;
     gap: 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .itin-dresscode__text {
@@ -2423,12 +2448,17 @@ label.rsvpform-check {
   }
 
   .itin-venue {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .itin-venue__inner {
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-between;
     gap: 4rem;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .itin-venue__title {
@@ -2440,11 +2470,16 @@ label.rsvpform-check {
   }
 
   .travel-intro {
-    flex-direction: row;
-    align-items: center;
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .travel-intro__inner {
+    flex-direction: row;
+    align-items: center;
     gap: 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .travel-intro__text {
@@ -2477,11 +2512,16 @@ label.rsvpform-check {
   }
 
   .travel-flights {
-    flex-direction: row;
-    align-items: flex-start;
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+
+  .travel-flights__inner {
+    flex-direction: row;
+    align-items: flex-start;
     gap: 4rem;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
 
   .travel-flights__body {
