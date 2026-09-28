@@ -162,6 +162,22 @@ this one URL now backs the login gate and both forms, a misconfigured
 new deployment breaks all three at once, not just the one you were
 testing.
 
+### "Regretfully decline" RSVPs weren't being recorded
+
+`rsvp.html` hides and clears the plus-one and events questions once
+"Regretfully decline" is picked, so a decline submission never sends
+`plusOne` or `events` at all. `RSVP_REQUIRED_FIELDS` originally required
+both on every RSVP regardless of `attending`, so every decline failed
+that check and came back `{ok: false}` — invisible from the browser,
+since the form posts with `mode: 'no-cors'` and shows "Thank you"
+either way. Fixed: those two are now only required when
+`attending === 'Joyfully accept'`, matching `rsvp.html`'s own logic.
+**Redeploy** (per "After editing Code.gs later" above) for this fix to
+take effect on the live site. Test it without a real submission by
+picking `testRsvpDecline` from the function dropdown and running it —
+check the log for `{"ok":true}` and the `RSVP Responses` tab for a "Test
+Decliner" row.
+
 ## What it does
 
 - Validates that the required fields (first/last name, street, city, state,

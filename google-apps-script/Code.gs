@@ -42,7 +42,11 @@ var PHONE_COLUMN = HEADER_ROW.indexOf('Phone') + 1;
 // mailing-details REQUIRED_FIELDS/HEADER_ROW/SHEET_NAME above so the
 // existing form's behavior is untouched; doPost dispatches on formType.
 var RSVP_SHEET_NAME = 'RSVP Responses';
-var RSVP_REQUIRED_FIELDS = ['fullName', 'attending', 'plusOne', 'events'];
+var RSVP_REQUIRED_FIELDS = ['fullName', 'attending'];
+// plusOne/events are only required when attending -- rsvp.html itself
+// hides and clears both once "Regretfully decline" is picked (js/rsvp.js's
+// syncAttendingFollowup()), so a decline submission never sends them.
+var RSVP_REQUIRED_FIELDS_IF_ATTENDING = ['plusOne', 'events'];
 var RSVP_HEADER_ROW = [
   'Timestamp',
   'Full Name',
@@ -60,7 +64,11 @@ function doPost(e) {
     var data = JSON.parse(e.postData.contents);
 
     if (data.formType === 'rsvp') {
-      var rsvpMissing = RSVP_REQUIRED_FIELDS.filter(function (field) {
+      var rsvpRequired = RSVP_REQUIRED_FIELDS;
+      if (data.attending === 'Joyfully accept') {
+        rsvpRequired = rsvpRequired.concat(RSVP_REQUIRED_FIELDS_IF_ATTENDING);
+      }
+      var rsvpMissing = rsvpRequired.filter(function (field) {
         return !data[field] || (Array.isArray(data[field]) && !data[field].length);
       });
       if (rsvpMissing.length) {
@@ -210,7 +218,7 @@ function appendRsvpSubmission(data) {
       new Date(),
       data.fullName,
       data.attending,
-      data.plusOne,
+      data.plusOne || '',
       data.plusOneName || '',
       eventsList,
       data.dietary || '',
@@ -304,6 +312,29 @@ function testAppendRsvpSubmission() {
     songRequests: 'Anything by ABBA',
     notes: 'So excited!'
   });
+}
+
+/**
+ * Quick manual test for a "Regretfully decline" RSVP -- rsvp.html hides
+ * and clears the plusOne/events questions once decline is picked, so a
+ * real decline submission never sends them. This goes through doPost()
+ * itself (not appendRsvpSubmission() directly) so it exercises the same
+ * required-fields check a real decline request hits. In the Apps Script
+ * editor, pick "testRsvpDecline" from the function dropdown and click
+ * Run; check the log for {"ok":true} and the "RSVP Responses" tab for a
+ * "Test Decliner" row with blank Plus One?/Events columns.
+ */
+function testRsvpDecline() {
+  var result = doPost({
+    postData: {
+      contents: JSON.stringify({
+        formType: 'rsvp',
+        fullName: 'Test Decliner',
+        attending: 'Regretfully decline'
+      })
+    }
+  });
+  Logger.log(result.getContent());
 }
 
 /**
