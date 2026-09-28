@@ -2467,12 +2467,14 @@ img {
 /* ==========================================================================
    Travel & Stay: interactive Mauritius map widget
    Replaces the static travel-intro__map image with a self-contained
-   marker/popup component (js/travel-map.js). Marker icon shape, popup
-   corner radius/shadow/spacing below are PLACEHOLDER pending Figma
-   frames 211:5443 (default) and 211:5402 (with popup) -- the Figma tool
-   is rate-limited this session, see js/travel-map.js's header comment.
-   Swap only the values marked PLACEHOLDER once those frames are
-   reachable; nothing else here should need to change.
+   marker/popup component (js/travel-map.js). Base art is
+   images/travel-map.svg (the couple's own vector export, 471x540
+   viewBox) -- its path is a plain black fill at 20% opacity with no
+   background, so .travelmap supplies the olive backdrop to get the
+   intended two-tone island/ocean look. Marker icon shape and popup
+   corner radius/shadow/spacing below are still PLACEHOLDER pending the
+   two Figma frames (211:5443 default, 211:5402 with popup); swap only
+   those values if those frames ever become reachable.
    ========================================================================== */
 
 .travelmap {
@@ -2480,7 +2482,8 @@ img {
   width: 75%;
   max-width: 19rem;
   margin: 0 auto;
-  aspect-ratio: 471 / 557;
+  aspect-ratio: 471 / 540;
+  background-color: var(--olive);
 }
 
 .travelmap__base {
@@ -2493,8 +2496,8 @@ img {
 .travelmap__marker {
   position: absolute;
   transform: translate(-50%, -100%);
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.375rem;
+  height: 2.375rem;
   padding: 0;
   border: none;
   background: none;
@@ -2503,6 +2506,15 @@ img {
   align-items: flex-end;
   justify-content: center;
   -webkit-tap-highlight-color: transparent;
+  z-index: 1;
+}
+
+.travelmap__marker:hover,
+.travelmap__marker.is-active {
+  /* Keeps whichever marker the pointer is currently over on top of any
+     neighbor it overlaps with, so hovering near two closely-spaced pins
+     doesn't flicker between them. */
+  z-index: 2;
 }
 
 .travelmap__marker-icon {

@@ -29,7 +29,7 @@ save-the-date page.
 | `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
 | `itin-venue.jpg` | La Grande Kaz location map on the Itinerary page |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
-| `travel-map.png` | Base island silhouette for the interactive map on the Travel & Stay page |
+| `travel-map.svg` | Base island silhouette for the interactive map on the Travel & Stay page |
 | `travel-hotel-victoria-beachcomber.jpg` | Victoria Beachcomber hotel card |
 | `travel-hotel-ravenala-attitude.jpg` | Ravenala Attitude hotel card |
 | `travel-hotel-le-meridien.jpg` | Le Méridien hotel card |
@@ -55,7 +55,34 @@ were provided directly by the couple after hitting the Figma tool's rate
 limit, then resized/compressed the same way as the rest of the site's
 photos.
 
-`travel-map.png` had its baked-in decorative pin icons digitally removed
-(color-masked out and filled with the surrounding olive tone) once the
-map became interactive (`js/travel-map.js`) — the JS now draws its own
-13 markers on top, so the old static pins would otherwise show twice.
+`travel-map.png` (the earlier raster base map) was replaced by
+`travel-map.svg`, a clean vector silhouette the couple uploaded directly,
+with no decorative pins baked in — the JS draws its own 13 markers on top
+of it (`js/travel-map.js`). The old PNG is no longer referenced by any
+page; it's left in this folder purely for git history's sake and can be
+deleted if you'd like a smaller repo.
+
+### Interactive map photos (Travel & Stay page)
+
+`js/travel-map.js` already points each of the map's 13 location popups at
+the exact filename below — drop a photo in under that name (same
+resize/compress convention as everything else in this folder: JPEG,
+roughly the size it displays at) and it appears automatically, no code
+changes needed. Until a file exists, that popup shows the same "Photo
+coming soon" placeholder used elsewhere on the site.
+
+| File | Location |
+|---|---|
+| `travel-map-venue.jpg` | La Grande Kaz (Wedding Venue) |
+| `travel-map-airport.jpg` | SSR International Airport (MRU) |
+| `travel-map-grand-baie.jpg` | Grand Baie |
+| `travel-map-trou-aux-biches.jpg` | Trou aux Biches Beach |
+| `travel-map-mont-choisy.jpg` | Mont Choisy Beach |
+| `travel-map-pamplemousses.jpg` | Pamplemousses Botanical Garden |
+| `travel-map-port-louis.jpg` | Port Louis |
+| `travel-map-caudan.jpg` | Caudan Waterfront |
+| `travel-map-tamarin.jpg` | Tamarin |
+| `travel-map-chamarel.jpg` | Chamarel Seven Coloured Earths |
+| `travel-map-black-river.jpg` | Black River Gorges National Park |
+| `travel-map-le-morne.jpg` | Le Morne Brabant |
+| `travel-map-ile-aux-cerfs.jpg` | Île aux Cerfs |

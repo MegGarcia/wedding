@@ -2,40 +2,44 @@
 // locations, the lat/lng-to-map-position math, and the marker/popup
 // interaction live in this one file. Kept separate from js/pages.js and
 // js/rsvp.js the same way those are separate from each other -- this is
-// the one file that owns the map widget.
+// the one file that owns the map widget. Base art is
+// images/travel-map.svg (see that file's header comment in
+// css/style.css for why the container needs its own background color).
 (function () {
   'use strict';
 
-  // Edit name/lat/lng/image directly. Leave image '' to show the
-  // diagonal-stripe placeholder; paste a real images/... path once a
-  // real photo is supplied and it swaps in automatically.
+  // Edit name/lat/lng/image directly. image points at the exact filename
+  // to drop into images/ for that location's popup photo (see
+  // images/README.md for the full list) -- until that file actually
+  // exists, the <img>'s onerror handler below swaps in the diagonal-
+  // stripe placeholder automatically, so there's nothing else to wire up
+  // once real photos are supplied.
   var LOCATIONS = [
-    { slug: 'venue', name: 'La Grande Kaz (Wedding Venue)', lat: -20.0825474, lng: 57.5468961, image: '' },
-    { slug: 'airport', name: 'SSR International Airport (MRU)', lat: -20.4334615, lng: 57.6787266, image: '' },
-    { slug: 'grand-baie', name: 'Grand Baie', lat: -20.0089204, lng: 57.5816352, image: '' },
-    { slug: 'trou-aux-biches', name: 'Trou aux Biches Beach', lat: -20.0350439, lng: 57.5449607, image: '' },
-    { slug: 'mont-choisy', name: 'Mont Choisy Beach', lat: -20.0028549, lng: 57.5526127, image: '' },
-    { slug: 'pamplemousses', name: 'Pamplemousses Botanical Garden', lat: -20.1045656, lng: 57.5803163, image: '' },
-    { slug: 'port-louis', name: 'Port Louis', lat: -20.1608912, lng: 57.5012222, image: '' },
-    { slug: 'caudan', name: 'Caudan Waterfront', lat: -20.160863, lng: 57.498089, image: '' },
-    { slug: 'tamarin', name: 'Tamarin', lat: -20.3377911, lng: 57.3750805, image: '' },
-    { slug: 'chamarel', name: 'Chamarel Seven Coloured Earths', lat: -20.4400767, lng: 57.3731676, image: '' },
-    { slug: 'black-river', name: 'Black River Gorges National Park', lat: -20.4263719, lng: 57.4509443, image: '' },
-    { slug: 'le-morne', name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, image: '' },
-    { slug: 'ile-aux-cerfs', name: 'Île aux Cerfs', lat: -20.2723538, lng: 57.8041107, image: '' }
+    { slug: 'venue', name: 'La Grande Kaz (Wedding Venue)', lat: -20.0825474, lng: 57.5468961, image: 'images/travel-map-venue.jpg' },
+    { slug: 'airport', name: 'SSR International Airport (MRU)', lat: -20.4334615, lng: 57.6787266, image: 'images/travel-map-airport.jpg' },
+    { slug: 'grand-baie', name: 'Grand Baie', lat: -20.0089204, lng: 57.5816352, image: 'images/travel-map-grand-baie.jpg' },
+    { slug: 'trou-aux-biches', name: 'Trou aux Biches Beach', lat: -20.0350439, lng: 57.5449607, image: 'images/travel-map-trou-aux-biches.jpg' },
+    { slug: 'mont-choisy', name: 'Mont Choisy Beach', lat: -20.0028549, lng: 57.5526127, image: 'images/travel-map-mont-choisy.jpg' },
+    { slug: 'pamplemousses', name: 'Pamplemousses Botanical Garden', lat: -20.1045656, lng: 57.5803163, image: 'images/travel-map-pamplemousses.jpg' },
+    { slug: 'port-louis', name: 'Port Louis', lat: -20.1608912, lng: 57.5012222, image: 'images/travel-map-port-louis.jpg' },
+    { slug: 'caudan', name: 'Caudan Waterfront', lat: -20.160863, lng: 57.498089, image: 'images/travel-map-caudan.jpg' },
+    { slug: 'tamarin', name: 'Tamarin', lat: -20.3377911, lng: 57.3750805, image: 'images/travel-map-tamarin.jpg' },
+    { slug: 'chamarel', name: 'Chamarel Seven Coloured Earths', lat: -20.4400767, lng: 57.3731676, image: 'images/travel-map-chamarel.jpg' },
+    { slug: 'black-river', name: 'Black River Gorges National Park', lat: -20.4263719, lng: 57.4509443, image: 'images/travel-map-black-river.jpg' },
+    { slug: 'le-morne', name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, image: 'images/travel-map-le-morne.jpg' },
+    { slug: 'ile-aux-cerfs', name: 'Île aux Cerfs', lat: -20.2723538, lng: 57.8041107, image: 'images/travel-map-ile-aux-cerfs.jpg' }
   ];
 
   // Mauritius is small enough (~60km across) that a flat linear
   // approximation -- lng as x, lat as y, one scale+offset per axis, no
   // real map projection -- places points accurately relative to each
-  // other. These two reference points were estimated by eye against
-  // images/travel-map.png (the only art available -- Figma access is
-  // rate-limited this session, see images/README.md). Re-derive both
-  // once the real vector map is reachable; nothing else here should
-  // need to change.
+  // other. These two reference points were measured directly against
+  // the real vector geometry in images/travel-map.svg (the couple's own
+  // upload, 471x540 viewBox), by parsing its path data and confirming
+  // both points sit on the island polygon.
   var CALIBRATION = {
-    refA: { name: 'Grand Baie', lat: -20.0089204, lng: 57.5816352, xPct: 56, yPct: 6 },
-    refB: { name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, xPct: 8, yPct: 88 }
+    refA: { name: 'Grand Baie', lat: -20.0089204, lng: 57.5816352, xPct: 61.57, yPct: 1.11 },
+    refB: { name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, xPct: 23.78, yPct: 96.67 }
   };
 
   function project(lat, lng) {
@@ -57,23 +61,29 @@
   // cosmetic percentage-point nudges applied on top of project()'s
   // geographic result so every marker stays independently tappable; they
   // do not change any lat/lng in LOCATIONS. Every resulting position below
-  // was verified to land on the actual island shape in images/travel-map.png
-  // (sampled the image's pixel colors directly, not eyeballed) -- re-verify
-  // the same way if the base image ever changes. Trou aux Biches, Grand
-  // Baie, and Mont Choisy sit on a genuinely narrow stretch of the island
-  // art and end up closer together (~15-33px on mobile) than every other
-  // marker (all 36px+ apart); that's the real shape's limit at this size,
-  // not something a further nudge fixes -- a marker-clustering UI would be
-  // the proper fix if that's ever worth doing. Revisit alongside the
-  // calibration once the real Figma map is reachable.
+  // was verified with a point-in-polygon test against the real vector path
+  // in images/travel-map.svg (not eyeballed, and not a pixel-color guess
+  // against a raster image like the old PNG-based values this replaces) --
+  // re-verify the same way if the base SVG ever changes. Trou aux Biches,
+  // Mont Choisy, and Grand Baie sit on a genuinely narrow stretch of the
+  // island shape and end up closer together (~19-31px on mobile) than most
+  // other markers; that's the real shape's limit at this size, not
+  // something a further nudge fixes -- a marker-clustering UI would be the
+  // proper fix if that's ever worth doing. Tamarin and Le Morne Brabant
+  // need no nudge -- project()'s raw output already lands them cleanly on
+  // the island.
   var NUDGES = {
-    'venue': { dx: -6.19, dy: 4.01 },
-    'grand-baie': { dx: 8.12, dy: -1.33 },
-    'trou-aux-biches': { dx: 3.72, dy: -7.27 },
-    'mont-choisy': { dx: 5.74, dy: 4.11 },
-    'pamplemousses': { dx: 11.76, dy: 3.15 },
-    'port-louis': { dx: -5.76, dy: -2.29 },
-    'caudan': { dx: -0.95, dy: 7.4 }
+    'venue': { dx: -3.54, dy: -0.39 },
+    'airport': { dx: -3.66, dy: -1.98 },
+    'grand-baie': { dx: 2.12, dy: 0.37 },
+    'trou-aux-biches': { dx: -8.57, dy: 3.05 },
+    'mont-choisy': { dx: -3.72, dy: 4.46 },
+    'pamplemousses': { dx: 4.44, dy: -2.39 },
+    'port-louis': { dx: -5.09, dy: -2.92 },
+    'caudan': { dx: 5.97, dy: 2.64 },
+    'chamarel': { dx: 1.07, dy: -1.00 },
+    'black-river': { dx: 0.59, dy: -2.66 },
+    'ile-aux-cerfs': { dx: -2.00, dy: -2.63 }
   };
 
   function projectWithNudge(loc) {
@@ -90,6 +100,20 @@
   if (!map) return;
 
   var activeSlug = null;
+
+  // Closing on mouseleave is deferred briefly and cancelled if the pointer
+  // re-enters (the marker itself, or a spot the icon's own shape doesn't
+  // quite cover) within that window -- without this, hovering near the
+  // pin's center dot rapidly fires leave/enter and the popup flickers
+  // open and closed.
+  var closeTimer = null;
+
+  function cancelClose() {
+    if (closeTimer) {
+      clearTimeout(closeTimer);
+      closeTimer = null;
+    }
+  }
 
   function markerId(slug) {
     return 'travelmap-marker-' + slug;
@@ -116,15 +140,22 @@
       '</svg>';
 
     button.addEventListener('mouseenter', function () {
+      cancelClose();
       openPopup(loc.slug);
     });
     button.addEventListener('mouseleave', function () {
-      if (activeSlug === loc.slug) closePopup();
+      if (activeSlug !== loc.slug) return;
+      cancelClose();
+      closeTimer = setTimeout(function () {
+        closeTimer = null;
+        closePopup();
+      }, 150);
     });
     button.addEventListener('click', function (event) {
       // Without this, the click bubbles to the document listener below
       // and immediately closes the popup this same click just opened.
       event.stopPropagation();
+      cancelClose();
       // Always open (never toggle-close here): on desktop, mouseenter
       // above already opens this marker's popup before its click ever
       // fires, so treating "already open" as "close" would make a plain
@@ -148,18 +179,35 @@
     popup.style.left = pos.xPct + '%';
     popup.style.top = pos.yPct + '%';
 
-    var photoHtml = loc.image
-      ? '<img src="' + loc.image + '" alt="">'
-      : '<div class="placeholder-photo travelmap__popup-photo-placeholder">Photo coming soon</div>';
+    var photoWrap = document.createElement('div');
+    photoWrap.className = 'travelmap__popup-photo';
 
-    popup.innerHTML =
-      '<div class="travelmap__popup-photo">' + photoHtml + '</div>' +
-      '<p class="travelmap__popup-title" id="' + popupId(loc.slug) + '-title">' + loc.name + '</p>';
+    // The real photo file doesn't exist yet for most locations -- rather
+    // than wait and re-wire this later, every location already points at
+    // its intended filename (see images/README.md), and this 404s
+    // gracefully into the same placeholder used elsewhere on the site
+    // until that exact file is dropped into images/.
+    var img = document.createElement('img');
+    img.alt = '';
+    img.addEventListener('error', function () {
+      photoWrap.innerHTML = '<div class="placeholder-photo travelmap__popup-photo-placeholder">Photo coming soon</div>';
+    });
+    img.src = loc.image;
+    photoWrap.appendChild(img);
+
+    var title = document.createElement('p');
+    title.className = 'travelmap__popup-title';
+    title.id = popupId(loc.slug) + '-title';
+    title.textContent = loc.name;
+
+    popup.appendChild(photoWrap);
+    popup.appendChild(title);
 
     return popup;
   }
 
   function openPopup(slug) {
+    cancelClose();
     if (activeSlug === slug) return;
     closePopup();
 
@@ -198,12 +246,14 @@
   document.addEventListener('click', function (event) {
     if (!activeSlug) return;
     if (map.contains(event.target)) return;
+    cancelClose();
     closePopup();
   });
 
   document.addEventListener('keydown', function (event) {
     if (event.key !== 'Escape' || !activeSlug) return;
     var slug = activeSlug;
+    cancelClose();
     closePopup();
     var marker = document.getElementById(markerId(slug));
     if (marker) marker.focus();
