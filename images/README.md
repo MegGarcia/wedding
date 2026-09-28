@@ -26,29 +26,11 @@ save-the-date page.
 | File | Used for |
 |---|---|
 | `itin-hero.jpg` | Itinerary page hero photo |
-| `itin-dresscode-01.jpg` … `itin-dresscode-07.jpg` | Itinerary page dress-code inspiration grid |
+| `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
 | `itin-venue.jpg` | La Grande Kaz location map on the Itinerary page |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
 | `travel-map.png` | Mauritius pin-map graphic on the Travel & Stay page |
-| `faq-hero.jpg` | FAQ page hero photo |
-| `registry-hero.jpg` | Registry page hero photo |
-
-These were captured as rendered screenshots of the Figma nodes (via the
-Figma MCP's `get_screenshot`) rather than the original uploaded source
-files, because this session's network policy doesn't allow outbound
-requests to `figma.com` (needed to download the raw asset URLs directly).
-Visually they match the design exactly; if pixel-identical originals are
-ever wanted, download them from the Figma file directly.
-
-### Pending (Figma rate limit)
-
-The Figma MCP tool call limit (Starter plan) was hit partway through this
-build, before these could be downloaded:
-
-| File (once added) | Used for |
-|---|---|
-| `itin-dresscode-08.jpg` … `itin-dresscode-12.jpg` | Remaining 5 of the Itinerary dress-code grid's 12 photos — the grid currently repeats `01`–`05` as placeholders in their place |
-| `travel-hotel-victoria-beachcomber.jpg` | Victoria Beachcomber hotel card, Travel & Stay page |
+| `travel-hotel-victoria-beachcomber.jpg` | Victoria Beachcomber hotel card |
 | `travel-hotel-ravenala-attitude.jpg` | Ravenala Attitude hotel card |
 | `travel-hotel-le-meridien.jpg` | Le Méridien hotel card |
 | `travel-hotel-be-cosy.jpg` | Be Cosy by LOV hotel card |
@@ -56,10 +38,19 @@ build, before these could be downloaded:
 | `travel-hotel-airbnb.jpg` | AirBnb card, Travel & Stay page |
 | `travel-flights.jpg` | Flights section photo, Travel & Stay page |
 | `travel-seven-coloured-earths.jpg` | "Seven Coloured Earths" callout card, Travel & Stay page |
+| `faq-hero.jpg` | FAQ page hero photo |
+| `registry-hero.jpg` | Registry page hero photo |
 
-Until these are added, `travel-stay.html` and `itinerary.html` show a
-diagonal-striped "Photo pending" placeholder in their place (see
-`.placeholder-photo` in `css/style.css`). Either wait for the Figma tool
-call limit to reset and re-run the same `get_screenshot` fetches, or
-upgrade the Figma plan referenced in the tool's error message, then swap
-the placeholder markup for `<img>` tags pointing at the downloaded files.
+`itin-hero.jpg`, `itin-dresscode-01.jpg`–`07.jpg`, `itin-venue.jpg`,
+`travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and `registry-hero.jpg`
+were captured as rendered screenshots of the Figma nodes (via the Figma
+MCP's `get_screenshot`) rather than original uploaded source files, because
+this session's network policy doesn't allow outbound requests to
+`figma.com` directly. Visually they match the design exactly; if pixel-
+identical originals are ever wanted, download them from the Figma file.
+
+The remaining new-page images (`itin-dresscode-08.jpg`–`12.jpg`, all 6
+`travel-hotel-*.jpg`, `travel-flights.jpg`, `travel-seven-coloured-earths.jpg`)
+were provided directly by the couple after hitting the Figma tool's rate
+limit, then resized/compressed the same way as the rest of the site's
+photos.
