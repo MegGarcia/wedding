@@ -1970,6 +1970,12 @@ img {
   gap: 1.5rem;
 }
 
+.travel-flights__text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .travel-flights__title {
   font-family: var(--font-script);
   font-weight: 400;
@@ -2530,7 +2536,7 @@ label.rsvpform-check {
   }
 
   .travel-hotels__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     max-width: var(--max-width);
     margin: 0 auto;
   }
@@ -2548,7 +2554,7 @@ label.rsvpform-check {
     margin: 0 auto;
   }
 
-  .travel-flights__body {
+  .travel-flights__text {
     flex: 1 0 0;
   }
 
@@ -2786,9 +2792,7 @@ label.rsvpform-check {
 
 @media (min-width: 900px) {
   .travelmap {
-    flex: 0 0 auto;
-    width: 22rem;
-    max-width: 35%;
+    flex: 1 0 0;
     margin: 0;
   }
 
