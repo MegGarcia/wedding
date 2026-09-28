@@ -64,38 +64,40 @@
       <label class="rsvpform-radio"><input type="radio" name="attending" value="Regretfully decline" required> Regretfully decline</label>
     </fieldset>
 
-    <div class="rsvpform-row">
-      <fieldset class="field">
-        <legend>Will you be bringing a plus one? If your invite includes your partner, please say yes if they will be attending with you. <span class="field__required">*</span></legend>
-        <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-yes" value="Yes, I have a plus one" required> Yes, I have a plus one</label>
-        <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-no" value="No, just me" required> No, just me</label>
-      </fieldset>
-      <div class="field">
-        <label for="rsvp-plusone-name">Plus one&rsquo;s full name</label>
-        <input type="text" id="rsvp-plusone-name" name="plusOneName" placeholder="Luna Garpal" disabled>
+    <div class="rsvpform-followup" id="rsvp-followup" hidden>
+      <div class="rsvpform-row">
+        <fieldset class="field">
+          <legend>Will you be bringing a plus one? If your invite includes your partner, please say yes if they will be attending with you. <span class="field__required">*</span></legend>
+          <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-yes" value="Yes, I have a plus one" required> Yes, I have a plus one</label>
+          <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-no" value="No, just me" required> No, just me</label>
+        </fieldset>
+        <div class="field" id="rsvp-plusone-name-wrap" hidden>
+          <label for="rsvp-plusone-name">Plus one&rsquo;s full name</label>
+          <input type="text" id="rsvp-plusone-name" name="plusOneName" placeholder="Luna Garpal" disabled>
+        </div>
       </div>
-    </div>
 
-    <fieldset class="field">
-      <legend>Which events will join us for? <span class="field__required">*</span></legend>
-      <label class="rsvpform-check"><input type="checkbox" name="events" value="Tilak &amp; Sangeet (Tuesday, July 6th)"> Tilak &amp; Sangeet (Tuesday, July 6th)</label>
-      <label class="rsvpform-check"><input type="checkbox" name="events" value="Wedding (Wednesday, July 7th)"> Wedding (Wednesday, July 7th)</label>
-      <label class="rsvpform-check"><input type="checkbox" name="events" value="Reception (Thursday, July 8th)"> Reception (Thursday, July 8th)</label>
-    </fieldset>
+      <fieldset class="field">
+        <legend>Which events will join us for? <span class="field__required">*</span></legend>
+        <label class="rsvpform-check"><input type="checkbox" name="events" value="Tilak &amp; Sangeet (Tuesday, July 6th)"> Tilak &amp; Sangeet (Tuesday, July 6th)</label>
+        <label class="rsvpform-check"><input type="checkbox" name="events" value="Wedding (Wednesday, July 7th)"> Wedding (Wednesday, July 7th)</label>
+        <label class="rsvpform-check"><input type="checkbox" name="events" value="Reception (Thursday, July 8th)"> Reception (Thursday, July 8th)</label>
+      </fieldset>
 
-    <div class="field">
-      <label for="rsvp-dietary">Dietary restrictions or allergies</label>
-      <input type="text" id="rsvp-dietary" name="dietary">
-    </div>
+      <div class="field">
+        <label for="rsvp-dietary">Dietary restrictions or allergies</label>
+        <input type="text" id="rsvp-dietary" name="dietary">
+      </div>
 
-    <div class="field">
-      <label for="rsvp-songs">Song requests</label>
-      <input type="text" id="rsvp-songs" name="songRequests">
-    </div>
+      <div class="field">
+        <label for="rsvp-songs">Song requests</label>
+        <input type="text" id="rsvp-songs" name="songRequests">
+      </div>
 
-    <div class="field">
-      <label for="rsvp-notes">Anything else we should know?</label>
-      <input type="text" id="rsvp-notes" name="notes">
+      <div class="field">
+        <label for="rsvp-notes">Anything else we should know?</label>
+        <input type="text" id="rsvp-notes" name="notes">
+      </div>
     </div>
 
     <button type="submit" class="rsvp__submit">

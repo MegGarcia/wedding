@@ -2155,6 +2155,16 @@ img {
   color: var(--ink);
   padding: 0;
   margin: 0 0 0.25rem;
+  transition: color 240ms ease-out;
+}
+
+/* Matches .field:focus-within label's focus highlight (index.html's own
+   protected rule) so a radio/checkbox question's legend gets the same
+   olive highlight a text input's label gets when its input is focused --
+   added here rather than editing that rule directly, since it lives
+   above the "New pages" banner. */
+.rsvpform fieldset.field:focus-within legend {
+  color: var(--olive);
 }
 
 .rsvpform-radio,
@@ -2167,12 +2177,67 @@ img {
   color: var(--ink);
 }
 
+/* Custom-drawn instead of native appearance so the stroke matches the
+   text inputs' 1px/2px olive border (.field input) instead of each
+   browser's own thin default checkbox/radio outline. These inputs sit
+   inside a fieldset that also carries the .field class (for the legend's
+   shared styling), so .field input's own padding/font rules apply to
+   them too unless reset here. */
 .rsvpform-radio input,
 .rsvpform-check input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 1.15rem;
   height: 1.15rem;
-  accent-color: var(--olive);
+  padding: 0;
+  margin: 0;
+  border: 1px solid var(--olive);
+  background: var(--white);
   flex: 0 0 auto;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 240ms ease-out;
+}
+
+.rsvpform-radio input {
+  border-radius: 50%;
+}
+
+.rsvpform-radio input:checked,
+.rsvpform-check input:checked {
+  background: var(--olive);
+  border-color: var(--olive);
+}
+
+.rsvpform-radio input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--white);
+  transform: translate(-50%, -50%);
+}
+
+.rsvpform-check input:checked::after {
+  content: '';
+  position: absolute;
+  top: 0.1rem;
+  left: 0.32rem;
+  width: 0.3rem;
+  height: 0.55rem;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.rsvpform-radio input:focus-visible,
+.rsvpform-check input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(74, 85, 42, 0.18);
 }
 
 .rsvpform-row {
@@ -2185,6 +2250,22 @@ img {
   background: #f2f2f2;
   color: var(--placeholder);
   cursor: not-allowed;
+}
+
+/* Attending-conditional questions and the plus-one name field are
+   toggled via the hidden attribute (js/rsvp.js) -- .field/.rsvpform-row/
+   fieldset.field all set their own `display` above, which (author-origin
+   styles beat the UA stylesheet's [hidden] rule regardless of
+   specificity) would otherwise keep rendering even while hidden. */
+.rsvpform-followup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rsvpform-followup[hidden],
+.rsvpform .field[hidden] {
+  display: none;
 }
 
 /* ==========================================================================
@@ -2438,6 +2519,20 @@ img {
 
   .rsvpform-row > * {
     flex: 1;
+  }
+
+  .rsvpform-radio input,
+  .rsvpform-check input {
+    width: 1.35rem;
+    height: 1.35rem;
+    border-width: 2px;
+  }
+
+  .rsvpform-check input:checked::after {
+    top: 0.15rem;
+    left: 0.38rem;
+    width: 0.35rem;
+    height: 0.65rem;
   }
 }
 

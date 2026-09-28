@@ -24,12 +24,16 @@
   var plusOneYes = document.getElementById('rsvp-plusone-yes');
   var plusOneNo = document.getElementById('rsvp-plusone-no');
   var plusOneName = document.getElementById('rsvp-plusone-name');
+  var plusOneNameWrap = document.getElementById('rsvp-plusone-name-wrap');
+  var attendingRadios = form.querySelectorAll('input[name="attending"]');
+  var followup = document.getElementById('rsvp-followup');
 
-  // ---------- Plus-one name field: only enabled/required once "Yes" is picked ----------
+  // ---------- Plus-one name field: only shown/enabled/required once "Yes" is picked ----------
   function syncPlusOneName() {
     if (!plusOneName) return;
     var enabled = !!(plusOneYes && plusOneYes.checked);
     plusOneName.disabled = !enabled;
+    if (plusOneNameWrap) plusOneNameWrap.hidden = !enabled;
     if (!enabled) {
       plusOneName.value = '';
       plusOneName.classList.remove('is-invalid');
@@ -43,6 +47,40 @@
   if (plusOneYes) plusOneYes.addEventListener('change', syncPlusOneName);
   if (plusOneNo) plusOneNo.addEventListener('change', syncPlusOneName);
   syncPlusOneName();
+
+  // ---------- Everything after "Will you be attending?": only shown once
+  // "Joyfully accept" is picked -- "Regretfully decline" (or nothing yet)
+  // keeps the default of showing none of it. Answers already given to the
+  // hidden questions are cleared, since FormData still submits a checked/
+  // filled-in value regardless of its container's visibility. ----------
+  function syncAttendingFollowup() {
+    if (!followup) return;
+    var checked = form.querySelector('input[name="attending"]:checked');
+    var show = !!(checked && checked.value === 'Joyfully accept');
+    followup.hidden = !show;
+
+    var plusOneRadios = form.querySelectorAll('input[name="plusOne"]');
+    Array.prototype.forEach.call(plusOneRadios, function (radio) {
+      radio.required = show;
+      if (!show) radio.checked = false;
+    });
+
+    if (!show) {
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="events"]'), function (box) {
+        box.checked = false;
+      });
+      ['rsvp-dietary', 'rsvp-songs', 'rsvp-notes'].forEach(function (id) {
+        var field = document.getElementById(id);
+        if (field) field.value = '';
+      });
+      syncPlusOneName();
+    }
+  }
+
+  Array.prototype.forEach.call(attendingRadios, function (radio) {
+    radio.addEventListener('change', syncAttendingFollowup);
+  });
+  syncAttendingFollowup();
 
   // ---------- Validation (mirrors js/main.js's validateField/messageFor pattern) ----------
   function messageFor(field) {
@@ -138,8 +176,10 @@
     });
 
     if (!validateRadioGroup('attending')) valid = false;
-    if (!validateRadioGroup('plusOne')) valid = false;
-    if (!validateCheckboxGroup('events')) valid = false;
+    if (followup && !followup.hidden) {
+      if (!validateRadioGroup('plusOne')) valid = false;
+      if (!validateCheckboxGroup('events')) valid = false;
+    }
 
     var nameField = document.getElementById('rsvp-name');
     if (nameField && !validateField(nameField)) valid = false;
