@@ -1788,6 +1788,13 @@ img {
   border-radius: 4px;
 }
 
+.itin-venue__map {
+  width: 100%;
+  aspect-ratio: 1200 / 683;
+  border: 0;
+  border-radius: 4px;
+}
+
 /* ---------- Travel & Stay page ---------- */
 
 .travel-intro {
@@ -2476,6 +2483,10 @@ label.rsvpform-check {
   }
 
   .itin-venue__photo {
+    max-width: 40rem;
+  }
+
+  .itin-venue__map {
     max-width: 40rem;
   }
 

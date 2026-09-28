@@ -27,7 +27,7 @@ save-the-date page.
 |---|---|
 | `itin-hero.jpg` | Itinerary page hero photo |
 | `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
-| `itin-venue.jpg` | La Grande Kaz location map on the Itinerary page |
+| `itin-venue.jpg` | No longer referenced by any page -- the Itinerary page's venue section now embeds a live Google Maps iframe instead. Left in this folder for git history's sake and can be deleted if you'd like a smaller repo. |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
 | `travel-map.svg` | Base island silhouette for the interactive map on the Travel & Stay page |
 | `travel-hotel-victoria-beachcomber.jpg` | Victoria Beachcomber hotel card |
