@@ -1836,6 +1836,19 @@ img {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 220ms ease;
+}
+
+.travel-hotel-card:hover,
+.travel-hotel-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25);
+}
+
+.travel-hotel-card:hover .travel-hotel-card__arrow {
+  transform: scale(1.08);
 }
 
 .travel-hotel-card__photo-wrap {
@@ -1850,7 +1863,7 @@ img {
   display: block;
 }
 
-.travel-hotel-card__link {
+.travel-hotel-card__arrow {
   position: absolute;
   top: 0.9rem;
   right: 0.9rem;
@@ -1862,10 +1875,11 @@ img {
   align-items: center;
   justify-content: center;
   color: var(--olive);
-  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 200ms ease;
 }
 
-.travel-hotel-card__link svg {
+.travel-hotel-card__arrow svg {
   width: 1.25rem;
   height: 1.25rem;
 }
