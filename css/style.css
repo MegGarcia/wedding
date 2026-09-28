@@ -2149,31 +2149,33 @@ img {
   gap: 0.5rem;
 }
 
-.rsvpform fieldset.field legend {
-  font-family: var(--font-body);
-  font-size: 1.125rem;
-  color: var(--ink);
-  padding: 0;
-  margin: 0 0 0.25rem;
-  transition: color 240ms ease-out;
-}
+/* The question label above each radio/checkbox group is a real <label>
+   (not a <legend>) specifically so it picks up index.html's own
+   protected .field label / .field:focus-within label rules automatically
+   -- same font, size, color and focus highlight as every text input's
+   label, with no separate copy of that styling to keep in sync here. */
 
-/* Matches .field:focus-within label's focus highlight (index.html's own
-   protected rule) so a radio/checkbox question's legend gets the same
-   olive highlight a text input's label gets when its input is focused --
-   added here rather than editing that rule directly, since it lives
-   above the "New pages" banner. */
-.rsvpform fieldset.field:focus-within legend {
-  color: var(--olive);
-}
-
-.rsvpform-radio,
-.rsvpform-check {
+/* .field label's own font-size/margin would otherwise leak onto these
+   too, since each option label is also a label inside the same
+   .field-classed fieldset -- label.* here matches that rule's
+   specificity so this (later in the file) wins instead. */
+label.rsvpform-radio,
+label.rsvpform-check {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   font-family: var(--font-body);
   font-size: 1.1rem;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* .field:focus-within label would otherwise also highlight these answer
+   options (they're labels in the same fieldset too) whenever any radio/
+   checkbox in the group is focused -- only the question heading above
+   should get that highlight, so this stays pinned to ink regardless. */
+.rsvpform fieldset.field:focus-within label.rsvpform-radio,
+.rsvpform fieldset.field:focus-within label.rsvpform-check {
   color: var(--ink);
 }
 

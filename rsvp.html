@@ -58,16 +58,16 @@
       <input type="text" id="rsvp-name" name="fullName" placeholder="Luna Garpal" required>
     </div>
 
-    <fieldset class="field">
-      <legend>Will you be attending? <span class="field__required">*</span></legend>
+    <fieldset class="field" aria-labelledby="rsvp-attending-label">
+      <label id="rsvp-attending-label">Will you be attending? <span class="field__required">*</span></label>
       <label class="rsvpform-radio"><input type="radio" name="attending" value="Joyfully accept" required> Joyfully accept</label>
       <label class="rsvpform-radio"><input type="radio" name="attending" value="Regretfully decline" required> Regretfully decline</label>
     </fieldset>
 
     <div class="rsvpform-followup" id="rsvp-followup" hidden>
       <div class="rsvpform-row">
-        <fieldset class="field">
-          <legend>Will you be bringing a plus one? If your invite includes your partner, please say yes if they will be attending with you. <span class="field__required">*</span></legend>
+        <fieldset class="field" aria-labelledby="rsvp-plusone-label">
+          <label id="rsvp-plusone-label">Will you be bringing a plus one? If your invite includes your partner, please say yes if they will be attending with you. <span class="field__required">*</span></label>
           <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-yes" value="Yes, I have a plus one" required> Yes, I have a plus one</label>
           <label class="rsvpform-radio"><input type="radio" name="plusOne" id="rsvp-plusone-no" value="No, just me" required> No, just me</label>
         </fieldset>
@@ -77,8 +77,8 @@
         </div>
       </div>
 
-      <fieldset class="field">
-        <legend>Which events will join us for? <span class="field__required">*</span></legend>
+      <fieldset class="field" aria-labelledby="rsvp-events-label">
+        <label id="rsvp-events-label">Which events will join us for? <span class="field__required">*</span></label>
         <label class="rsvpform-check"><input type="checkbox" name="events" value="Tilak &amp; Sangeet (Tuesday, July 6th)"> Tilak &amp; Sangeet (Tuesday, July 6th)</label>
         <label class="rsvpform-check"><input type="checkbox" name="events" value="Wedding (Wednesday, July 7th)"> Wedding (Wednesday, July 7th)</label>
         <label class="rsvpform-check"><input type="checkbox" name="events" value="Reception (Thursday, July 8th)"> Reception (Thursday, July 8th)</label>
