@@ -1832,6 +1832,7 @@ img {
 }
 
 .travel-hotel-card {
+  background: var(--olive);
   border-radius: 4px;
   overflow: hidden;
   display: flex;
