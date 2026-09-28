@@ -29,7 +29,7 @@ save-the-date page.
 | `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
 | `itin-venue.jpg` | La Grande Kaz location map on the Itinerary page |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
-| `travel-map.png` | Mauritius pin-map graphic on the Travel & Stay page |
+| `travel-map.png` | Base island silhouette for the interactive map on the Travel & Stay page |
 | `travel-hotel-victoria-beachcomber.jpg` | Victoria Beachcomber hotel card |
 | `travel-hotel-ravenala-attitude.jpg` | Ravenala Attitude hotel card |
 | `travel-hotel-le-meridien.jpg` | Le Méridien hotel card |
@@ -54,3 +54,8 @@ The remaining new-page images (`itin-dresscode-08.jpg`–`12.jpg`, all 6
 were provided directly by the couple after hitting the Figma tool's rate
 limit, then resized/compressed the same way as the rest of the site's
 photos.
+
+`travel-map.png` had its baked-in decorative pin icons digitally removed
+(color-masked out and filled with the surrounding olive tone) once the
+map became interactive (`js/travel-map.js`) — the JS now draws its own
+13 markers on top, so the old static pins would otherwise show twice.

@@ -2463,3 +2463,150 @@ img {
   background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.12) 10px, rgba(255, 255, 255, 0.04) 10px, rgba(255, 255, 255, 0.04) 20px);
   color: var(--white);
 }
+
+/* ==========================================================================
+   Travel & Stay: interactive Mauritius map widget
+   Replaces the static travel-intro__map image with a self-contained
+   marker/popup component (js/travel-map.js). Marker icon shape, popup
+   corner radius/shadow/spacing below are PLACEHOLDER pending Figma
+   frames 211:5443 (default) and 211:5402 (with popup) -- the Figma tool
+   is rate-limited this session, see js/travel-map.js's header comment.
+   Swap only the values marked PLACEHOLDER once those frames are
+   reachable; nothing else here should need to change.
+   ========================================================================== */
+
+.travelmap {
+  position: relative;
+  width: 60%;
+  max-width: 16rem;
+  margin: 0 auto;
+  aspect-ratio: 471 / 557;
+}
+
+.travelmap__base {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.travelmap__marker {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.travelmap__marker-icon {
+  width: 1.1rem;
+  height: 1.4rem;
+  fill: var(--white);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  transition: transform 160ms ease;
+}
+
+.travelmap__marker-dot {
+  fill: var(--olive);
+}
+
+.travelmap__marker:hover .travelmap__marker-icon,
+.travelmap__marker.is-active .travelmap__marker-icon {
+  transform: scale(1.15);
+}
+
+.travelmap__marker:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+.travelmap__popup {
+  position: absolute;
+  --popup-tx: -50%;
+  --popup-ty: calc(-100% - 0.75rem);
+  transform: translate(var(--popup-tx), var(--popup-ty));
+  width: 11rem;
+  max-width: 80%;
+  background: var(--white);
+  border-radius: 0.5rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  padding: 0.6rem;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+.travelmap__popup[hidden] {
+  display: none;
+}
+
+.travelmap__popup.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.travelmap__popup-photo {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.35rem;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.travelmap__popup-photo img,
+.travelmap__popup-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.travelmap__popup-photo-placeholder {
+  font-size: 0.65rem;
+  padding: 0.4rem;
+}
+
+.travelmap__popup-title {
+  font-family: var(--font-label);
+  font-size: 0.8rem;
+  color: var(--olive);
+  text-align: center;
+  margin: 0;
+}
+
+/* Each flip class overrides only its own axis, via the custom properties
+   above -- so a marker near a corner can combine a horizontal and
+   vertical flip at once and both still apply (a plain "transform:"
+   override per class would only let the last-matched one win). */
+.travelmap__popup--flip-left {
+  --popup-tx: 0%;
+}
+
+.travelmap__popup--flip-right {
+  --popup-tx: -100%;
+}
+
+.travelmap__popup--flip-top {
+  --popup-ty: calc(100% + 0.75rem);
+}
+
+@media (min-width: 900px) {
+  .travelmap {
+    flex: 0 0 auto;
+    width: 20rem;
+    max-width: 30%;
+    margin: 0;
+  }
+
+  .travelmap__popup {
+    width: 13rem;
+  }
+}
