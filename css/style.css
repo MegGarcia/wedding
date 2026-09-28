@@ -809,9 +809,9 @@ img {
   transition: color 240ms ease-out;
 }
 
-/* .field:focus-within label {
+.field:focus-within label {
   color: var(--olive);
-} */
+}
 
 .login-gate__form .field label,
 .login-gate__form .field:focus-within label {
@@ -2234,14 +2234,10 @@ label.rsvpform-check {
   transform: translate(-50%, -50%);
 }
 
-.rsvpform-check input[type="checkbox"]:checked::after{
-   top: 55%;
-}
-
 .rsvpform-check input:checked::after {
   content: '';
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   width: 0.3rem;
   height: 0.55rem;
@@ -2250,7 +2246,9 @@ label.rsvpform-check {
   /* translate(-50%, -50%) would center this element's own bounding box,
      but the checkmark's visible "ink" (only the right+bottom edges) sits
      lower/right within that box, so the box itself needs to sit a bit
-     above-left of center for the drawn checkmark to look centered. */
+     above-left of center for the drawn checkmark to look centered --
+     top: 55% (rather than 50%) is a further hand-tuned nudge on top of
+     that. */
   transform: translate(-50%, -73%) rotate(45deg);
 }
 
