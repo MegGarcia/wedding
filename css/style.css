@@ -2225,13 +2225,17 @@ img {
 .rsvpform-check input:checked::after {
   content: '';
   position: absolute;
-  top: 0.1rem;
-  left: 0.32rem;
+  top: 50%;
+  left: 50%;
   width: 0.3rem;
   height: 0.55rem;
   border: solid var(--white);
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  /* translate(-50%, -50%) would center this element's own bounding box,
+     but the checkmark's visible "ink" (only the right+bottom edges) sits
+     lower/right within that box, so the box itself needs to sit a bit
+     above-left of center for the drawn checkmark to look centered. */
+  transform: translate(-50%, -73%) rotate(45deg);
 }
 
 .rsvpform-radio input:focus-visible,
@@ -2529,8 +2533,6 @@ img {
   }
 
   .rsvpform-check input:checked::after {
-    top: 0.15rem;
-    left: 0.38rem;
     width: 0.35rem;
     height: 0.65rem;
   }
