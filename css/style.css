@@ -809,9 +809,9 @@ img {
   transition: color 240ms ease-out;
 }
 
-.field:focus-within label {
+/* .field:focus-within label {
   color: var(--olive);
-}
+} */
 
 .login-gate__form .field label,
 .login-gate__form .field:focus-within label {
