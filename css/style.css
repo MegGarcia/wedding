@@ -2101,11 +2101,27 @@ img {
 
 /* ---------- RSVP (attendance) page ---------- */
 
+/* Sticky-footer layout scoped to this page only, via the body class below
+   -- lets .rsvpform-page stretch to fill any leftover space so the
+   footer stays pinned to the bottom of the window when content (e.g.
+   the post-submit confirmation) is shorter than the viewport, instead of
+   leaving a gap of plain body background below it. html/body themselves
+   are index.html's own protected rules, so this can't be done by editing
+   them directly -- scoping through a page-specific class keeps every
+   other page (including index.html) completely unaffected. */
+body.rsvpform-body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
 .rsvpform-page {
   background: var(--white);
   padding: 2rem 1.25rem 3rem;
   max-width: var(--max-width);
   margin: 0 auto;
+  flex: 1 0 auto;
 }
 
 .rsvpform-intro {
