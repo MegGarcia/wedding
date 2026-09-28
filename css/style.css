@@ -2034,6 +2034,9 @@ img {
   background: var(--olive);
   color: var(--white);
   padding: 1.5rem 1.25rem 2.5rem;
+}
+
+.faq-list__inner {
   display: flex;
   flex-direction: column;
 }
@@ -2560,10 +2563,11 @@ label.rsvpform-check {
 
   .faq-list {
     padding: 3rem 4rem 4rem;
+  }
+
+  .faq-list__inner {
     max-width: var(--max-width);
     margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
   }
 
   .faq-question {
