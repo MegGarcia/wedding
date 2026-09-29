@@ -2169,9 +2169,12 @@ body.rsvpform-body {
 .rsvpform-page {
   background: var(--white);
   padding: 2rem 1.25rem 3rem;
+  flex: 1 0 auto;
+}
+
+.rsvpform-page__inner {
   max-width: var(--max-width);
   margin: 0 auto;
-  flex: 1 0 auto;
 }
 
 .rsvpform-intro {
@@ -2618,8 +2621,7 @@ label.rsvpform-check {
   }
 
   .registry-hero {
-    padding: 2.5rem;
-    padding-bottom: 8rem;
+    padding: 2.5rem 4rem 8rem;
     background-position: center;
   }
 
@@ -2641,6 +2643,10 @@ label.rsvpform-check {
 
   .rsvpform-page {
     padding: 3rem 4rem 5rem;
+  }
+
+  .rsvpform-field--name {
+    max-width: 50%;
   }
 
   .rsvpform-heading {

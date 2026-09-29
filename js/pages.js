@@ -32,15 +32,4 @@
       answer.hidden = isOpen;
     });
   });
-
-  // ---------- Registry placeholder link ----------
-  // No real Zola registry exists yet -- see google-apps-script/README.md-
-  // style provenance note in images/README.md and the plan this was built
-  // from. Swap this constant for the real URL once you have one.
-  var REGISTRY_URL = 'PASTE_YOUR_ZOLA_REGISTRY_URL_HERE';
-  var registryLink = document.getElementById('registry-link');
-  if (registryLink && REGISTRY_URL.indexOf('PASTE_YOUR_') !== 0) {
-    registryLink.href = REGISTRY_URL;
-    registryLink.removeAttribute('aria-disabled');
-  }
 })();
