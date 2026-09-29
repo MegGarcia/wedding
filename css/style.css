@@ -2107,7 +2107,8 @@ img {
 
 .registry-hero {
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - 76px);
+  min-height: calc(100dvh - 76px);
   display: flex;
   align-items: flex-end;
   padding: 1.25rem;
@@ -2621,6 +2622,7 @@ label.rsvpform-check {
   }
 
   .registry-hero {
+    min-height: 100vh;
     padding: 2.5rem 4rem 8rem;
     background-position: center;
   }
