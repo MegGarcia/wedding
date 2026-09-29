@@ -2421,6 +2421,7 @@ label.rsvpform-check {
 
   .itin-intro__text {
     font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .itin-days {
@@ -2437,6 +2438,11 @@ label.rsvpform-check {
 
   .itin-day {
     flex: 1;
+  }
+
+  .itin-event__desc {
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .itin-dresscode {
@@ -2461,7 +2467,8 @@ label.rsvpform-check {
   }
 
   .itin-dresscode__text p {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .itin-dresscode__grid {
@@ -2485,6 +2492,11 @@ label.rsvpform-check {
 
   .itin-venue__title {
     font-size: 4.5rem;
+  }
+
+  .itin-venue__address {
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .itin-venue__photo {
@@ -2512,6 +2524,11 @@ label.rsvpform-check {
     flex: 1 0 0;
   }
 
+  .travel-intro__text p {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
   .travel-intro__map {
     flex: 0 0 auto;
     width: 20rem;
@@ -2534,13 +2551,19 @@ label.rsvpform-check {
     max-width: var(--max-width);
     margin-left: auto;
     margin-right: auto;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .travel-hotels__grid {
     grid-template-columns: repeat(3, 1fr);
     max-width: var(--max-width);
     margin: 0 auto;
+  }
+
+  .travel-hotel-card__address {
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .travel-flights {
@@ -2558,6 +2581,11 @@ label.rsvpform-check {
 
   .travel-flights__text {
     flex: 1 0 0;
+  }
+
+  .travel-flights__body p {
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .travel-flights__photo {
@@ -2583,7 +2611,8 @@ label.rsvpform-check {
   }
 
   .faq-answer {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
     max-width: 55rem;
   }
 
@@ -2599,7 +2628,8 @@ label.rsvpform-check {
   }
 
   .registry-card__text {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .registry-card__cta {
@@ -2616,7 +2646,8 @@ label.rsvpform-check {
   }
 
   .rsvpform-intro p {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .rsvpform-row {
