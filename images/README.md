@@ -38,8 +38,8 @@ save-the-date page.
 | `travel-hotel-airbnb.jpg` | AirBnb card, Travel & Stay page |
 | `travel-flights.jpg` | Flights section photo, Travel & Stay page |
 | `travel-seven-coloured-earths.jpg` | Chamarel Seven Coloured Earths marker photo on the interactive map, Travel & Stay page |
-| `faq-hero.jpg` | FAQ page hero photo |
-| `registry-hero.jpg` | Registry page hero photo |
+| `faq-hero.jpg` | Registry page hero photo (swapped with registry-hero.jpg so the card no longer covers faces) |
+| `registry-hero.jpg` | FAQ page hero photo (swapped with faq-hero.jpg) |
 
 `itin-hero.jpg`, `itin-dresscode-01.jpg`–`07.jpg`, `itin-venue.jpg`,
 `travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and `registry-hero.jpg`
@@ -64,12 +64,10 @@ deleted if you'd like a smaller repo.
 
 ### Interactive map photos (Travel & Stay page)
 
-`js/travel-map.js` already points each of the map's 12 location popups at
-the exact filename below — drop a photo in under that name (same
-resize/compress convention as everything else in this folder: JPEG,
-roughly the size it displays at) and it appears automatically, no code
-changes needed. Until a file exists, that popup shows the same "Photo
-coming soon" placeholder used elsewhere on the site.
+`js/travel-map.js` points each of the map's 12 location popups at the
+filename below. All 12 now have a real photo (the last 11 were provided
+directly by the couple and resized/compressed to roughly the size they
+display at, same convention as the rest of this folder).
 
 | File | Location |
 |---|---|
