@@ -1570,13 +1570,6 @@ img {
   margin: 0 auto;
 }
 
-.pagefooter__brand {
-  font-family: var(--font-label);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  font-size: 1.3rem;
-}
-
 .pagefooter__date {
   font-family: var(--font-label);
   font-size: 1rem;
@@ -2393,10 +2386,6 @@ label.rsvpform-check {
 
   .pagefooter {
     padding: 3rem 4rem;
-  }
-
-  .pagefooter__brand {
-    font-size: 2rem;
   }
 
   .pagefooter__date {
