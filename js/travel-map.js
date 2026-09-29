@@ -38,8 +38,7 @@
     { slug: 'tamarin', name: 'Tamarin', lat: -20.3377911, lng: 57.3750805, image: 'images/travel-map-tamarin.jpg' },
     { slug: 'chamarel', name: 'Chamarel Seven Coloured Earths', lat: -20.4400767, lng: 57.3731676, image: 'images/travel-seven-coloured-earths.jpg' },
     { slug: 'black-river', name: 'Black River Gorges National Park', lat: -20.4263719, lng: 57.4509443, image: 'images/travel-map-black-river.jpg' },
-    { slug: 'le-morne', name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, image: 'images/travel-map-le-morne.jpg' },
-    { slug: 'ile-aux-cerfs', name: 'Île aux Cerfs', lat: -20.2723538, lng: 57.8041107, image: 'images/travel-map-ile-aux-cerfs.jpg' }
+    { slug: 'le-morne', name: 'Le Morne Brabant', lat: -20.45, lng: 57.3166667, image: 'images/travel-map-le-morne.jpg' }
   ];
 
   // Mauritius is small enough (~60km across) that a flat linear
@@ -94,8 +93,7 @@
     'port-louis': { dx: -5.09, dy: -2.92 },
     'caudan': { dx: 5.97, dy: 2.64 },
     'chamarel': { dx: 1.07, dy: -1.00 },
-    'black-river': { dx: 0.59, dy: -2.66 },
-    'ile-aux-cerfs': { dx: -2.00, dy: -2.63 }
+    'black-river': { dx: 0.59, dy: -2.66 }
   };
 
   function projectWithNudge(loc) {

@@ -64,7 +64,7 @@ deleted if you'd like a smaller repo.
 
 ### Interactive map photos (Travel & Stay page)
 
-`js/travel-map.js` already points each of the map's 13 location popups at
+`js/travel-map.js` already points each of the map's 12 location popups at
 the exact filename below — drop a photo in under that name (same
 resize/compress convention as everything else in this folder: JPEG,
 roughly the size it displays at) and it appears automatically, no code
@@ -84,4 +84,3 @@ coming soon" placeholder used elsewhere on the site.
 | `travel-map-tamarin.jpg` | Tamarin |
 | `travel-map-black-river.jpg` | Black River Gorges National Park |
 | `travel-map-le-morne.jpg` | Le Morne Brabant |
-| `travel-map-ile-aux-cerfs.jpg` | Île aux Cerfs |
