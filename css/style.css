@@ -1935,12 +1935,19 @@ img {
 }
 
 .travel-hotel-card__stars {
-  color: #f0c419;
   letter-spacing: 0.1em;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 999px;
   padding: 0.35rem 0.6rem;
   font-size: 0.9rem;
+}
+
+.travel-hotel-card__star--filled {
+  color: var(--white);
+}
+
+.travel-hotel-card__star--empty {
+  color: #3e4827;
 }
 
 .travel-hotel-card__pill {
