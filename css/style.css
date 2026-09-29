@@ -2650,6 +2650,12 @@ label.rsvpform-check {
     line-height: 1.25;
   }
 
+  label.rsvpform-radio,
+  label.rsvpform-check {
+    font-size: 1.5rem;
+    line-height: 1.25;
+  }
+
   .rsvpform-row {
     flex-direction: row;
     gap: 2rem;
