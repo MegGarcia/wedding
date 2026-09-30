@@ -2757,13 +2757,26 @@ label.rsvpform-check {
    intended two-tone island/ocean look.
    ========================================================================== */
 
-.travelmap {
-  position: relative;
+.travelmap-wrap {
   width: 75%;
   max-width: 19rem;
   margin: 0 auto;
+}
+
+.travelmap {
+  position: relative;
+  width: 100%;
   aspect-ratio: 471 / 540;
   background-color: var(--olive);
+}
+
+.travelmap__hint {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--white);
+  text-align: center;
+  opacity: 0.85;
 }
 
 .travelmap__base {
@@ -2924,7 +2937,7 @@ label.rsvpform-check {
 }
 
 @media (min-width: 900px) {
-  .travelmap {
+  .travelmap-wrap {
     flex: 1 0 0;
     width: auto;
     max-width: none;
