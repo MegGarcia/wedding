@@ -25,8 +25,9 @@ save-the-date page.
 
 | File | Used for |
 |---|---|
-| `itin-hero.jpg` | Itinerary page hero photo |
-| `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
+| `itin-hero.jpg` | Itinerary page hero photo -- a real photo the couple uploaded directly, replacing the earlier Figma-screenshot placeholder |
+| `itin-dresscode-01.png` … `itin-dresscode-07.png` | Itinerary page dress-code inspiration grid -- re-uploaded by the couple as PNG, replacing the earlier Figma-screenshot JPGs of the same name |
+| `itin-dresscode-08.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid, continued |
 | `itin-venue.jpg` | No longer referenced by any page -- the Itinerary page's venue section now embeds a live Google Maps iframe instead. Left in this folder for git history's sake and can be deleted if you'd like a smaller repo. |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
 | `travel-map.svg` | Base island silhouette for the interactive map on the Travel & Stay page |
@@ -42,20 +43,26 @@ save-the-date page.
 | `registry-hero.jpg` | Registry page hero photo -- a real engagement photo the couple uploaded directly, replacing the earlier Figma-screenshot placeholder |
 | `registry-hero-old.jpg` | No longer referenced by any page -- the earlier Registry page hero photo (a Figma-screenshot placeholder whose card ended up covering the couple's faces). Left in this folder for git history's sake and can be deleted if you'd like a smaller repo. |
 
-`itin-hero.jpg`, `itin-dresscode-01.jpg`–`07.jpg`, `itin-venue.jpg`,
-`travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and `registry-hero-old.jpg`
-were captured as rendered screenshots of the Figma nodes (via the Figma
-MCP's `get_screenshot`) rather than original uploaded source files, because
-this session's network policy doesn't allow outbound requests to
-`figma.com` directly. Visually they match the design exactly; if pixel-
-identical originals are ever wanted, download them from the Figma file.
-`registry-hero.jpg` is a real engagement photo, not a Figma screenshot.
+`itin-venue.jpg`, `travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and
+`registry-hero-old.jpg` were captured as rendered screenshots of the Figma
+nodes (via the Figma MCP's `get_screenshot`) rather than original uploaded
+source files, because this session's network policy doesn't allow outbound
+requests to `figma.com` directly. Visually they match the design exactly;
+if pixel-identical originals are ever wanted, download them from the
+Figma file. `registry-hero.jpg` and `itin-hero.jpg` are real photos, not
+Figma screenshots.
 
 The remaining new-page images (`itin-dresscode-08.jpg`–`12.jpg`, all 6
-`travel-hotel-*.jpg`, `travel-flights.jpg`, `travel-seven-coloured-earths.jpg`)
-were provided directly by the couple after hitting the Figma tool's rate
-limit, then resized/compressed the same way as the rest of the site's
-photos.
+`travel-hotel-*.jpg`, `travel-flights.jpg`,
+`travel-seven-coloured-earths.jpg`) were provided directly by the couple
+after hitting the Figma tool's rate limit, then resized/compressed the
+same way as the rest of the site's photos.
+
+`itin-dresscode-01.png`–`07.png` were later re-uploaded directly by the
+couple as-is (raw PNG, uncompressed -- 226KB-745KB apiece, versus
+20KB-65KB for `08.jpg`–`12.jpg` at the same on-page size). They render
+correctly as-is, just heavier than this folder's usual convention; worth
+converting to compressed JPEG later if repo size matters.
 
 `travel-map.png` (the earlier raster base map) was replaced by
 `travel-map.svg`, a clean vector silhouette the couple uploaded directly,

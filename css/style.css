@@ -1605,6 +1605,15 @@ img {
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.4);
 }
 
+/* Overrides .pagehero's shared background-position for this page only --
+   itin-hero.jpg is a full-resolution portrait photo with both faces near
+   the top (~22-29% down), so the shared rule's "center" lands on the
+   waist/dress under cover's heavy zoom. travel-stay.html and faq.html
+   keep the shared "center" value untouched. */
+.itin-pagehero {
+  background-position: 50% 18%;
+}
+
 /* ---------- Itinerary page ---------- */
 
 .itin-intro {
@@ -2408,6 +2417,10 @@ label.rsvpform-check {
 
   .pagehero__title {
     font-size: clamp(6rem, 11vw, 10rem);
+  }
+
+  .itin-pagehero {
+    background-position: 50% 38%;
   }
 
   .itin-intro,
