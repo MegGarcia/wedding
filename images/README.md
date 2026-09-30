@@ -38,16 +38,18 @@ save-the-date page.
 | `travel-hotel-airbnb.jpg` | AirBnb card, Travel & Stay page |
 | `travel-flights.jpg` | Flights section photo, Travel & Stay page |
 | `travel-seven-coloured-earths.jpg` | Chamarel Seven Coloured Earths marker photo on the interactive map, Travel & Stay page |
-| `faq-hero.jpg` | Registry page hero photo (swapped with registry-hero.jpg so the card no longer covers faces) |
-| `registry-hero.jpg` | FAQ page hero photo (swapped with faq-hero.jpg) |
+| `faq-hero.jpg` | FAQ page hero photo |
+| `registry-hero.jpg` | Registry page hero photo -- a real engagement photo the couple uploaded directly, replacing the earlier Figma-screenshot placeholder |
+| `registry-hero-old.jpg` | No longer referenced by any page -- the earlier Registry page hero photo (a Figma-screenshot placeholder whose card ended up covering the couple's faces). Left in this folder for git history's sake and can be deleted if you'd like a smaller repo. |
 
 `itin-hero.jpg`, `itin-dresscode-01.jpg`–`07.jpg`, `itin-venue.jpg`,
-`travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and `registry-hero.jpg`
+`travel-hero.jpg`, `travel-map.png`, `faq-hero.jpg`, and `registry-hero-old.jpg`
 were captured as rendered screenshots of the Figma nodes (via the Figma
 MCP's `get_screenshot`) rather than original uploaded source files, because
 this session's network policy doesn't allow outbound requests to
 `figma.com` directly. Visually they match the design exactly; if pixel-
 identical originals are ever wanted, download them from the Figma file.
+`registry-hero.jpg` is a real engagement photo, not a Figma screenshot.
 
 The remaining new-page images (`itin-dresscode-08.jpg`–`12.jpg`, all 6
 `travel-hotel-*.jpg`, `travel-flights.jpg`, `travel-seven-coloured-earths.jpg`)
