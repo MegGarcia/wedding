@@ -2829,24 +2829,29 @@ label.rsvpform-check {
 
 @media (prefers-reduced-motion: no-preference) {
   .travelmap:not(.travelmap--interacted) .travelmap__marker::before {
-    animation: travelmap-pulse 3.4s ease-in-out infinite;
+    animation:
+      travelmap-pulse-scale 3.4s linear infinite,
+      travelmap-pulse-opacity 3.4s ease-in-out infinite;
   }
 }
 
-@keyframes travelmap-pulse {
-  0% {
-    transform: translate(-50%, -50%) scale(0.7);
-    opacity: 0;
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.0);
-    opacity: 0.5;
-    animation-timing-function: linear;
-  }
-  100% {
-    transform: translate(-50%, -50%) scale(1.3);
-    opacity: 0;
-  }
+/* transform and opacity are split into two independent animations (a
+   single animation-timing-function can't give them different shapes
+   within one keyframe interval) so scale can grow at one truly constant
+   rate across the entire cycle -- no deceleration anywhere for it to
+   "stick" at -- while opacity keeps its own fade-in/peak/fade-out shape.
+   Both opacity keyframes start/end at 0, so the loop point stays
+   seamless: the scale value's jump from 1.3 back to 0.7 at the loop
+   boundary is invisible since opacity is 0 there either way. */
+@keyframes travelmap-pulse-scale {
+  0% { transform: translate(-50%, -50%) scale(0.7); }
+  100% { transform: translate(-50%, -50%) scale(1.3); }
+}
+
+@keyframes travelmap-pulse-opacity {
+  0% { opacity: 0; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; }
 }
 
 .travelmap__popup {
