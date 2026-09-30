@@ -2930,3 +2930,34 @@ html.pre-authed #login-gate {
 html.pre-authed #site-content[hidden] {
   display: block;
 }
+
+/* Restyles the envelope scene's auto-focused "View Invite" button
+   (js/main.js already calls skipButton.focus() as soon as the envelope
+   opens, so this :focus state is what every visitor actually sees) to
+   match the site's solid CTA button language -- same values as
+   .rsvp__submit. Same selector, appended later in the file, wins by
+   cascade order over the protected :focus rule above (equal
+   specificity) with no !important needed; that protected rule, and the
+   base hidden-until-focus accessibility pattern, are both left
+   untouched -- only the focused appearance changes. */
+.envelope-scene__skip:focus {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--white);
+  background: var(--olive);
+  border: none;
+  border-radius: 0;
+  padding: 1rem;
+  transition: background 0.2s ease;
+}
+
+.envelope-scene__skip:hover {
+  background: #3c4522;
+}
+
+@media (min-width: 900px) {
+  .envelope-scene__skip:focus {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+  }
+}
