@@ -2113,8 +2113,8 @@ img {
   align-items: flex-end;
   padding: 1.25rem;
   padding-bottom: 6rem;
-  background-size: cover;
-  background-position: 55% center;
+  background-size: 210% auto;
+  background-position: 55% 80%;
 }
 
 .registry-card {
@@ -2624,6 +2624,7 @@ label.rsvpform-check {
   .registry-hero {
     min-height: 100vh;
     padding: 2.5rem 4rem 8rem;
+    background-size: cover;
     background-position: center;
   }
 
