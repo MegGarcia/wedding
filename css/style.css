@@ -1521,14 +1521,10 @@ img {
   color: var(--olive);
   text-decoration: none;
   padding: 0.85rem 1rem;
-  border-radius: 0.6rem;
 }
 
 .pagenav__link:hover,
-.pagenav__link:focus-visible {
-  background: rgba(74, 85, 42, 0.08);
-}
-
+.pagenav__link:focus-visible,
 .pagenav__link[aria-current="page"] {
   text-decoration: underline;
   text-underline-offset: 0.3em;
