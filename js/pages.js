@@ -1,8 +1,13 @@
-// Shared behavior for the new pages (Itinerary / Travel & Stay / FAQ /
-// Registry / RSVP): mobile nav toggle and the FAQ accordion. Deliberately
-// separate from js/main.js, which stays untouched. The auth-guard redirect
-// itself lives inline in each page's <head> (see each .html file) rather
-// than here, since it has to run synchronously before first paint.
+// Shared behavior for the site's shared page navigation and the new pages
+// (Itinerary / Travel & Stay / FAQ / Registry / RSVP): mobile nav toggle,
+// the FAQ accordion, and scroll reveal. Deliberately separate from
+// js/main.js, which stays untouched. Also loaded (deferred) by index.html
+// itself now, purely for the nav toggle -- see the has-reveal guard below
+// for why that doesn't double up the scroll-reveal observer there. The
+// auth-guard redirect on the 5 non-home pages lives inline in each page's
+// <head> (see each .html file) rather than here, since it has to run
+// synchronously before first paint; index.html has its own separate
+// pre-authed check, also inline in its <head>.
 (function () {
   'use strict';
 
@@ -41,6 +46,15 @@
   // lives in the protected part of css/style.css, shared by every page,
   // so no CSS changes were needed here -- just observing the same
   // attribute.) ----------
+  //
+  // The extra !has-reveal check guards against index.html specifically,
+  // which now also loads this file (deferred, for the nav toggle) but
+  // already runs its own, identical reveal setup via js/main.js
+  // (synchronous, so it always finishes first) -- without this check,
+  // index.html would end up with two separate IntersectionObservers
+  // redundantly watching the same [data-reveal] elements. On the other 5
+  // pages, which don't load js/main.js, has-reveal is never already
+  // present, so this behaves exactly as before.
   var reduceMotion = false;
   try {
     reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -48,7 +62,7 @@
     reduceMotion = false;
   }
 
-  if (!reduceMotion && window.IntersectionObserver) {
+  if (!reduceMotion && window.IntersectionObserver && !document.documentElement.classList.contains('has-reveal')) {
     document.documentElement.classList.add('has-reveal');
 
     var revealObserver = new IntersectionObserver(function (entries, observer) {
