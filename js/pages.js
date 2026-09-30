@@ -32,4 +32,35 @@
       answer.hidden = isOpen;
     });
   });
+
+  // ---------- Scroll reveal (mirrors js/main.js's site-wide pattern on
+  // index.html exactly -- same .has-reveal gate class, [data-reveal]
+  // selector, threshold, and reveal-once behavior -- so elements on
+  // these 5 pages fade/slide in the same way the home page's do. The
+  // CSS for this (.has-reveal [data-reveal], .reveal-d1/d2/d3) already
+  // lives in the protected part of css/style.css, shared by every page,
+  // so no CSS changes were needed here -- just observing the same
+  // attribute.) ----------
+  var reduceMotion = false;
+  try {
+    reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  } catch (err) {
+    reduceMotion = false;
+  }
+
+  if (!reduceMotion && window.IntersectionObserver) {
+    document.documentElement.classList.add('has-reveal');
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('[data-reveal]').forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
 })();

@@ -50,18 +50,18 @@
 <section class="rsvpform-page">
 <div class="rsvpform-page__inner">
   <div class="rsvpform-intro">
-    <h1 class="rsvpform-heading">See you in Mauritius?</h1>
-    <p>We can&rsquo;t wait to celebrate with you in Mauritius. Please let us know if you&rsquo;ll be joining us by January 15, 2027 so we can finalize plans with our venue and hotels. Because this is a destination celebration, an early response is a real gift to us, and it gives you the best shot at flights and rooms before July fills up.</p>
-    <p class="rsvpform-deadline">Please respond by January 15, 2027</p>
+    <h1 class="rsvpform-heading" data-reveal>See you in Mauritius?</h1>
+    <p class="reveal-d1" data-reveal>We can&rsquo;t wait to celebrate with you in Mauritius. Please let us know if you&rsquo;ll be joining us by January 15, 2027 so we can finalize plans with our venue and hotels. Because this is a destination celebration, an early response is a real gift to us, and it gives you the best shot at flights and rooms before July fills up.</p>
+    <p class="rsvpform-deadline reveal-d2" data-reveal>Please respond by January 15, 2027</p>
   </div>
 
   <form class="rsvpform" id="rsvp-attend-form" novalidate>
-    <div class="field rsvpform-field--name">
+    <div class="field rsvpform-field--name" data-reveal>
       <label for="rsvp-name">Your full name <span class="field__required">*</span></label>
       <input type="text" id="rsvp-name" name="fullName" placeholder="Luna Garpal" required>
     </div>
 
-    <fieldset class="field" aria-labelledby="rsvp-attending-label">
+    <fieldset class="field reveal-d1" aria-labelledby="rsvp-attending-label" data-reveal>
       <label id="rsvp-attending-label">Will you be attending? <span class="field__required">*</span></label>
       <label class="rsvpform-radio"><input type="radio" name="attending" value="Joyfully accept" required> Joyfully accept</label>
       <label class="rsvpform-radio"><input type="radio" name="attending" value="Regretfully decline" required> Regretfully decline</label>
@@ -103,7 +103,7 @@
       </div>
     </div>
 
-    <button type="submit" class="rsvp__submit">
+    <button type="submit" class="rsvp__submit" data-reveal>
       <span class="rsvp__spinner" aria-hidden="true"></span>
       Submit
     </button>
@@ -121,8 +121,8 @@
 
 <footer class="pagefooter">
   <div class="pagefooter__inner">
-    <span class="pagefooter__date">MAURITIUS</span>
-    <span class="pagefooter__date">07.07.2027</span>
+    <span class="pagefooter__date" data-reveal>MAURITIUS</span>
+    <span class="pagefooter__date reveal-d1" data-reveal>07.07.2027</span>
   </div>
 </footer>
 
