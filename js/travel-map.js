@@ -109,6 +109,19 @@
   var map = document.getElementById('travelmap');
   if (!map) return;
 
+  // The pulsing "you can press this" ring (see .travelmap__marker::before
+  // in css/style.css) is meant purely to help a first-time visitor
+  // discover that the pins are interactive -- once they've pressed or
+  // hovered any one of them, the ring disappears from every marker for
+  // the rest of this page view (this class is in-memory only, not
+  // persisted, so it reappears on a fresh page load).
+  var hasInteracted = false;
+  function markMapInteracted() {
+    if (hasInteracted) return;
+    hasInteracted = true;
+    map.classList.add('travelmap--interacted');
+  }
+
   var activeSlug = null;
 
   // Closing on mouseleave is deferred briefly and cancelled if the pointer
@@ -151,6 +164,7 @@
 
     if (supportsHover) {
       button.addEventListener('mouseenter', function () {
+        markMapInteracted();
         cancelClose();
         openPopup(loc.slug);
       });
@@ -167,6 +181,7 @@
       // Without this, the click bubbles to the document listener below
       // and immediately closes the popup this same click just opened.
       event.stopPropagation();
+      markMapInteracted();
       cancelClose();
       // Always open (never toggle-close here): on desktop, mouseenter
       // above already opens this marker's popup before its click ever

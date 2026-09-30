@@ -1499,14 +1499,14 @@ img {
 
 .pagenav__menu {
   position: absolute;
-  top: calc(100% + 0.6rem);
+  top: 100%;
   left: 0;
   right: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   background: var(--white);
-  border-radius: 1.25rem;
+  border-radius: 0;
   padding: 0.6rem;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
 }
@@ -1783,7 +1783,7 @@ img {
 
 .itin-venue__map {
   width: 100%;
-  aspect-ratio: 1200 / 683;
+  aspect-ratio: 1200 / 1366;
   border: 0;
   border-radius: 4px;
 }
@@ -2232,9 +2232,11 @@ p.rsvpform-deadline {
 
 /* The question label above each radio/checkbox group is a real <label>
    (not a <legend>) specifically so it picks up index.html's own
-   protected .field label / .field:focus-within label rules automatically
-   -- same font, size, color and focus highlight as every text input's
-   label, with no separate copy of that styling to keep in sync here. */
+   protected .field label rule automatically -- same font, size and
+   color as every text input's label, with no separate copy of that
+   styling to keep in sync here. (The protected .field:focus-within
+   label green-on-focus effect no longer applies to any label anywhere
+   on the site -- see the global override further down.) */
 
 /* .field label's own font-size/margin would otherwise leak onto these
    too, since each option label is also a label inside the same
@@ -2251,12 +2253,12 @@ label.rsvpform-check {
   margin: 0;
 }
 
-/* .field:focus-within label would otherwise also highlight these answer
-   options (they're labels in the same fieldset too) whenever any radio/
-   checkbox in the group is focused -- only the question heading above
-   should get that highlight, so this stays pinned to ink regardless. */
-.rsvpform fieldset.field:focus-within label.rsvpform-radio,
-.rsvpform fieldset.field:focus-within label.rsvpform-check {
+/* Overrides the protected .field:focus-within label rule (green-on-focus)
+   site-wide, including on index.html's own mailing-address form -- same
+   selector, appended later in this file, so it wins on source order
+   alone with no !important needed. This is a pure append; the protected
+   rule above the "New pages" banner is untouched. */
+.field:focus-within label {
   color: var(--ink);
 }
 
@@ -2423,6 +2425,10 @@ label.rsvpform-check {
     padding-right: 4rem;
   }
 
+  .itin-intro {
+    padding-top: 4rem;
+  }
+
   .itin-intro__text {
     font-size: 1.5rem;
     line-height: 1.25;
@@ -2510,6 +2516,7 @@ label.rsvpform-check {
 
   .itin-venue__map {
     max-width: 40rem;
+    aspect-ratio: 1200 / 683;
   }
 
   .travel-intro {
@@ -2796,6 +2803,41 @@ label.rsvpform-check {
   border-radius: 50%;
 }
 
+/* A subtle pulsing ring behind each marker, so a visitor can tell the
+   pins are interactive before they ever hover or tap one. It disappears
+   from every marker (not just the one interacted with) as soon as
+   js/travel-map.js adds .travelmap--interacted to the container, on the
+   visitor's first press or hover of any marker -- see markMapInteracted()
+   there. */
+.travelmap__marker::before {
+  content: none;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 2.375rem;
+  height: 2.375rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  transform: translate(-50%, 8%) scale(0.6);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.travelmap:not(.travelmap--interacted) .travelmap__marker::before {
+  content: '';
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .travelmap:not(.travelmap--interacted) .travelmap__marker::before {
+    animation: travelmap-pulse 2.2s ease-out infinite;
+  }
+}
+
+@keyframes travelmap-pulse {
+  0% { transform: translate(-50%, 8%) scale(0.6); opacity: 0.7; }
+  70%, 100% { transform: translate(-50%, 8%) scale(1.4); opacity: 0; }
+}
+
 .travelmap__popup {
   position: absolute;
   transform: translate(-50%, calc(-100% - 0.75rem));
@@ -2859,4 +2901,20 @@ label.rsvpform-check {
   .travelmap__popup {
     width: 13rem;
   }
+}
+
+/* Prevents a brief flash of the login gate on index.html for an already-
+   authed visitor: html.pre-authed is added by an inline synchronous
+   script at the very top of index.html's <head> (before <body> is even
+   parsed) whenever localStorage already has the auth flag set, so the
+   gate never paints in the first place -- js/main.js's own revealSite()
+   still runs moments later exactly as before, now just finding both
+   already in their final state. Logged-out visitors never get this
+   class, so their gate/reveal flow is completely unaffected. */
+html.pre-authed #login-gate {
+  display: none;
+}
+
+html.pre-authed #site-content[hidden] {
+  display: block;
 }
