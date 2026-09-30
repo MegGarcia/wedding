@@ -2072,6 +2072,17 @@ img {
   cursor: pointer;
 }
 
+/* Each question button is wrapped in a heading element (screen-reader
+   heading navigation between FAQ items, the standard accordion pattern --
+   a heading can't live inside a button, since button content must be
+   phrasing content). Reset the browser's default h3 block-level/margin
+   styling so it has no visual effect; the button inside still supplies
+   all the actual appearance. */
+.faq-question-heading {
+  margin: 0;
+  font: inherit;
+}
+
 .faq-chevron {
   width: 1.25rem;
   height: 1.25rem;
@@ -2743,10 +2754,7 @@ label.rsvpform-check {
    images/travel-map.svg (the couple's own vector export, 471x540
    viewBox) -- its path is a plain black fill at 20% opacity with no
    background, so .travelmap supplies the olive backdrop to get the
-   intended two-tone island/ocean look. Marker icon shape and popup
-   corner radius/shadow/spacing below are still PLACEHOLDER pending the
-   two Figma frames (211:5443 default, 211:5402 with popup); swap only
-   those values if those frames ever become reachable.
+   intended two-tone island/ocean look.
    ========================================================================== */
 
 .travelmap {
@@ -2974,4 +2982,19 @@ html.pre-authed #site-content[hidden] {
   .envelope-scene__skip:focus {
     padding: 1rem 1.75rem;
   }
+}
+
+/* Standard visually-hidden pattern (visible to screen readers/SEO
+   crawlers, invisible on screen) -- same clip technique as the protected
+   .envelope-scene__skip base rule above, generalized into a reusable
+   utility. Used for registry.html's page heading, which the Figma design
+   doesn't otherwise show a visible title for. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: none;
 }

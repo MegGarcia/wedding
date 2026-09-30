@@ -25,9 +25,8 @@ save-the-date page.
 
 | File | Used for |
 |---|---|
-| `itin-hero.jpg` | Itinerary page hero photo -- a real photo the couple uploaded directly, replacing the earlier Figma-screenshot placeholder |
-| `itin-dresscode-01.png` … `itin-dresscode-07.png` | Itinerary page dress-code inspiration grid -- re-uploaded by the couple as PNG, replacing the earlier Figma-screenshot JPGs of the same name |
-| `itin-dresscode-08.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid, continued |
+| `itin-hero.jpg` | Itinerary page hero photo -- a real photo the couple uploaded directly, replacing the earlier Figma-screenshot placeholder. Resized/compressed from the couple's original 5504x8256 upload (9.5MB) down to 4000x6000 at JPEG quality 88 (2.4MB) to keep it comfortably crisp at any screen size while cutting load time. |
+| `itin-dresscode-01.jpg` … `itin-dresscode-12.jpg` | Itinerary page dress-code inspiration grid |
 | `itin-venue.jpg` | No longer referenced by any page -- the Itinerary page's venue section now embeds a live Google Maps iframe instead. Left in this folder for git history's sake and can be deleted if you'd like a smaller repo. |
 | `travel-hero.jpg` | Travel & Stay page hero photo |
 | `travel-map.svg` | Base island silhouette for the interactive map on the Travel & Stay page |
@@ -58,11 +57,13 @@ The remaining new-page images (`itin-dresscode-08.jpg`–`12.jpg`, all 6
 after hitting the Figma tool's rate limit, then resized/compressed the
 same way as the rest of the site's photos.
 
-`itin-dresscode-01.png`–`07.png` were later re-uploaded directly by the
-couple as-is (raw PNG, uncompressed -- 226KB-745KB apiece, versus
-20KB-65KB for `08.jpg`–`12.jpg` at the same on-page size). They render
-correctly as-is, just heavier than this folder's usual convention; worth
-converting to compressed JPEG later if repo size matters.
+`itin-dresscode-01`–`07` were later re-uploaded directly by the couple as
+raw, uncompressed PNG (226KB-745KB apiece). Converted to JPEG at quality
+88 (34KB-112KB, in line with `08.jpg`–`12.jpg` at the same on-page size)
+-- each had a small amount of edge anti-aliasing transparency (well under
+1% of pixels) from how they were originally exported, flattened onto
+white (this folder's `.itin-dresscode` section background) before
+conversion, which is invisible at normal viewing size.
 
 `travel-map.png` (the earlier raster base map) was replaced by
 `travel-map.svg`, a clean vector silhouette the couple uploaded directly,
